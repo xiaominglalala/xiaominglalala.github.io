@@ -71,7 +71,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 解释：F(4) = F(3) + F(2) = 2 + 1 = 3
 ```
 
-##### 思路：
+思路：
 
 - 第一步，确定dp数组的意义：dp[i]代表第i个斐波那契数的值
 - 第二步，确定递推公式：dp[i] = dp[i-1]+dp[i-2]
@@ -79,7 +79,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 - 第四步， 确定遍历顺序：从前往后
 - 第五步，举例子来验证
 
-##### 代码：
+代码：
 
 #### [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 
@@ -112,7 +112,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 3. 2 阶 + 1 阶
 ```
 
-##### 思路：
+思路：
 
 - 第一步，确定dp[i]的含义：i层楼有几种爬法
 - 第二步，确定递推公式：dp[i] = dp[i-1] *1+dp[i-2] *1 
@@ -123,7 +123,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 
 > 之后第四第五步可以不要了
 
-##### 代码：
+代码：
 
 ![image-20220301220750008](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220301220750008.png)
 
@@ -166,7 +166,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 总花费为 6 。
 ```
 
-##### 思路：
+思路：
 
 - dp[i] 是第i层的最低花费
 - 因为是一定要走到底，所以不用纠结dp是n还是n-1，只要用和cost的长度和下标一样就行
@@ -177,9 +177,11 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
   - `dp[i] = min(dp[i-1], dp[i-2]) +c[i]`
 - 初始化：`dp[0] = c[0], dp[1] = c[1]`
 
-##### 代码：
+代码：
 
-![image-20220303111851172](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220303111851172.png)
+![image-20220330225001498](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220330225001498.png)
+
+
 
 #### [62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)
 
@@ -228,7 +230,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 输出：6
 ```
 
-##### 思路：
+思路：
 
 - 首先是dp[i,j]，到达i，j点有几种路径
 
@@ -246,7 +248,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 
   
 
-##### 代码：
+代码：
 
 可以一开始都当1，思路清晰的话，应该是边缘是1
 
@@ -290,7 +292,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 输出：1
 ```
 
-##### 思路：
+思路：
 
 - 相比上一道题，区别就是需要在遍历dp时，需要进行判断，只有没有障碍时，才能使用递推式
 - 第一步，确定dp: dp[i] [j]代表从(0,0)到i，j的路线数目
@@ -306,7 +308,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
   - 行数：![image-20220303121125370](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220303121125370.png)
   - 列数：![image-20220303121136606](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220303121136606.png)
 
-##### 代码：
+代码：
 
 <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220303161319272.png" alt="image-20220303161319272" style="zoom: 67%;" />
 
@@ -336,7 +338,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36
 ```
 
-##### 思路：
+思路：
 
 - dp[i]: 对于整数i的最大拆分
 - 递推式：dp[i] = max{dp[i], dp[i-j] *j, (i-j) *j}
@@ -345,7 +347,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
   -  (i-j) *j是直接相乘
 - 初始化：没必要考虑0和1，从dp[2] = 1开始
 
-##### 代码：
+代码：
 
 ![image-20220303173441326](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220303173441326.png)
 
@@ -373,7 +375,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 输出：1
 ```
 
-##### 思路：
+思路：
 
 - 确定dp[i]的意义： **1到i为节点组成的二叉搜索树的个数为dp[i]**
 - 先举个例子：<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210107093129889.png" alt="96.不同的二叉搜索树1" style="zoom:50%;" />
@@ -385,7 +387,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 - dp[i] = sum(dp[j]*dp[i-j-1]), 其中j从0到i-1
 - 初始化：dp[0] = 1, dp[1] = 1
 
-##### 代码：
+代码：
 
 <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220303180310728.png" alt="image-20220303180310728" style="zoom: 67%;" />
 
