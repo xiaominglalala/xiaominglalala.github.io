@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Dynamic Programming v_0.1 (Leetcode)
+title:      Dynamic Programming
 subtitle:   
 date:       2022-03-30
 author:     Ethan
@@ -10,13 +10,6 @@ tags:
     - Leetcode
     - Dynamic Programming
 ---
-
-- [ ] 基础题目
-  - [ ] 
-- [ ] 背包问题
-- [ ] 打家劫舍
-- [ ] 股票问题
-- [ ] 子序列问题
 
 # 动态规划
 
@@ -80,6 +73,8 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 - 第五步，举例子来验证
 
 代码：
+
+
 
 #### [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 
@@ -423,7 +418,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 
   - 如果背包容量j为0，无论是选取哪些物品，背包价值总和一定为0：<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/2021011010304192.png" alt="动态规划-背包问题2" style="zoom:50%;" />
   - i为0，存放编号0的物品的时候， j < weight[0]的时候，dp[0] [j] 应该是 0；j >= weight[0]时，dp[0] [j] 应该是value[0]，因为背包容量放足够放编号0物品<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210110103109140.png" alt="动态规划-背包问题7" style="zoom:50%;" />
-  - 对于其他部分 统一把dp数组统一初始为0，更方便一些<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/%25E5%258A%25A8%25E6%2580%2581%25E8%25A7%2584%25E5%2588%2592-%25E8%2583%258C%25E5%258C%2585%25E9%2597%25AE%25E9%25A2%259810.jpg" alt="动态规划-背包问题10" style="zoom:50%;" />
+  - 对于其他部分 统一把dp数组统一初始为0，更方便一些
   - 有两个遍历的维度：物品与背包重量；**但是先遍历物品更好理解**
 
 如果使用**一维滚动数组**
@@ -432,9 +427,9 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 
 - dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]
 
-- dp[j]有两个选择，一个是取自己dp[j] ，即不放物品i，一个是取dp[j - weight[i]] + value[i]，即放物品i。二者取最大
+- dp[j]有两个选择，一个是取自己当前的dp[j] ，即不放物品i，一个是取dp[j - weight[i]] + value[i]，即放物品i。二者取最大
 
-- ```text
+- ```python
   dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
   ```
 
@@ -446,91 +441,162 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 
 - 遍历顺序与二维时不同，是倒序遍历，**为了保证物品i只被放入一次！**
 
-#### [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
+#### [416. Partition Equal Subset Sum](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
 
-难度中等1162收藏分享切换为英文接收动态反馈
+难度中等1232收藏分享切换为中文接收动态反馈
 
-给你一个 **只包含正整数** 的 **非空** 数组 `nums` 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
-
- 
-
-**示例 1：**
-
-```
-输入：nums = [1,5,11,5]
-输出：true
-解释：数组可以分割成 [1, 5, 5] 和 [11] 。
-```
-
-**示例 2：**
-
-```
-输入：nums = [1,2,3,5]
-输出：false
-解释：数组不能分割成两个元素和相等的子集。
-```
-
-#### [1049. 最后一块石头的重量 II](https://leetcode-cn.com/problems/last-stone-weight-ii/)
-
-难度中等391收藏分享切换为英文接收动态反馈
-
-有一堆石头，用整数数组 `stones` 表示。其中 `stones[i]` 表示第 `i` 块石头的重量。
-
-每一回合，从中选出**任意两块石头**，然后将它们一起粉碎。假设石头的重量分别为 `x` 和 `y`，且 `x <= y`。那么粉碎的可能结果如下：
-
-- 如果 `x == y`，那么两块石头都会被完全粉碎；
-- 如果 `x != y`，那么重量为 `x` 的石头将会完全粉碎，而重量为 `y` 的石头新重量为 `y-x`。
-
-最后，**最多只会剩下一块** 石头。返回此石头 **最小的可能重量** 。如果没有石头剩下，就返回 `0`。
+Given a **non-empty** array `nums` containing **only positive integers**, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
 
  
 
-**示例 1：**
+**Example 1:**
 
 ```
-输入：stones = [2,7,4,1,8,1]
-输出：1
-解释：
-组合 2 和 4，得到 2，所以数组转化为 [2,7,1,8,1]，
-组合 7 和 8，得到 1，所以数组转化为 [2,1,1,1]，
-组合 2 和 1，得到 1，所以数组转化为 [1,1,1]，
-组合 1 和 1，得到 0，所以数组转化为 [1]，这就是最优值。
+Input: nums = [1,5,11,5]
+Output: true
+Explanation: The array can be partitioned as [1, 5, 5] and [11].
 ```
 
-**示例 2：**
+**Example 2:**
 
 ```
-输入：stones = [31,26,33,21,40]
-输出：5
+Input: nums = [1,2,3,5]
+Output: false
+Explanation: The array cannot be partitioned into equal sum subsets.
 ```
 
-**示例 3：**
+思路：
 
-```
-输入：stones = [1,2]
-输出：1
-```
+- **即一个商品如果可以重复多次放入是完全背包，而只能放入一次是01背包**
 
-#### [494. 目标和](https://leetcode-cn.com/problems/target-sum/)
+- 本题要求集合里能否出现总和为 sum / 2 的子集
 
-难度中等1085收藏分享切换为英文接收动态反馈
+- 动态规划五部曲
 
-给你一个整数数组 `nums` 和一个整数 `target` 。
+  - 确定dp数组以及下标的含义：**dp[j]表示 背包总容量是j，最大可以凑成j的子集总和为dp[j]**
 
-向数组中的每个整数前添加 `'+'` 或 `'-'` ，然后串联起所有整数，可以构造一个 **表达式** ：
+  - 确定递推公式：01背包的递推公式为：dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
 
-- 例如，`nums = [2, 1]` ，可以在 `2` 之前添加 `'+'` ，在 `1` 之前添加 `'-'` ，然后串联起来得到表达式 `"+2-1"` 。
+    - dp[j - weight[i]]表示容量为j - weight[i]的背包所背的最大价值。
+    - dp[j - weight[i]] + value[i] 表示容量为j的背包，放入物品i了之后的价值
+    - 在这道题中，weight和value是等价的数值，所以是dp[j]=max(dp[j], dp[j-num[i]]+num[i])
 
-返回可以通过上述方法构造的、运算结果等于 `target` 的不同 **表达式** 的数目。
+  - 如何初始化dp数组：都初始为0
+
+  - 确定遍历顺序：如果使用一维dp数组，物品遍历的for循环放在外层，遍历背包的for循环放在内层，且内层for循环倒序遍历！
+
+    - ```cpp
+      for(int i = 0; i < nums.size(); i++) {
+          for(int j = target; j >= nums[i]; j--) { // 每一个元素一定是不可重复放入，所以从大到小遍历
+              dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);
+          }
+      }
+      ```
+
+  - 举例推导dp数组：比如输入[1,5,11,5], 则target = (1+5+5+11)/2=11;我们希望看到dp[target] == target
+
+- 对于i=0，对于容量为11~1的背包，最多存入1![image-20220402152153079](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402152153079.png)
+
+- 对于i=1，也就是对于容量为11~6的背包，将最多存入1+5=6![image-20220402152315779](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402152315779.png)
+
+- 对于i=2，也就是容量为11的背包，最多存入11，dp[11]会变成11![image-20220402152347950](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402152347950.png)
+
+- 对于i=3，也就是容量为11-5的背包，将会在10哪里变一下![image-20220402152627761](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402152627761.png)
+
+代码：
+
+![image-20220402152728398](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402152728398.png)
+
+#### [1049. Last Stone Weight II](https://leetcode-cn.com/problems/last-stone-weight-ii/)
+
+难度中等419收藏分享切换为中文接收动态反馈
+
+You are given an array of integers `stones` where `stones[i]` is the weight of the `ith` stone.
+
+We are playing a game with the stones. On each turn, we choose any two stones and smash them together. Suppose the stones have weights `x` and `y` with `x <= y`. The result of this smash is:
+
+- If `x == y`, both stones are destroyed, and
+- If `x != y`, the stone of weight `x` is destroyed, and the stone of weight `y` has new weight `y - x`.
+
+At the end of the game, there is **at most one** stone left.
+
+Return *the smallest possible weight of the left stone*. If there are no stones left, return `0`.
 
  
 
-**示例 1：**
+**Example 1:**
 
 ```
-输入：nums = [1,1,1,1,1], target = 3
-输出：5
-解释：一共有 5 种方法让最终目标和为 3 。
+Input: stones = [2,7,4,1,8,1]
+Output: 1
+Explanation:
+We can combine 2 and 4 to get 2, so the array converts to [2,7,1,8,1] then,
+we can combine 7 and 8 to get 1, so the array converts to [2,1,1,1] then,
+we can combine 2 and 1 to get 1, so the array converts to [1,1,1] then,
+we can combine 1 and 1 to get 0, so the array converts to [1], then that's the optimal value.
+```
+
+**Example 2:**
+
+```
+Input: stones = [31,26,33,21,40]
+Output: 5
+```
+
+思路：
+
+- 将石头尽量分为重量相同的两堆，最优解就是这道题的答案
+
+- 物品的重量等价于价值
+
+- 动态规划五部曲
+
+  - 确定dp数组和下标含义：容量为j的背包，最多可以放dp[j]的物品
+
+  - 确定递推公式：dp[j]=max(dp[j],dp[j-stones[i]]+stones[i])
+
+    - dp[j-stones[i]] 代表容量为j-stones[i]的背包，最大负重
+
+  - 初始化dp数组：全部初始化为0，长度是总重量的一半
+
+  - 确定遍历顺序：一维数组倒序遍历
+
+  - 举例：[2,4,1,1], half = 4
+
+    <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210121115805904.jpg" alt="1049.最后一块石头的重量II" style="zoom:50%;" />
+
+    最后dp[target]里是容量为target的背包所能背的最大重量。
+
+    那么分成两堆石头，一堆石头的总重量是dp[target]，另一堆就是sum - dp[target]。
+
+    相撞之后剩下的最小石头重量就是 (sum - dp[target]) - dp[target]
+
+- 前一题是问是否能装满，这个是最多装多少，所以是sum-dp[half]-dp[half]
+
+代码：
+
+![image-20220402180250756](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402180250756.png)
+
+#### [494. Target Sum](https://leetcode-cn.com/problems/target-sum/)
+
+难度中等1143收藏分享切换为中文接收动态反馈
+
+You are given an integer array `nums` and an integer `target`.
+
+You want to build an **expression** out of nums by adding one of the symbols `'+'` and `'-'` before each integer in nums and then concatenate all the integers.
+
+- For example, if `nums = [2, 1]`, you can add a `'+'` before `2` and a `'-'` before `1` and concatenate them to build the expression `"+2-1"`.
+
+Return the number of different **expressions** that you can build, which evaluates to `target`.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [1,1,1,1,1], target = 3
+Output: 5
+Explanation: There are 5 ways to assign symbols to make the sum of nums be target 3.
 -1 + 1 + 1 + 1 + 1 = 3
 +1 - 1 + 1 + 1 + 1 = 3
 +1 + 1 - 1 + 1 + 1 = 3
@@ -538,47 +604,357 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 +1 + 1 + 1 + 1 - 1 = 3
 ```
 
-**示例 2：**
+**Example 2:**
 
 ```
-输入：nums = [1], target = 1
-输出：1
+Input: nums = [1], target = 1
+Output: 1
 ```
 
-#### [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)
+思路：
 
-难度中等650收藏分享切换为英文接收动态反馈
+假设有加号的部分叫x，有减号的部分叫sum-x
 
-给你一个二进制字符串数组 `strs` 和两个整数 `m` 和 `n` 。
+我们知道x-(sum-x)=target
 
-请你找出并返回 `strs` 的最大子集的长度，该子集中 **最多** 有 `m` 个 `0` 和 `n` 个 `1` 。
+所以x=(target+sum)/2
 
-如果 `x` 的所有元素也是 `y` 的元素，集合 `x` 是集合 `y` 的 **子集** 。
+- 确定dp数组及其下标
+  - dp[j]表示装满容量为j的背包，有dp[j]种方法
+  - 不同于之前最多能装多少，这里是有方法的数目
+- 确定递推公式
+  - 假如我们目标是5，我们有一个1，那么就有dp[4]种方法
+  - 同理，如果有2，就有dp[3]种方法.....
+  - 所以要求dp[j], 对于i从0~j进行遍历; dp[j] += dp[j-nums[i]]
+- 初始化dp
+  - 对于dp[0]初始化为1，代表装满容量为0的背包的方法是1，什么都不放
+  - 对于其他的dp[j]初始化为0
+- 确定遍历循序
+  - 外循环正序
+  - 内循环倒序
+- 举例推导dp数组
+  - nums: [1, 1, 1, 1, 1], S: 3
+  - 我们可以知道加号的部分是（5+3）//2=4
+  - 也就是我们要凑出来一个`+4`和一个`-1`
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210125120743274.jpg" alt="494.目标和" style="zoom:50%;" />
+
+代码：
+
+- 注意边界条件，如果target的绝对值太大，比整个list求和都大，不可以；或者全是加号的part不是整除，也是不行的。
+
+> 这题的边界条件很多，要小心
+
+- 注意内循环的上限是add_part,不是target
+
+![image-20220402184734081](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402184734081.png)
+
+#### [474. Ones and Zeroes](https://leetcode-cn.com/problems/ones-and-zeroes/)
+
+难度中等680收藏分享切换为中文接收动态反馈
+
+You are given an array of binary strings `strs` and two integers `m` and `n`.
+
+Return *the size of the largest subset of `strs` such that there are **at most*** `m` `0`*'s and* `n` `1`*'s in the subset*.
+
+A set `x` is a **subset** of a set `y` if all elements of `x` are also elements of `y`.
 
  
 
-**示例 1：**
+**Example 1:**
 
 ```
-输入：strs = ["10", "0001", "111001", "1", "0"], m = 5, n = 3
-输出：4
-解释：最多有 5 个 0 和 3 个 1 的最大子集是 {"10","0001","1","0"} ，因此答案是 4 。
-其他满足题意但较小的子集包括 {"0001","1"} 和 {"10","1","0"} 。{"111001"} 不满足题意，因为它含 4 个 1 ，大于 n 的值 3 。
+Input: strs = ["10","0001","111001","1","0"], m = 5, n = 3
+Output: 4
+Explanation: The largest subset with at most 5 0's and 3 1's is {"10", "0001", "1", "0"}, so the answer is 4.
+Other valid but smaller subsets include {"0001", "1"} and {"10", "1", "0"}.
+{"111001"} is an invalid subset because it contains 4 1's, greater than the maximum of 3.
 ```
 
-**示例 2：**
+**Example 2:**
 
 ```
-输入：strs = ["10", "0", "1"], m = 1, n = 1
-输出：2
-解释：最大的子集是 {"0", "1"} ，所以答案是 2 。
+Input: strs = ["10","0","1"], m = 1, n = 1
+Output: 2
+Explanation: The largest subset is {"0", "1"}, so the answer is 2.
 ```
+
+思路：
+
+- **本题中strs 数组里的元素就是物品，每个物品都是一个！**
+
+  **而m 和 n相当于是一个背包，两个维度的背包**,所以这回是dp[i] [j]
+
+  所以这是一个两个维度的01背包
+
+- 确定dp数组和下标的意义
+
+  - dp[i] [j]代表最多有i个0和j个1的这个子集的长度
+
+- 递推式
+
+  - dp[i] [j]纳入一个str，而这个str种有n_0个0和n_1个1，那么dp[i] [j] = dp[i - str_0] [j - str_1]+1
+  - 所以dp[i] [j] = max(dp[i] [j], dp[i - str_0] [j - str_1]+1)
+
+- 确定遍历顺序：
+
+  - 之前一直说内循环要倒序，其实更明确的说是在遍历背包容量时需要从前往后遍历
+
+- 举例
+
+代码：
+
+- 从str种计算字符的个数：![image-20220402201112174](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402201112174.png)
+- ![image-20220402201355039](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402201355039.png)
 
 ### 2.2 完全背包
 
-### 2.3 多重背包
+有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。**每件物品都有无限个（也就是可以放入背包多次）**，求解将哪些物品装入背包里物品价值总和最大。
 
-### 2.4 背包总结
+**完全背包和01背包问题唯一不同的地方就是，每种物品有无限件**。
+
+![image-20220402202013982](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220402202013982.png)
+
+![动态规划-完全背包](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210126104510106.jpg)
+
+**其实还有一个很重要的问题，为什么遍历物品在外层循环，遍历背包容量在内层循环？**
+
+- 01背包中二维dp数组的两个for遍历的先后循序是可以颠倒
+- 01背包中一维dp数组的两个for循环先后循序一定是先遍历物品，再遍历背包容量。
+- 完全背包种一维dp数组也可以颠倒顺序
+
+**在完全背包中，对于一维dp数组来说，其实两个for循环嵌套顺序同样无所谓！**
+
+#### [518. Coin Change 2](https://leetcode-cn.com/problems/coin-change-2/)
+
+难度中等767
+
+You are given an integer array `coins` representing coins of different denominations and an integer `amount` representing a total amount of money.
+
+Return *the number of combinations that make up that amount*. If that amount of money cannot be made up by any combination of the coins, return `0`.
+
+You may assume that you have an infinite number of each kind of coin.
+
+The answer is **guaranteed** to fit into a signed **32-bit** integer.
+
+ 
+
+**Example 1:**
+
+```
+Input: amount = 5, coins = [1,2,5]
+Output: 4
+Explanation: there are four ways to make up the amount:
+5=5
+5=2+2+1
+5=2+1+1+1
+5=1+1+1+1+1
+```
+
+**Example 2:**
+
+```
+Input: amount = 3, coins = [2]
+Output: 0
+Explanation: the amount of 3 cannot be made up just with coins of 2.
+```
+
+**Example 3:**
+
+```
+Input: amount = 10, coins = [10]
+Output: 1
+```
+
+ 思路：
+
+- 本题和纯完全背包不一样，**纯完全背包是能否凑成总金额，而本题是要求凑成总金额的个数！**
+- 确定dp数组和下标的含义：dp[j]代表总金额j有dp[j]种组合
+- 确定递推公式：与494 Target Sum类似的，对于i从0~j进行遍历; dp[j] += dp[j-nums[i]]
+- 初始化dp数组：dp[0]  = 1,其余为0
+- 确定遍历的顺序
+  - 不同于常见的完全背包不考虑两个for循环的顺序
+- 举例子
+  - 输入: amount = 5, coins = [1, 2, 5] ，dp状态图如下：
+  - ![518.零钱兑换II](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210120181331461.jpg)
+
+代码：
+
+在求装满背包有几种方案的时候，认清遍历顺序是非常关键的。
+
+**如果求组合数就是外层for循环遍历物品，内层for遍历背包**。
+
+**如果求排列数就是外层for遍历背包，内层for循环遍历物品**。
+
+
+
+#### [377. Combination Sum IV](https://leetcode-cn.com/problems/combination-sum-iv/)
+
+难度中等600
+
+Given an array of **distinct** integers `nums` and a target integer `target`, return *the number of possible combinations that add up to* `target`.
+
+The test cases are generated so that the answer can fit in a **32-bit** integer.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [1,2,3], target = 4
+Output: 7
+Explanation:
+The possible combination ways are:
+(1, 1, 1, 1)
+(1, 1, 2)
+(1, 2, 1)
+(1, 3)
+(2, 1, 1)
+(2, 2)
+(3, 1)
+Note that different sequences are counted as different combinations.
+```
+
+**Example 2:**
+
+```
+Input: nums = [9], target = 3
+Output: 0
+```
+
+Follow up: What if negative numbers are allowed in the given array? How does it change the problem? What limitation we need to add to the question to allow negative numbers?
+
+思路：
+
+- 
+
+代码：
+
+#### [70. Climbing Stairs](https://leetcode-cn.com/problems/climbing-stairs/)
+
+难度简单2325
+
+You are climbing a staircase. It takes `n` steps to reach the top.
+
+Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?
+
+ 
+
+**Example 1:**
+
+```
+Input: n = 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+```
+
+**Example 2:**
+
+```
+Input: n = 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+```
+
+#### [322. Coin Change](https://leetcode-cn.com/problems/coin-change/)
+
+难度中等1844
+
+You are given an integer array `coins` representing coins of different denominations and an integer `amount` representing a total amount of money.
+
+Return *the fewest number of coins that you need to make up that amount*. If that amount of money cannot be made up by any combination of the coins, return `-1`.
+
+You may assume that you have an infinite number of each kind of coin.
+
+ 
+
+**Example 1:**
+
+```
+Input: coins = [1,2,5], amount = 11
+Output: 3
+Explanation: 11 = 5 + 5 + 1
+```
+
+**Example 2:**
+
+```
+Input: coins = [2], amount = 3
+Output: -1
+```
+
+**Example 3:**
+
+```
+Input: coins = [1], amount = 0
+Output: 0
+```
+
+#### [279. Perfect Squares](https://leetcode-cn.com/problems/perfect-squares/)
+
+难度中等1305
+
+Given an integer `n`, return *the least number of perfect square numbers that sum to* `n`.
+
+A **perfect square** is an integer that is the square of an integer; in other words, it is the product of some integer with itself. For example, `1`, `4`, `9`, and `16` are perfect squares while `3` and `11` are not.
+
+ 
+
+**Example 1:**
+
+```
+Input: n = 12
+Output: 3
+Explanation: 12 = 4 + 4 + 4.
+```
+
+**Example 2:**
+
+```
+Input: n = 13
+Output: 2
+Explanation: 13 = 4 + 9.
+```
+
+#### [139. Word Break](https://leetcode-cn.com/problems/word-break/)
+
+难度中等1518
+
+Given a string `s` and a dictionary of strings `wordDict`, return `true` if `s` can be segmented into a space-separated sequence of one or more dictionary words.
+
+**Note** that the same word in the dictionary may be reused multiple times in the segmentation.
+
+ 
+
+**Example 1:**
+
+```
+Input: s = "leetcode", wordDict = ["leet","code"]
+Output: true
+Explanation: Return true because "leetcode" can be segmented as "leet code".
+```
+
+**Example 2:**
+
+```
+Input: s = "applepenapple", wordDict = ["apple","pen"]
+Output: true
+Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+Note that you are allowed to reuse a dictionary word.
+```
+
+**Example 3:**
+
+```
+Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+Output: false
+```
+
+### 2.3 背包总结
 
 ## 3. 打家劫舍
 
