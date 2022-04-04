@@ -51,17 +51,17 @@ tags:
 
 - 使用递归的方法，每次到达一块土地，如果当前位置没有超过边界，就朝四个方向探索
 - 每次经过一次土地，就把他的值设置为0，避免被其他的四方向探索所访问
-- ![image-20211230122035377](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230122035377.png)
+- ![image-20211230122035377](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211230122035377.png)
 
 **代码**：
 
-![image-20211230122224752](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230122224752.png)
+![image-20211230122224752](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211230122224752.png)
 
 
 
-![image-20211230123101412](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230123101412.png)
+![image-20211230123101412](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211230123101412.png)
 
-![image-20211230123150154](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230123150154.png)
+![image-20211230123150154](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211230123150154.png)
 
 
 
@@ -109,13 +109,13 @@ tags:
 
 代码：
 
-![image-20211230171121082](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230171121082.png)
+![image-20211230171121082](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211230171121082.png)
 
 
 
-![image-20211230171500102](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230171500102.png)
+![image-20211230171500102](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211230171500102.png)
 
-![image-20211230171526967](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230171526967.png)
+![image-20211230171526967](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211230171526967.png)
 
 #### 547. [省份数量](https://leetcode-cn.com/problems/number-of-provinces/)
 
@@ -159,7 +159,7 @@ tags:
 
 代码：
 
-<img src="C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211206152757416.png" alt="image-20211206152757416" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211206152757416.png" alt="image-20211206152757416" style="zoom:50%;" />
 
 
 
@@ -454,15 +454,15 @@ tags:
     - 其次需要存放符合条件的结果的结合：`result_list`
     - 此外，需要一个变量来确定从哪里开始遍历集合：`start_index`放在backtracking（回溯）函数里面。
     - n是数的范围，k是每个组合的长度
-    - ![image-20211208114649518](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211208114649518.png)
+    - ![image-20211208114649518](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211208114649518.png)
   - 递归的终止条件
     - 当达到终止条件，此时把result保存至result_list之中，并终止此次递归
     - 在这个问题中，当目前寻找的组合的长度已经达到k了，说明已经找到底了，该回溯了，终止此次递归
-    - ![image-20211208120905762](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211208120905762.png)
+    - ![image-20211208120905762](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211208120905762.png)
   - 单层搜索的过程
     - 第一层for循环，横向遍历所有的元素
     - 第二层for循环进行递归
-    - ![image-20211208122805788](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211208122805788.png)
+    - ![image-20211208122805788](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211208122805788.png)
     - 所谓的回溯就是`result.pop()`，会让result从[1,2]变为[1], 之后再变成[1, 3]
 - 剪枝优化
   - **如果for循环选择的起始位置之后的元素个数 已经不足 我们需要的元素个数了，那么就没有必要搜索了**
@@ -471,7 +471,7 @@ tags:
   - 在集合n中至多要从该起始位置 : `n - (k - len(result)) + 1`，开始遍历。
   - 为什么有个+1呢，因为包括起始位置，我们要是一个左闭的集合。而python的range不包含右节点，所以是+2
 - 代码
-  - ![image-20211208140606999](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211208140606999.png)
+  - ![image-20211208140606999](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211208140606999.png)
 
 #### [17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)
 
@@ -524,9 +524,9 @@ tags:
 
 **代码：**
 
-<img src="C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211208142700932.png" alt="image-20211208142700932" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211208142700932.png" alt="image-20211208142700932" style="zoom:50%;" />
 
-<img src="C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211208142737844.png" alt="image-20211208142737844" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211208142737844.png" alt="image-20211208142737844" style="zoom:50%;" />
 
 - 
 
