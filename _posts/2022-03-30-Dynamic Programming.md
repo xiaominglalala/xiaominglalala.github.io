@@ -770,6 +770,7 @@ Output: 1
 - 本题和纯完全背包不一样，**纯完全背包是能否凑成总金额，而本题是要求凑成总金额的个数！**
 - 确定dp数组和下标的含义：dp[j]代表总金额j有dp[j]种组合
 - 确定递推公式：与494 Target Sum类似的，对于i从0~j进行遍历; dp[j] += dp[j-nums[i]]
+  - 可以理解为对于j这个上限，不断拿各个nums[i]来试着减去，然后看后面的部分有多少种方法。nums[i]一定被使用
 - 初始化dp数组：dp[0]  = 1,其余为0
 - 确定遍历的顺序
   - 不同于常见的完全背包不考虑两个for循环的顺序
@@ -784,6 +785,16 @@ Output: 1
 **如果求组合数就是外层for循环遍历物品，内层for遍历背包**。
 
 **如果求排列数就是外层for遍历背包，内层for循环遍历物品**。
+
+初始化的长度取决于j，j代表容量，dp[j]代表方案的个数
+
+注意dp[0] = 1! 这样递归才能开始
+
+注意内循环是从coins[i]开始的，**内部的起始值很关键**
+
+不能用![image-20220403105426076](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220403105426076.png)这个来判断，因为这样的方式不是0。实际就是不找了，这也是一种方式
+
+![image-20220403105616609](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220403105616609.png)
 
 
 
@@ -825,9 +836,35 @@ Follow up: What if negative numbers are allowed in the given array? How does it 
 
 思路：
 
-- 
+- 这道题就是就排列顺序的，不想上一题是单纯的组合
+
+- 确定dp数组和下标：dp[j], target为j时有dp[j]种排列
+
+- 确定递推公式：dp[j] += dp[j-nums[i]]
+
+  - 看了这么多题，可以得出一个经验性的结论：**对于装满背包的问题，常用的递推式为dp[j] += dp[j-nums[i]]**
+
+- 确定初始化dp[0] = 1,其余为0
+
+- 确定遍历顺序
+
+  - **如果求组合数就是外层for循环遍历物品，内层for遍历背包**。
+
+    **如果求排列数就是外层for遍历背包，内层for循环遍历物品**。
+
+- 举例
+
+  - ![377.组合总和Ⅳ](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210131174250148.jpg)
+
+- ![image-20220403110931603](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220403110931603.png)
 
 代码：
+
+![image-20220403135530350](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220403135530350.png)
+
+没太搞明白
+
+
 
 #### [70. Climbing Stairs](https://leetcode-cn.com/problems/climbing-stairs/)
 
@@ -859,6 +896,29 @@ Explanation: There are three ways to climb to the top.
 2. 1 step + 2 steps
 3. 2 steps + 1 step
 ```
+
+思路：
+
+- 可以理解为完全背包
+- 确定dp和下标
+  - dp[n]代表到n层楼梯有几种走法
+- 确定递推式
+  - dp[n] += dp[n-j]
+  - j只可能是1或者2，也就是走一步还是走两步
+- 确定dp数组初始化
+  - dp[0] = 1
+- 确定遍历顺序
+  - 和上一题一样，这是推导排列顺序的问题
+  - 所以外层遍历容量，内层是遍历物品
+  - 如果是组合就是外层遍历物品，内存遍历容量
+  - 为什么？之后要会给别人解释。
+- 举例
+
+代码：
+
+![image-20220403220021113](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220403220021113.png)
+
+注意和上一道题目一样，需要进行一个判断才写递推式
 
 #### [322. Coin Change](https://leetcode-cn.com/problems/coin-change/)
 
@@ -958,7 +1018,132 @@ Output: false
 
 ## 3. 打家劫舍
 
+#### [198. House Robber](https://leetcode-cn.com/problems/house-robber/)
+
+难度中等2034
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and **it will automatically contact the police if two adjacent houses were broken into on the same night**.
+
+Given an integer array `nums` representing the amount of money of each house, return *the maximum amount of money you can rob tonight **without alerting the police***.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+```
+
+**Example 2:**
+
+```
+Input: nums = [2,7,9,3,1]
+Output: 12
+Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+Total amount you can rob = 2 + 9 + 1 = 12.
+```
+
+#### [213. House Robber II](https://leetcode-cn.com/problems/house-robber-ii/)
+
+难度中等988
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are **arranged in a circle.** That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and **it will automatically contact the police if two adjacent houses were broken into on the same night**.
+
+Given an integer array `nums` representing the amount of money of each house, return *the maximum amount of money you can rob tonight **without alerting the police***.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [2,3,2]
+Output: 3
+Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
+```
+
+**Example 2:**
+
+```
+Input: nums = [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+```
+
+**Example 3:**
+
+```
+Input: nums = [1,2,3]
+Output: 3
+```
+
+#### [337. House Robber III](https://leetcode-cn.com/problems/house-robber-iii/)
+
+难度中等1222
+
+The thief has found himself a new place for his thievery again. There is only one entrance to this area, called `root`.
+
+Besides the `root`, each house has one and only one parent house. After a tour, the smart thief realized that all houses in this place form a binary tree. It will automatically contact the police if **two directly-linked houses were broken into on the same night**.
+
+Given the `root` of the binary tree, return *the maximum amount of money the thief can rob **without alerting the police***.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/rob1-tree.jpg)
+
+```
+Input: root = [3,2,3,null,3,null,1]
+Output: 7
+Explanation: Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/rob2-tree.jpg)
+
+```
+Input: root = [3,4,5,1,3,null,1]
+Output: 9
+Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.
+```
+
+ 
+
 ## 4. 股票问题
+
+#### [121. Best Time to Buy and Sell Stock](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
+
+难度简单2250
+
+You are given an array `prices` where `prices[i]` is the price of a given stock on the `ith` day.
+
+You want to maximize your profit by choosing a **single day** to buy one stock and choosing a **different day in the future** to sell that stock.
+
+Return *the maximum profit you can achieve from this transaction*. If you cannot achieve any profit, return `0`.
+
+ 
+
+**Example 1:**
+
+```
+Input: prices = [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+```
+
+**Example 2:**
+
+```
+Input: prices = [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transactions are done and the max profit = 0.
+```
 
 ## 5. 子序列问题
 
