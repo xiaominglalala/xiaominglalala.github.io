@@ -1,3 +1,16 @@
+---
+layout:     post
+title:      Hash Table
+subtitle:   
+date:       2022-04-05
+author:     Ethan
+header-img: img/landscape_0.jpg
+catalog: true
+tags:
+    - Leetcode
+    - Hash Table
+---
+
 ## 哈希表
 
 哈希表是根据关键码的值而直接进行访问的数据结构。

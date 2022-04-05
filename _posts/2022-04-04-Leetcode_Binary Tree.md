@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      DFS+BFS+Backtracking
+title:      Binary tree
 subtitle:   
 date:       2022-04-04
 author:     Ethan

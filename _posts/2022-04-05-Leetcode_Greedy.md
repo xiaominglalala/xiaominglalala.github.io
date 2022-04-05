@@ -1,3 +1,16 @@
+---
+layout:     post
+title:      Greedy
+subtitle:   
+date:       2022-04-05
+author:     Ethan
+header-img: img/landscape_1.jpg
+catalog: true
+tags:
+    - Leetcode
+    - Greedy
+---
+
 # 贪心
 
 #### [455. 分发饼干](https://leetcode-cn.com/problems/assign-cookies/)

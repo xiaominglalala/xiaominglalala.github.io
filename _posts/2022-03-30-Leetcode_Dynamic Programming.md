@@ -4,7 +4,7 @@ title:      Dynamic Programming
 subtitle:   
 date:       2022-03-30
 author:     Ethan
-header-img: img/5.jpg
+header-img: img/dog_0.jpg
 catalog: true
 tags:
     - Leetcode
@@ -997,9 +997,16 @@ Explanation: 13 = 4 + 9.
 - dp的意义：dp[j]代表j需要最少几个完全平方数
 - 递推式：如果使用了数字i，那么dp[j] = dp[j-i*i]+1
   - 所以dp[j] = min(dp[j]+dp[j-i*i+1])
-- 初始化：dp[0] = 0
+- 初始化：dp[0] = 0，其他的用n+1
+- 遍历顺序：对于求组合数，外层是遍历物品，内存遍历背包容量；对于求排列数，外层是遍历背包容量，内层是遍历物品。而对于这题，是求最小值，那么就和上一题一样，都是可以的。
+- 举例：
+  - ![279.完全平方数](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210202112617341.jpg)
 
 代码：
+
+![image-20220404000554711](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404000554711.png)
+
+
 
 #### [139. Word Break](https://leetcode-cn.com/problems/word-break/)
 
@@ -1035,7 +1042,34 @@ Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
 Output: false
 ```
 
+思路：
+
+- dp的意义：dp[j]代表对于长度为i的s，到j为止，可不可以被拆分
+- 递推式：如果这个从j-len(word)到j，这些确实是word。那么我们需要考虑的就是dp[j-len(word)]的情况
+  - dp[j] = dp[j] or (dp[j-len(word)] and word
+- 初始化
+  - dp[0]必须是True，否则推导存在问题，其余全部是False
+- 遍历顺序
+  - ~~本题是是否出现过，所以内外循环是遍历那个都可以~~
+  - 但是实际上我把i和j顺序颠倒就报错了，
+  - ![image-20220404094707811](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404094707811.png)
+  - j=13的时候apple没发现，所以必须外层是背包容量，内层是物品
+
+代码：
+
+- 时间复杂度是O(n^2), 空间复杂度是O(n)
+
+![image-20220404091415474](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404091415474.png)
+
+此外，内层是背包的话，一般会出现初始的不同
+
 ### 2.3 背包总结
+
+![image-20220404095026520](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404095026520.png)
+
+![image-20220404095116913](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404095116913.png)
+
+![image-20220404095135910](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404095135910.png)
 
 ## 3. 打家劫舍
 
@@ -1066,6 +1100,20 @@ Output: 12
 Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
 Total amount you can rob = 2 + 9 + 1 = 12.
 ```
+
+思路：
+
+- dp的意义：对于前i间房子，我能偷多少钱
+- 递推式：对于dp[j]，如果我偷了j，那么我就不能偷j-1；dp[j] = dp[j-2]+nums[j-1]; 如果没偷j，dp[j] = dp[j-1]
+  - 所以dp[j]  = max( dp[j-2]+nums[j-1], dp[j-1])
+  - 注意上面nums是j-1，要是觉得不爽，就给nums前面再给一位，或者都用少一位
+  - 可以感觉到不是要装满的背包问题还是挺不一样的
+- 初始化：dp[0] = nums[0]; dp[1] = max(nums[0], nums[1])
+- 迭代顺序：正序
+
+代码：
+
+![image-20220404102202701](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404102202701.png)
 
 #### [213. House Robber II](https://leetcode-cn.com/problems/house-robber-ii/)
 
@@ -1101,6 +1149,17 @@ Input: nums = [1,2,3]
 Output: 3
 ```
 
+思路：
+
+- dp的意义：还是前j间房子，最多偷dp[j]
+- 递推式：q其实仔细想一下，只有最后那个和第一个之间会存在影响，那么我们可以就计算两次，一次一定不拿第一个，一次一定不拿最后一个。
+  - 分别构建另外两个list，对于这两个list，使用上一题的策略dp[j]  = max( dp[j-2]+nums[j-1], dp[j-1])
+  - dp[j] = max(dp_0, dp_1)
+
+代码：
+
+![image-20220404214027472](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404214027472.png)
+
 #### [337. House Robber III](https://leetcode-cn.com/problems/house-robber-iii/)
 
 难度中等1222
@@ -1133,7 +1192,21 @@ Output: 9
 Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.
 ```
 
- 
+思路：
+
+- 这题和前两个一样，难点仅在于对于树的遍历
+
+- 对于树的话，首先就要想到遍历方式，前中后序（深度优先搜索）还是层序遍历（广度优先搜索）。
+
+  **本题一定是要后序遍历，因为通过递归函数的返回值来做下一步计算**。
+
+- 确定遍历顺序：
+
+  - 通过递归左节点，得到左节点偷与不偷的金钱；通过递归右节点，得到右节点偷与不偷的金钱。
+
+代码：
+
+![image-20220404221807738](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404221807738.png)
 
 ## 4. 股票问题
 
@@ -1164,6 +1237,272 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 Input: prices = [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transactions are done and the max profit = 0.
+```
+
+思路：
+
+- 毫无疑问，最简单的就是使用贪心算法
+- ![image-20220404231030902](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404231030902.png)
+
+如果使用动态规划，这里需要构建二维的dp
+
+- dp数组的意义
+  - dp[i] [0]代表第i天前**买入股票**所需要花费的最少金额
+  - dp[i] [1]代表第i天前**出售股票**所能获得的最大收益
+- 递推式
+  - 对于dp[i] [0]
+    - 如果第i-1天还没买入，那么必须第i天买了，dp[i] [0] = prices[i]
+    - 如果之前买了，dp[i] [0] = dp[i-1] [0]
+    - 所以dp[i] [0] = min(dp[i-1] [0], prices[i])
+  - 对于dp[i] [1];
+    - 如果第i-1天已经处于卖出股票的状态，dp[i] [1] = dp[i-1] [1]
+    - 如果第i-1天还没卖，第i天卖了，dp[i] [1] = prices[i] - dp[i-1] [0] 
+    - 所以dp[i] [1] = max(dp[i-1] [1],  prices[i] - dp[i-1] [0] )
+- 初始化
+  - dp[0] [0] =prices[0]
+  - dp[0] [1] = 0
+
+代码：
+
+![image-20220404233017408](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220404233017408.png)
+
+这个复杂度特别高
+
+
+
+#### [122. Best Time to Buy and Sell Stock II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
+
+难度中等1636收藏分享切换为中文接收动态反馈
+
+You are given an integer array `prices` where `prices[i]` is the price of a given stock on the `ith` day.
+
+On each day, you may decide to buy and/or sell the stock. You can only hold **at most one** share of the stock at any time. However, you can buy it then immediately sell it on the **same day**.
+
+Find and return *the **maximum** profit you can achieve*.
+
+ 
+
+**Example 1:**
+
+```
+Input: prices = [7,1,5,3,6,4]
+Output: 7
+Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+Total profit is 4 + 3 = 7.
+```
+
+**Example 2:**
+
+```
+Input: prices = [1,2,3,4,5]
+Output: 4
+Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+Total profit is 4.
+```
+
+**Example 3:**
+
+```
+Input: prices = [7,6,4,3,1]
+Output: 0
+Explanation: There is no way to make a positive profit, so we never buy the stock to achieve the maximum profit of 0.
+```
+
+思路：
+
+- 这题和上一题唯一的区别就在于递推式
+- 对于dp[i] [0], 也就是在第i天前**买入股票**所需要花费的最少金额
+  - 如果第i-1天还没买入，不同于之前必须第i天买，现在可以在第i-1天及之前卖出，所以考虑到最少金额，一定是希望第i-1天前卖出的越高越好：dp[i] [0] 不再是 prices[i]，而应该是prices[i] - dp[i-1] [1]
+  - 如果第i-1天刚买了，dp[i] [0] = dp[i-1] [0]
+  - 所以dp[i] [0] = min(dp[i-1] [0], prices[i]- dp[i-1] [1])
+- 对于dp[i] [1];第i天前**出售股票**所能获得的最大收益
+  - 如果第i-1天已经处于卖出股票的状态，dp[i] [1] = dp[i-1] [1]
+  - 如果第i-1天还没卖，第i天卖了，dp[i] [1] = prices[i] - dp[i-1] [0] 
+  - 所以dp[i] [1] = max(dp[i-1] [1],  prices[i] - dp[i-1] [0] )
+- 初始化：dp[0] [0] = prices[0]; dp[0] [1]=0
+
+![image-20220405093146641](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405093146641.png)
+
+理论上时间复杂度和空间复杂度都是O(n)
+
+另一种思路是可以理解为每天都在买卖
+
+- ![image-20220405093604481](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405093604481.png)
+- ![image-20220405094333137](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405094333137.png)
+
+代码：
+
+![image-20220405094434607](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405094434607.png)
+
+
+
+
+
+#### [123. Best Time to Buy and Sell Stock III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
+
+难度困难1075收藏分享切换为中文接收动态反馈
+
+You are given an array `prices` where `prices[i]` is the price of a given stock on the `ith` day.
+
+Find the maximum profit you can achieve. You may complete **at most two transactions**.
+
+**Note:** You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+ 
+
+**Example 1:**
+
+```
+Input: prices = [3,3,5,0,0,3,1,4]
+Output: 6
+Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
+Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.
+```
+
+**Example 2:**
+
+```
+Input: prices = [1,2,3,4,5]
+Output: 4
+Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are engaging multiple transactions at the same time. You must sell before buying again.
+```
+
+**Example 3:**
+
+```
+Input: prices = [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transaction is done, i.e. max profit = 0.
+```
+
+思路：
+
+- 从这道题的思路，我们可以看到，有几种状态，dp就需要有几列，121和122就是两列
+- dp数组和下标的意义：
+  - dp[i] [j]代表第i天执行j操作
+  - j=0，不操作
+  - j=1, 第i天前，第一次买入需要花费的最少钱; 这里不能用贪心策略，因为仅有两次。
+  - j=2，第一次卖出的收入收入
+  - j=3, 第二次买入
+  - j=4，第二次卖出
+  - 这五个状态依次依赖来更新，如果前一个值为0，比如根本没有进行一次卖出，将也不存在二次买入
+- 递推式：
+  - 对于dp[i] [1], 之前一定没买过。如果第i天买入，dp[i] [1]= prices[i] - dp[i-1] [0]; 如果第i天不操作，且之前买过，dp[i] [1] = dp[i-1] [1]。所以dp[i] [1] = min( prices[i] - dp[i-1] [0]， dp[i-1] [1])
+  - 对于dp[i] [2]。如果第i天卖出，dp[i] [2] = prices[i] - dp[i-1] [1]; 如果第i天不操作，dp[i] [2] = dp[i-1] [2]。所以dp[i] [2] = max(prices[i] - dp[i-1] [1], dp[i-1] [2])
+  - 对于dp[i] [3] = min(prices[i] - dp[i-1] [2], dp[i-1] [3])
+  - 对于dp[i] [4] = max(prices[i] - dp[i-1] [3], dp[i-1] [4])
+- 初始化：
+  - 没操作就是0，dp[0] [0] = 0
+  - 第一次买入肯定是第一天， dp[0] [1] = prices[0]
+  - 同理dp[0] [2] = 0; dp[0] [4] =0
+  - dp[0] [3] =prices[0]
+
+代码：
+
+![image-20220405104453045](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405104453045.png)
+
+#### [188. Best Time to Buy and Sell Stock IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
+
+难度困难695收藏分享切换为中文接收动态反馈
+
+You are given an integer array `prices` where `prices[i]` is the price of a given stock on the `ith` day, and an integer `k`.
+
+Find the maximum profit you can achieve. You may complete at most `k` transactions.
+
+**Note:** You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+ 
+
+**Example 1:**
+
+```
+Input: k = 2, prices = [2,4,1]
+Output: 2
+Explanation: Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2.
+```
+
+**Example 2:**
+
+```
+Input: k = 2, prices = [3,2,6,5,0,3]
+Output: 7
+Explanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
+```
+
+思路：
+
+- 和上一题相比，这次允许多次交易了，很显然我们需要的列数是2k+1
+- 递推式和之前一样，初始化是只要是奇数，意味着买入都是初始化为prices[0]
+
+代码：
+
+![image-20220405110742006](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405110742006.png)
+
+#### [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+难度中等1150收藏分享切换为中文接收动态反馈
+
+You are given an array `prices` where `prices[i]` is the price of a given stock on the `ith` day.
+
+Find the maximum profit you can achieve. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
+
+- After you sell your stock, you cannot buy stock on the next day (i.e., cooldown one day).
+
+**Note:** You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+ 
+
+**Example 1:**
+
+```
+Input: prices = [1,2,3,0,2]
+Output: 3
+Explanation: transactions = [buy, sell, cooldown, buy, sell]
+```
+
+**Example 2:**
+
+```
+Input: prices = [1]
+Output: 0
+```
+
+思路：
+
+代码：
+
+#### [714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
+
+难度中等672收藏分享切换为中文接收动态反馈
+
+You are given an array `prices` where `prices[i]` is the price of a given stock on the `ith` day, and an integer `fee` representing a transaction fee.
+
+Find the maximum profit you can achieve. You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction.
+
+**Note:** You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+ 
+
+**Example 1:**
+
+```
+Input: prices = [1,3,2,8,4,9], fee = 2
+Output: 8
+Explanation: The maximum profit can be achieved by:
+- Buying at prices[0] = 1
+- Selling at prices[3] = 8
+- Buying at prices[4] = 4
+- Selling at prices[5] = 9
+The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
+```
+
+**Example 2:**
+
+```
+Input: prices = [1,3,7,5,10,3], fee = 3
+Output: 6
 ```
 
 ## 5. 子序列问题
@@ -1250,4 +1589,42 @@ Explanation: The repeated subarray with maximum length is [3,2,1].
 ```
 Input: nums1 = [0,0,0,0,0], nums2 = [0,0,0,0,0]
 Output: 5
+```
+
+#### [1143. Longest Common Subsequence](https://leetcode-cn.com/problems/longest-common-subsequence/)
+
+难度中等921
+
+Given two strings `text1` and `text2`, return *the length of their longest **common subsequence**.* If there is no **common subsequence**, return `0`.
+
+A **subsequence** of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.
+
+- For example, `"ace"` is a subsequence of `"abcde"`.
+
+A **common subsequence** of two strings is a subsequence that is common to both strings.
+
+ 
+
+**Example 1:**
+
+```
+Input: text1 = "abcde", text2 = "ace" 
+Output: 3  
+Explanation: The longest common subsequence is "ace" and its length is 3.
+```
+
+**Example 2:**
+
+```
+Input: text1 = "abc", text2 = "abc"
+Output: 3
+Explanation: The longest common subsequence is "abc" and its length is 3.
+```
+
+**Example 3:**
+
+```
+Input: text1 = "abc", text2 = "def"
+Output: 0
+Explanation: There is no such common subsequence, so the result is 0.
 ```
