@@ -1471,7 +1471,27 @@ Output: 0
 
 思路：
 
+- 状态一：第i天前买入股票，所需最低金额
+- 状态二：第i天卖出了股票，所获最大收益
+- 状态三：今天为冷冻期
+- 确定递推式：
+  - 对于状态一，dp[i] [0]; 
+    - 如果之前买入了股票，dp[i] [0] = dp[i-1] [0]
+    - 如果今天买入的股票。如果今天刚好是经历了状态三，过了冷冻期，那买入的金额是price[i] - dp[i-1] [2] 
+    - dp[i] [0] = min( dp[i-1] [0],  price[i] - dp[i-1] [2])
+  - 对于状态二，dp[i] [1];
+    - 如果之前卖出了股票，dp[i] [1] = dp[i-1] [1]
+    - 如果就是今天卖出的股票，那就是i-1天之前买入的 dp[i] [1] = price[i] - dp[i-1] [0]
+    - dp[i] [1] = max(dp[i-1] [1], price[i] - dp[i-1] [0])
+  - 对于状态三，dp[i] [2];
+    - 那么前一天一定是卖出的状态，dp[i] [2] = dp[i-1] [1]
+- 初始化dp[i] [0] =prices[0]
+
 代码：
+
+![image-20220405122229142](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405122229142.png)
+
+这是我自己的想法，就是要注意for的要从1开始，之后可以看下网上的思路
 
 #### [714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
 
@@ -1504,6 +1524,28 @@ The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
 Input: prices = [1,3,7,5,10,3], fee = 3
 Output: 6
 ```
+
+思路：
+
+- 总体上其实和之前的122相似，可以多次交易，不同的地方在于这次有手续费
+- 所以相似地，也可以使用贪心算法
+
+- dp[i] [0] 代表第i天及之前买入股票的最小支出
+  - 如果第i天之前就买入了dp[i] [0] = dp[i-1] [0]
+  - 如果恰好是第i天买，dp[i] [0] = price[i] - dp[i-1] [1] 
+  - dp[i] [0] = min(dp[i-1] [0], prices[i] - dp[i-1] [1])
+- dp[i] [1] 代表第i天及之前卖出股票的最大收入
+  - 如果第i天之前就卖出了dp[i] [1] = dp[i-1] [1]
+  - 如果恰好第i天卖，dp[i] [1] = prices[i] - dp[i-1] [0] - fee
+  - dp[i] [1] = max(dp[i-1] [1], prices[i] - dp[i-1] [0] - fee)
+- 初始化
+  - dp[0] [0] = prices[0]
+
+代码
+
+![image-20220405203619715](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405203619715.png)
+
+感觉贪心也很简单
 
 ## 5. 子序列问题
 
@@ -1539,6 +1581,19 @@ Input: nums = [7,7,7,7,7,7,7]
 Output: 1
 ```
 
+思路
+
+- dp[j] 代表j之前的最长上升子序列长度, 也就是从0到j-1的比nums[j]小的数字的个数+1,因为自己也要被算上
+- 对于i从0到j-1, 如果nums[i]<nums[j]，那么dp[j] = max(dp[j], dp[i]+1)
+- 使用贪心和二分可以从O(n^2)变到O(nlgn), 二刷的时候看看
+
+代码：
+
+- 首先别忘了第十一行的判断
+- 其次是别忘了最后是要返回整个dp中的最大值，不像之前的问题只要最后一个
+
+![image-20220405211436368](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405211436368.png)
+
 #### [674. Longest Continuous Increasing Subsequence](https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/)
 
 难度简单262
@@ -1568,6 +1623,17 @@ Explanation: The longest continuous increasing subsequence is [2] with length 1.
 increasing.
 ```
 
+思路：
+
+- dp[j]表示j之前的最长连续递增子序列的长度,且必须以j结尾！
+  - 如果不加上以j结尾这个限制，将会很难推导
+- if nums[j] > nums[j-1], 那么dp[j] = dp[j-1] +1
+- 初始化dp[j]=1
+
+代码：
+
+![image-20220405214152189](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405214152189.png)
+
 #### [718. Maximum Length of Repeated Subarray](https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray/)
 
 难度中等659
@@ -1590,6 +1656,20 @@ Explanation: The repeated subarray with maximum length is [3,2,1].
 Input: nums1 = [0,0,0,0,0], nums2 = [0,0,0,0,0]
 Output: 5
 ```
+
+思路：
+
+- dp[i] [j]代表到nums1的第i个为止和到nums2的第j个为止，最长重复子数组的长度
+  - 必须说明，是不包含i和j
+  - 也就是最多到i-1和j-1的重复
+  - 但是我们的dp会有多给一格，所以最后也能考虑到最后一位
+- 其中如果nums1[i] == nums2[j],那么递推式为dp[i] [j] = dp[i-1] [j-1]+1
+
+代码:
+
+![image-20220405235427925](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220405235427925.png)
+
+
 
 #### [1143. Longest Common Subsequence](https://leetcode-cn.com/problems/longest-common-subsequence/)
 
@@ -1627,4 +1707,273 @@ Explanation: The longest common subsequence is "abc" and its length is 3.
 Input: text1 = "abc", text2 = "def"
 Output: 0
 Explanation: There is no such common subsequence, so the result is 0.
+```
+
+#### [1035. Uncrossed Lines](https://leetcode-cn.com/problems/uncrossed-lines/)
+
+难度中等297
+
+You are given two integer arrays `nums1` and `nums2`. We write the integers of `nums1` and `nums2` (in the order they are given) on two separate horizontal lines.
+
+We may draw connecting lines: a straight line connecting two numbers `nums1[i]` and `nums2[j]` such that:
+
+- `nums1[i] == nums2[j]`, and
+- the line we draw does not intersect any other connecting (non-horizontal) line.
+
+Note that a connecting line cannot intersect even at the endpoints (i.e., each number can only belong to one connecting line).
+
+Return *the maximum number of connecting lines we can draw in this way*.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/142.png)
+
+```
+Input: nums1 = [1,4,2], nums2 = [1,2,4]
+Output: 2
+Explanation: We can draw 2 uncrossed lines as in the diagram.
+We cannot draw 3 uncrossed lines, because the line from nums1[1] = 4 to nums2[2] = 4 will intersect the line from nums1[2]=2 to nums2[1]=2.
+```
+
+**Example 2:**
+
+```
+Input: nums1 = [2,5,1,2,5], nums2 = [10,5,2,1,5,2]
+Output: 3
+```
+
+**Example 3:**
+
+```
+Input: nums1 = [1,3,7,1,7,5], nums2 = [1,9,2,5,1]
+Output: 2
+```
+
+ 
+
+#### [53. Maximum Subarray](https://leetcode-cn.com/problems/maximum-subarray/)
+
+难度简单4687收藏分享切换为中文接收动态反馈
+
+Given an integer array `nums`, find the contiguous subarray (containing at least one number) which has the largest sum and return *its sum*.
+
+A **subarray** is a **contiguous** part of an array.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.
+```
+
+**Example 2:**
+
+```
+Input: nums = [1]
+Output: 1
+```
+
+**Example 3:**
+
+```
+Input: nums = [5,4,-1,7,8]
+Output: 23
+```
+
+#### [392. Is Subsequence](https://leetcode-cn.com/problems/is-subsequence/)
+
+难度简单625收藏分享切换为中文接收动态反馈
+
+Given two strings `s` and `t`, return `true` *if* `s` *is a **subsequence** of* `t`*, or* `false` *otherwise*.
+
+A **subsequence** of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., `"ace"` is a subsequence of `"abcde"` while `"aec"` is not).
+
+ 
+
+**Example 1:**
+
+```
+Input: s = "abc", t = "ahbgdc"
+Output: true
+```
+
+**Example 2:**
+
+```
+Input: s = "axc", t = "ahbgdc"
+Output: false
+```
+
+ 
+
+**Constraints:**
+
+- `0 <= s.length <= 100`
+- `0 <= t.length <= 104`
+- `s` and `t` consist only of lowercase English letters.
+
+ 
+
+**Follow up:** Suppose there are lots of incoming `s`, say `s1, s2, ..., sk` where `k >= 109`, and you want to check one by one to see if `t` has its subsequence. In this scenario, how would you change your code?
+
+#### [115. 不同的子序列](https://leetcode-cn.com/problems/distinct-subsequences/)
+
+难度困难724收藏分享切换为英文接收动态反馈
+
+给定一个字符串 `s` 和一个字符串 `t` ，计算在 `s` 的子序列中 `t` 出现的个数。
+
+字符串的一个 **子序列** 是指，通过删除一些（也可以不删除）字符且不干扰剩余字符相对位置所组成的新字符串。（例如，`"ACE"` 是 `"ABCDE"` 的一个子序列，而 `"AEC"` 不是）
+
+题目数据保证答案符合 32 位带符号整数范围。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "rabbbit", t = "rabbit"
+输出：3
+解释：
+如下图所示, 有 3 种可以从 s 中得到 "rabbit" 的方案。
+rabbbit
+rabbbit
+rabbbit
+```
+
+**示例 2：**
+
+```
+输入：s = "babgbag", t = "bag"
+输出：5
+解释：
+如下图所示, 有 5 种可以从 s 中得到 "bag" 的方案。 
+babgbag
+babgbag
+babgbag
+babgbag
+babgbag
+```
+
+#### [583. 两个字符串的删除操作](https://leetcode-cn.com/problems/delete-operation-for-two-strings/)
+
+难度中等397
+
+给定两个单词 `word1` 和 `word2` ，返回使得 `word1` 和 `word2` **相同**所需的**最小步数**。
+
+**每步** 可以删除任意一个字符串中的一个字符。
+
+ 
+
+**示例 1：**
+
+```
+输入: word1 = "sea", word2 = "eat"
+输出: 2
+解释: 第一步将 "sea" 变为 "ea" ，第二步将 "eat "变为 "ea"
+```
+
+**示例  2:**
+
+```
+输入：word1 = "leetcode", word2 = "etco"
+输出：4
+```
+
+#### [72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)
+
+难度困难2275收藏分享切换为英文接收动态反馈
+
+给你两个单词 `word1` 和 `word2`， *请返回将 `word1` 转换成 `word2` 所使用的最少操作数* 。
+
+你可以对一个单词进行如下三种操作：
+
+- 插入一个字符
+- 删除一个字符
+- 替换一个字符
+
+ 
+
+**示例 1：**
+
+```
+输入：word1 = "horse", word2 = "ros"
+输出：3
+解释：
+horse -> rorse (将 'h' 替换为 'r')
+rorse -> rose (删除 'r')
+rose -> ros (删除 'e')
+```
+
+**示例 2：**
+
+```
+输入：word1 = "intention", word2 = "execution"
+输出：5
+解释：
+intention -> inention (删除 't')
+inention -> enention (将 'i' 替换为 'e')
+enention -> exention (将 'n' 替换为 'x')
+exention -> exection (将 'n' 替换为 'c')
+exection -> execution (插入 'u')
+```
+
+#### [647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
+
+难度中等824收藏分享切换为英文接收动态反馈
+
+给你一个字符串 `s` ，请你统计并返回这个字符串中 **回文子串** 的数目。
+
+**回文字符串** 是正着读和倒过来读一样的字符串。
+
+**子字符串** 是字符串中的由连续字符组成的一个序列。
+
+具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "abc"
+输出：3
+解释：三个回文子串: "a", "b", "c"
+```
+
+**示例 2：**
+
+```
+输入：s = "aaa"
+输出：6
+解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
+```
+
+#### [516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)
+
+难度中等767收藏分享切换为英文接收动态反馈
+
+给你一个字符串 `s` ，找出其中最长的回文子序列，并返回该序列的长度。
+
+子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "bbbab"
+输出：4
+解释：一个可能的最长回文子序列为 "bbbb" 。
+```
+
+**示例 2：**
+
+```
+输入：s = "cbbd"
+输出：2
+解释：一个可能的最长回文子序列为 "bb" 。
 ```
