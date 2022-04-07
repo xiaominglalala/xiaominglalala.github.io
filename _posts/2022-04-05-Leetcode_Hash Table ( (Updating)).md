@@ -39,6 +39,10 @@ tags:
 输出: false
 ```
 
+思路：
+
+代码：
+
 #### [349. 两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/)
 
 难度简单458
@@ -60,6 +64,10 @@ tags:
 输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
 输出：[9,4]
 ```
+
+思路：
+
+代码：
 
 #### [202. 快乐数](https://leetcode-cn.com/problems/happy-number/)
 

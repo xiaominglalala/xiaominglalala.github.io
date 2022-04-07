@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Dynamic Programming
+title:      Dynamic Programming (Finished)
 subtitle:   
 date:       2022-03-30
 author:     Ethan
@@ -1709,6 +1709,23 @@ Output: 0
 Explanation: There is no such common subsequence, so the result is 0.
 ```
 
+思路：
+
+- 要注意subarray和subsequence的区别，前者要求连续，后者不需要
+- 又是一个两个东西比较的，很自然会想到用一个list table
+- dp[i] [j]代表text1在索引i之前和text2在索引j之前的最长公共subsequence
+- 很显然根据上一题的经验，建立dp时要多一格来确保看到最后一个索引位
+- 如果text1[i-1] == text2[j-1], 那么dp[i] [j] = dp[i-1] [j-1]+1
+- 如果text1[i-1] != text2[j-1], 那么我们就要看
+  - text1[i-2]和text2[j-1]的最长公共subsequence
+  - text1[i-1]和text2[j-2]的最长公共subsequence
+  - dp[i] [j] = max(dp[i-1] [j], dp[i] [j-1])
+- 遍历顺序![1143.最长公共子序列](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210204115139616.jpg)
+
+代码：
+
+![image-20220406103627306](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220406103627306.png)
+
 #### [1035. Uncrossed Lines](https://leetcode-cn.com/problems/uncrossed-lines/)
 
 难度中等297
@@ -1728,7 +1745,7 @@ Return *the maximum number of connecting lines we can draw in this way*.
 
 **Example 1:**
 
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/142.png)
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/142.png" alt="img" style="zoom: 25%;" />
 
 ```
 Input: nums1 = [1,4,2], nums2 = [1,2,4]
@@ -1751,7 +1768,15 @@ Input: nums1 = [1,3,7,1,7,5], nums2 = [1,9,2,5,1]
 Output: 2
 ```
 
- 
+ 思路：
+
+- **本题说是求绘制的最大连线数，其实就是求两个字符串的最长公共子序列的长度！**
+- 所以你会发现和上一题是完全一样的，甚至代码都不用修改，直接改一下变量名就ok了
+- 直线不能相交，这就是说明在字符串A中 找到一个与字符串B相同的子序列，且这个子序列不能改变相对顺序，只要相对顺序不改变，链接相同数字的直线就不会相交
+
+代码：
+
+![image-20220406165913584](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220406165913584.png)
 
 #### [53. Maximum Subarray](https://leetcode-cn.com/problems/maximum-subarray/)
 
@@ -1784,6 +1809,20 @@ Output: 1
 Input: nums = [5,4,-1,7,8]
 Output: 23
 ```
+
+思路:
+
+- 这题很显然可以使用贪心
+- 如果dp[i] 表示以i结尾的最大连续子序和，这样就是在整个dp遍历过程中找到
+  - 注意不能到i为止，那样说输出最后一个dp[i]
+  - 可能这就是连续子序的问题
+- 如果没有包含nums[i]，dp[i] = dp[i-1]
+- 如果包含nums[i], dp[i] = max(dp[i-1]+nums[i], nums[i])
+- 所以，dp[i] = max()
+
+代码：
+
+![image-20220406173624353](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220406173624353.png)
 
 #### [392. Is Subsequence](https://leetcode-cn.com/problems/is-subsequence/)
 
@@ -1820,6 +1859,21 @@ Output: false
  
 
 **Follow up:** Suppose there are lots of incoming `s`, say `s1, s2, ..., sk` where `k >= 109`, and you want to check one by one to see if `t` has its subsequence. In this scenario, how would you change your code?
+
+思路：
+
+- 这道题看到第一反应就是双指针，但是我们这次要用动态规划
+- 然后又是两个字符串的，很自然就能想到要dp矩阵
+- dp[i] [j]代表到s[i]和t[j]为止，以下标i-1为结尾和以下标j-1结尾的重复字串长度，如果这个长度恰好等于短的字符串的长度，那么就是True 
+- 递推式：
+  - 如果s[i-1] == t[j-1], 那么dp[i] [j] = dp[i-1] [j-1]+1
+  - 如果是s[i-1] != t[j-1], 那么他有两个方向的递推
+    - dp[i-1] [j]和dp[i] [j-1]
+    - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210303172354155.jpg" alt="392.判断子序列1" style="zoom:33%;" />
+
+代码:
+
+![image-20220406183204057](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220406183204057.png)
 
 #### [115. 不同的子序列](https://leetcode-cn.com/problems/distinct-subsequences/)
 
@@ -1859,6 +1913,35 @@ babgbag
 babgbag
 ```
 
+思路：
+
+- 如果不是子序列，而是要求连续序列的，==那就可以考虑用KMP==。为什么？
+
+  这道题目相对于72. 编辑距离，简单了不少，因为本题相当于只有删除操作，不用考虑替换增加之类的
+  
+- 我们知道t是不可分割的，s是可以进行删减的，
+
+- 所以定义dp[i] [j]为在s[0, i-1]中t[0, j-1]所出现的个数
+
+- 递推式：
+
+  - 如果末尾项不一样（s[i] != t[j]）
+  - s[i-1] 不能和 t[j-1] 匹配，因此只考虑 t[j-1] 作为 s[i-2] 的子序列，子序列个数为 dp[i-1] [j]
+  - 如果末尾项一样(s[i]== t[j])，dp[i] [j]的来源有两部份
+    - 那么我们可以用s[i-1]和t[j-1] 进行匹配，考虑 t[j-1] 作为 s[i-1] 的子序列，当前的子序列数为dp[i-1] [j-1]
+    -  如果我们不用s[i-1]来匹配，考虑 t[j-1] 作为 s[i-2] 的子序列，那么子序列数位dp[i-1] [j]
+
+- 初始化：
+
+  - dp[i] [0] 表示：以i-1为结尾的s删除元素，出现空字符串的个数，有几种方案。显然是1，必须全删，只有这一个方案。
+  - 再来看dp[0] [j] ：空字符串s删除元素，出现以j-1为结尾的字符串t的个数。显然是0
+  - dp[0] [0]应该是1，空字符串s，可以删除0个元素，变成空字符串t
+
+
+代码：
+
+![image-20220406223347914](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220406223347914.png)
+
 #### [583. 两个字符串的删除操作](https://leetcode-cn.com/problems/delete-operation-for-two-strings/)
 
 难度中等397
@@ -1883,6 +1966,15 @@ babgbag
 输入：word1 = "leetcode", word2 = "etco"
 输出：4
 ```
+
+思路：
+
+- 只要求出两个字符串的最长公共子序列长度即可，那么除了最长公共子序列之外的字符都是必须删除的，最后用两个字符串的总长度减去两个最长公共子序列的长度就是删除的最少步数。
+- 参考1143
+
+代码：
+
+
 
 #### [72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)
 

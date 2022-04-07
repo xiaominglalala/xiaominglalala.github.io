@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Array
+title:      Array (Finished)
 subtitle:   
 date:       2022-04-2
 author:     Ethan
