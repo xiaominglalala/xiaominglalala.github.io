@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Hash Table
+title:      Hash Table (Updating)
 subtitle:   
 date:       2022-04-05
 author:     Ethan

@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Binary tree
+title:      Binary Tree (Updating)
 subtitle:   
 date:       2022-04-04
 author:     Ethan

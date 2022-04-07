@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      DFS+BFS+Backtracking
+title:      DFS & BFS & Backtracking (Updating)
 subtitle:   
 date:       2022-04-3
 author:     Ethan

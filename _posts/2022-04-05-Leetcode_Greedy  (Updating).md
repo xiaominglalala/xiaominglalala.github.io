@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Greedy
+title:      Greedy (Updating)
 subtitle:   
 date:       2022-04-05
 author:     Ethan
