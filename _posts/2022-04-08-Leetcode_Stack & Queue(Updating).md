@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      Stack & Queue (Updating)
+subtitle:   
+date:       2022-03-30
+author:     Ethan
+header-img: img/dog_0.jpg
+catalog: true
+tags:
+    - Leetcode
+    - Stack
+    - Queue
+
+---
+
 ## 队列和栈
 
 - 队列是先进先出
@@ -77,12 +92,12 @@ myQueue.empty(); // return false
   而之后提及这两个，也别忘加self
 
   此外，之后调用功能，比如empty，也要self！
-  ![image-20211228163615659](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211228163615659.png)
+  ![image-20211228163615659](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211228163615659.png)
 
 - empty也有问题，但是没太理解
-  ![image-20211228164822733](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211228164822733.png)
+  ![image-20211228164822733](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211228164822733.png)
 
-- <img src="C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211228183311419.png" alt="image-20211228183311419" style="zoom:15%;" />
+- <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211228183311419.png" alt="image-20211228183311419" style="zoom:15%;" />
 
 代码：
 
