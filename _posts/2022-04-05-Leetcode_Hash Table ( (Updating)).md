@@ -15,7 +15,7 @@ tags:
 
 哈希表是根据关键码的值而直接进行访问的数据结构。
 
-#### [242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
+#### [242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/) & [剑指 Offer II 032. 有效的变位词](https://leetcode-cn.com/problems/dKk3P7/)
 
 难度简单472
 
@@ -41,7 +41,17 @@ tags:
 
 思路：
 
+- 定义一个数组叫做record用来上记录字符串s里字符出现的次数
+- 把字符映射到哈希表的索引下标上，**因为字符a到字符z的ASCII是26个连续的数值，所以字符a映射为下标0，相应的字符z映射为下标25**
+- 那看一下如何检查字符串t中是否出现了这些字符，同样在遍历字符串t的时候，对t中出现的字符映射哈希表索引上的数值再做-1的操作
+- **record数组如果有的元素不为零0，说明字符串s和t一定是谁多了字符或者谁少了字符，return false。**
+- 最后如果record数组所有元素都为零0，说明字符串s和t是字母异位词，return true
+- 时间复杂度为O(n), 空间复杂度为O(1)
+
 代码：
+
+- 获得字母的顺序是ord()
+- ![image-20220410011836230](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410011836230.png)
 
 #### [349. 两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/)
 
@@ -240,7 +250,7 @@ tags:
 输出：[[2,2,2,2]]
 ```
 
-#### 146. LRU 缓存机制（哈希表和双向链表）
+#### 146. LRU 缓存机制 & [剑指 Offer II 031. 最近最少使用缓存](https://leetcode-cn.com/problems/OrIXps/)
 
 运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制 。
 实现 LRUCache 类：
@@ -298,7 +308,7 @@ lRUCache.get(4);    // 返回 4
 
 代码：
 
-#### 953. [验证外星语词典](https://leetcode-cn.com/problems/verifying-an-alien-dictionary/)(verifying-an-alien-dictionary)(哈希表)
+#### 953. [验证外星语词典](https://leetcode-cn.com/problems/verifying-an-alien-dictionary/)(verifying-an-alien-dictionary) & [剑指 Offer II 034. 外星语言是否排序](https://leetcode-cn.com/problems/lwyVBB/)
 
 某种外星语也使用英文小写字母，但可能顺序 order 不同。字母表的顺序（order）是一些小写字母的排列。
 
@@ -341,3 +351,92 @@ lRUCache.get(4);    // 返回 4
 
 代码：
 
+#### [380. O(1) 时间插入、删除和获取随机元素](https://leetcode-cn.com/problems/insert-delete-getrandom-o1/) & [剑指 Offer II 030. 插入、删除和随机访问都是 O(1) 的容器](https://leetcode-cn.com/problems/FortPu/)
+
+难度中等459
+
+实现`RandomizedSet` 类：
+
+- `RandomizedSet()` 初始化 `RandomizedSet` 对象
+- `bool insert(int val)` 当元素 `val` 不存在时，向集合中插入该项，并返回 `true` ；否则，返回 `false` 。
+- `bool remove(int val)` 当元素 `val` 存在时，从集合中移除该项，并返回 `true` ；否则，返回 `false` 。
+- `int getRandom()` 随机返回现有集合中的一项（测试用例保证调用此方法时集合中至少存在一个元素）。每个元素应该有 **相同的概率** 被返回。
+
+你必须实现类的所有函数，并满足每个函数的 **平均** 时间复杂度为 `O(1)` 。
+
+ 
+
+**示例：**
+
+```
+输入
+["RandomizedSet", "insert", "remove", "insert", "getRandom", "remove", "insert", "getRandom"]
+[[], [1], [2], [2], [], [1], [2], []]
+输出
+[null, true, false, true, 2, true, false, 2]
+
+解释
+RandomizedSet randomizedSet = new RandomizedSet();
+randomizedSet.insert(1); // 向集合中插入 1 。返回 true 表示 1 被成功地插入。
+randomizedSet.remove(2); // 返回 false ，表示集合中不存在 2 。
+randomizedSet.insert(2); // 向集合中插入 2 。返回 true 。集合现在包含 [1,2] 。
+randomizedSet.getRandom(); // getRandom 应随机返回 1 或 2 。
+randomizedSet.remove(1); // 从集合中移除 1 ，返回 true 。集合现在包含 [2] 。
+randomizedSet.insert(2); // 2 已在集合中，所以返回 false 。
+randomizedSet.getRandom(); // 由于 2 是集合中唯一的数字，getRandom 总是返回 2 。
+```
+
+#### [49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/) & [剑指 Offer II 033. 变位词组](https://leetcode-cn.com/problems/sfvd7V/)
+
+难度中等1092
+
+给你一个字符串数组，请你将 **字母异位词** 组合在一起。可以按任意顺序返回结果列表。
+
+**字母异位词** 是由重新排列源单词的字母得到的一个新单词，所有源单词中的字母通常恰好只用一次。
+
+ 
+
+**示例 1:**
+
+```
+输入: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+输出: [["bat"],["nat","tan"],["ate","eat","tea"]]
+```
+
+**示例 2:**
+
+```
+输入: strs = [""]
+输出: [[""]]
+```
+
+**示例 3:**
+
+```
+输入: strs = ["a"]
+输出: [["a"]]
+```
+
+#### [539. 最小时间差](https://leetcode-cn.com/problems/minimum-time-difference/) & [剑指 Offer II 035. 最小时间差](https://leetcode-cn.com/problems/569nqc/) 
+
+难度中等193
+
+给定一个 24 小时制（小时:分钟 **"HH:MM"**）的时间列表，找出列表中任意两个时间的最小时间差并以分钟数表示。
+
+ 
+
+**示例 1：**
+
+```
+输入：timePoints = ["23:59","00:00"]
+输出：1
+```
+
+**示例 2：**
+
+```
+输入：timePoints = ["00:00","23:59","00:00"]
+输出：0
+```
+
+#### 

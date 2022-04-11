@@ -1974,7 +1974,7 @@ babgbag
 
 代码：
 
-
+![image-20220406232438269](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220406232438269.png)
 
 #### [72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)
 
@@ -2014,6 +2014,23 @@ exention -> exection (将 'n' 替换为 'c')
 exection -> execution (插入 'u')
 ```
 
+思路：
+
+- **dp[i] [j] 表示以下标i-1为结尾的字符串word1，和以下标j-1为结尾的字符串word2，最近编辑距离为dp[i] [j]**
+- 和之前题目一样，从后往前看
+- 对于word1[i-1]和word2[j-1]
+  - 如果相等，就不操作，相当于抵消，也就是都删除，dp[i] [j] = dp[i-1] [j-1]
+  - 如果不相等，因为是把word1变成word2，word2是永远不变的，删除word1的东西，dp[i] [j] = dp[i-1] [j] +1
+  - 如果增加，dp[i] [j] = dp[i] [j-1] +1
+  - 如果替换，dp[i] [j] = dp[i-1] [j-1] +1
+- 初始化，dp[0] [0]没有意义，设为0，dp[i] [0] = i, 也就是把word1变成空字符串；dp[0] [i] = i, 也就是把空字符串变成word2
+
+代码：
+
+![image-20220408135157062](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220408135157062.png)
+
+
+
 #### [647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
 
 难度中等824收藏分享切换为英文接收动态反馈
@@ -2044,6 +2061,20 @@ exection -> execution (插入 'u')
 解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
 ```
 
+思路：
+
+- dp[i] [j]代表从下标i到下标j之间是不是回文子串，注意，不是有多少，而是是不是，要不然就错了
+- 对于递推式，如果s[i] != s[j], 那么dp[i] [j] 显然是false，那么如果二者相等：
+  - 如果i和j下标一样，i=j，s[i] == s[j], dp[i] [j] = True
+  - 如果i和j下标相差1，s[i] == s[j], dp[i] [j] = True
+  - 否则就是下标相差1以上，所以就是判断dp[i+1] [j-1]是不是True，如果他是True，那么dp[i] [j]就是true
+- 特别需要注意的是遍历顺序，因为dp[i] [?]需要依赖dp[i+1] [？+1]， 所以i一定要是倒序遍历
+- 不要小看遍历顺序的确认！
+
+代码：
+
+![image-20220409075326215](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220409075326215.png)
+
 #### [516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)
 
 难度中等767收藏分享切换为英文接收动态反馈
@@ -2069,3 +2100,18 @@ exection -> execution (插入 'u')
 输出：2
 解释：一个可能的最长回文子序列为 "bb" 。
 ```
+
+思路：
+
+- 上一题中的回文子串是连续的，但是回文子序列不要求连续
+- 定义dp[i] [j] 代表从下标i到下标j的最长回文子序列长度
+- 如果s[i] == s[j], 那么dp[i] [j] = dp[i+1] [j-1]+2
+- 如果s[i] != s[j], 那么dp[i] [j] = max(dp[i+1] [j], dp[i] [j-1])
+- 初始化：dp[i] [i] = 1
+- 遍历顺序：注意i需要依赖i+1来推导出来，所以i是倒序，j是正序
+
+代码：
+
+\#注意j一定要比i大！
+
+![image-20220410001245817](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410001245817.png)
