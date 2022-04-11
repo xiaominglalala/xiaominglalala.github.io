@@ -13,51 +13,6 @@ tags:
 
 ## 数组
 
-#### [704. 二分查找](https://leetcode-cn.com/problems/binary-search/)
-
-难度简单586收藏分享切换为英文接收动态反馈
-
-给定一个 `n` 个元素有序的（升序）整型数组 `nums` 和一个目标值 `target` ，写一个函数搜索 `nums` 中的 `target`，如果目标值存在返回下标，否则返回 `-1`。
-
-
-**示例 1:**
-
-```
-输入: nums = [-1,0,3,5,9,12], target = 9
-输出: 4
-解释: 9 出现在 nums 中并且下标为 4
-```
-
-**示例 2:**
-
-```
-输入: nums = [-1,0,3,5,9,12], target = 2
-输出: -1
-解释: 2 不存在 nums 中因此返回 -1
-```
-
-思路：
-
-- 对于有序数组+数组中无重复元素，可以考虑使用二分查找
-- 对于二分查找，主要需要注意两种情况
-  - 首先是右边是闭合的
-    - 如果右边是闭合的，在写while循环时，就需要使用<=  `while (left <= right)` 
-    - 并且对于第二次查找，下标将会是middle + 1或者middle - 1
-    - 范围从0到 len(nums)
-  - 其次是右边是开的
-    - 如果右边是开的，在写while循环时，就需要使用<`while (left < right)`
-    - 次时对于第二次查找，就需要把middle加入考虑；middle或者middle+1
-    - 范围从0到 len(nums-1)
-- middle = (left + right) // 2 使用整除
-
-代码：
-
-![image-20220202164310357](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220202164310357.png)
-
-or
-
-![image-20220202164552584](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220202164552584.png)
-
 #### [27. 移除元素](https://leetcode-cn.com/problems/remove-element/)
 
 难度简单1149
@@ -299,6 +254,8 @@ for (int i = 0; i < len; i++) {
 ```
 
 思路：
+
+
 
 代码：
 

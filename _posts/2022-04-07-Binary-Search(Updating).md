@@ -1,5 +1,5 @@
 ---
-yilayout:     post
+layout:     post
 title:      Binary Search(Updating)
 subtitle:   
 date:       2022-04-07
@@ -67,6 +67,8 @@ tags:
 <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410110317918.png" alt="image-20220410110317918" style="zoom:50%;" />
 
 - 看个例子，左边的是大于等于，右边是严格大于
+- 大于等于用于lower
+- 大于用于upper
 
 <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410110436760.png" alt="image-20220410110436760" style="zoom:50%;" />
 
@@ -91,7 +93,7 @@ tags:
 
 ![image-20220407115920934](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220407115920934.png)
 
-![image-20220410101602019](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410101602019.png)
+#### 二分搜索题目分类![image-20220410101602019](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410101602019.png)
 
 #### [278. 第一个错误的版本](https://leetcode-cn.com/problems/first-bad-version/)
 
@@ -328,6 +330,15 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 - `set` 操作中的时间戳 `timestamp` 都是严格递增的
 - 最多调用 `set` 和 `get` 操作 `2 * 105` 次
 
+思路：
+
+- 维护一个有序字典，并且使用二分查找来找到最大的timestamp
+- 但是要用到Python3自带的二分查找库函数：bisect.bisect_right(), 来找到第一个小于等于
+
+代码：
+
+![image-20220410233241056](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410233241056.png)
+
 #### [33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
 
 难度中等1986
@@ -361,7 +372,9 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 输出：-1
 ```
 
- 
+ 思路：
+
+代码;
 
 #### [81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/)
 
@@ -390,6 +403,10 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 输入：nums = [2,5,6,0,0,1,2], target = 3
 输出：false
 ```
+
+思路：
+
+代码：
 
 #### [153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)
 
@@ -614,41 +631,18 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 解释：8 的算术平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。
 ```
 
- 
-
-
-
-**示例 1：**
-
-```
-输入: piles = [3,6,7,11], H = 8
-输出: 4
-```
-
-**示例 2：**
-
-```
-输入: piles = [30,11,23,4,20], H = 5
-输出: 30
-```
-
-**示例 3：**
-
-```
-输入: piles = [30,11,23,4,20], H = 6
-输出: 23
-```
-
-**分析：**
+ **分析：**
 
 - 设定上下区间进行二分查找，复杂度为O(lgn)
-- 使用//来向下整除
-- 如果整除结果的平方比x小，这个结果可能是我们要的。让下界=mid+1
-- 如果整除结果的平方
+- 注意一般left用作下限，right因为本来就是开区间，所以应该是上限加一
+- 回想之前的数组，right是用len(nums)，这是取不到的，而left用的是0
+- 所以这里right用x+1，因为x可以被取到
 
 **代码：**
 
-![image-20211209141530177](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211209141530177.png)
+![image-20220411004306888](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220411004306888.png)
+
+
 
 #### [74. 搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)
 
@@ -679,6 +673,14 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 输出：false
 ```
 
+思路：
+
+
+
+代码：
+
+![image-20220411010028717](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220411010028717.png)
+
 #### [875. 爱吃香蕉的珂珂](https://leetcode-cn.com/problems/koko-eating-bananas/) & [剑指 Offer II 073. 狒狒吃香蕉](https://leetcode-cn.com/problems/nZZqjQ/)
 
 难度中等277
@@ -690,6 +692,32 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。
 
 返回她可以在 `H` 小时内吃掉所有香蕉的最小速度 `K`（`K` 为整数）。
+
+示例 1：
+
+输入: piles = [3,6,7,11], H = 8
+输出: 4
+示例 2：
+
+输入: piles = [30,11,23,4,20], H = 5
+输出: 30
+示例 3：
+
+输入: piles = [30,11,23,4,20], H = 6
+输出: 23
+
+
+
+**思路：**
+
+- 可以看如下的伪代码：![image-20220410111835474](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410111835474.png)
+- 下界left应可以找到的最小值，珂珂最少吃一根1，上界是开区间，应该找到最大值+1。注意不是piles的长度，而是取值
+  - 其中容易出错的点在于
+- 难点在于向上取整的写法
+  - Python 提供的向上取整使用ceil()
+  - 或者是result = （分母+分子-1) / 分子
+
+**代码：**
 
 #### [1011. 在 D 天内送达包裹的能力](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/)
 
@@ -749,6 +777,14 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 
 - `1 <= days <= weights.length <= 5 * 104`
 - `1 <= weights[i] <= 500`
+
+思路：
+
+
+
+代码：
+
+
 
 #### [378. 有序矩阵中第 K 小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)
 

@@ -79,6 +79,8 @@ tags:
 
 代码：
 
+
+
 #### [202. 快乐数](https://leetcode-cn.com/problems/happy-number/)
 
 难度简单760
@@ -189,7 +191,36 @@ tags:
 输出：true
 ```
 
-#### [15. 三数之和](https://leetcode-cn.com/problems/3sum/)
+#### [15. 三数之和](https://leetcode-cn.com/problems/3sum/) & [剑指 Offer II 007. 数组中和为 0 的三个数](https://leetcode-cn.com/problems/1fGaJU/)
+
+难度中等51
+
+给定一个包含 `n` 个整数的数组 `nums`，判断 `nums` 中是否存在三个元素 `a` ，`b` ，`c` *，*使得 `a + b + c = 0` ？请找出所有和为 `0` 且 **不重复** 的三元组。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [-1,0,1,2,-1,-4]
+输出：[[-1,-1,2],[-1,0,1]]
+```
+
+**示例 2：**
+
+```
+输入：nums = []
+输出：[]
+```
+
+**示例 3：**
+
+```
+输入：nums = [0]
+输出：[]
+```
+
+
 
 难度中等4142
 
