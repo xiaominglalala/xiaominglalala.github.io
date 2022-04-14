@@ -4,7 +4,7 @@ title:      Stack & Queue (Updating)
 subtitle:   
 date:       2022-03-30
 author:     Ethan
-header-img: img/dog_0.jpg
+header-img: img/city_9.jpg
 catalog: true
 tags:
     - Leetcode
