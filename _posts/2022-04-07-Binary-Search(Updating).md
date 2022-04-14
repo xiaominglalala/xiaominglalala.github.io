@@ -372,9 +372,13 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 输出：-1
 ```
 
- 思路：
+思路：
 
-代码;
+
+
+代码：
+
+
 
 #### [81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/)
 
@@ -716,8 +720,13 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 - 难点在于向上取整的写法
   - Python 提供的向上取整使用ceil()
   - 或者是result = （分母+分子-1) / 分子
+- 这道题是最左二分，也就是求下界
 
 **代码：**
+
+- 时间复杂度：O*(*N*log*W*)，其中 N*N* 是香蕉堆的数量，W*W* 最大的香蕉堆的大小。
+- 空间复杂度：O(1)
+- ![image-20220411235218319](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220411235218319.png)
 
 #### [1011. 在 D 天内送达包裹的能力](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/)
 
@@ -784,7 +793,56 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 
 代码：
 
+#### [1231. 分享巧克力](https://leetcode-cn.com/problems/divide-chocolate/)
 
+难度困难77
+
+你有一大块巧克力，它由一些甜度不完全相同的小块组成。我们用数组 `sweetness` 来表示每一小块的甜度。
+
+你打算和 `K` 名朋友一起分享这块巧克力，所以你需要将切割 `K` 次才能得到 `K+1` 块，每一块都由一些 **连续** 的小块组成。
+
+为了表现出你的慷慨，你将会吃掉 **总甜度最小** 的一块，并将其余几块分给你的朋友们。
+
+请找出一个最佳的切割策略，使得你所分得的巧克力 **总甜度最大**，并返回这个 **最大总甜度**。
+
+ 
+
+**示例 1：**
+
+```
+输入：sweetness = [1,2,3,4,5,6,7,8,9], K = 5
+输出：6
+解释：你可以把巧克力分成 [1,2,3], [4,5], [6], [7], [8], [9]。
+```
+
+**示例 2：**
+
+```
+输入：sweetness = [5,6,7,8,9,1,2,3,4], K = 8
+输出：1
+解释：只有一种办法可以把巧克力分成 9 块。
+```
+
+**示例 3：**
+
+```
+输入：sweetness = [1,2,2,1,2,2,1,2,2], K = 2
+输出：5
+解释：你可以把巧克力分成 [1,2,2], [1,2,2], [1,2,2]。
+```
+
+
+
+**提示：**
+
+- `0 <= K < sweetness.length <= 10^4`
+- `1 <= sweetness[i] <= 10^5`
+
+思路：
+
+
+
+代码：
 
 #### [378. 有序矩阵中第 K 小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)
 
@@ -963,3 +1021,198 @@ k = 1
 解释：合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5
 ```
 
+#### [1146. Snapshot Array](https://leetcode-cn.com/problems/snapshot-array/)
+
+难度中等85
+
+Implement a SnapshotArray that supports the following interface:
+
+- `SnapshotArray(int length)` initializes an array-like data structure with the given length. **Initially, each element equals 0**.
+- `void set(index, val)` sets the element at the given `index` to be equal to `val`.
+- `int snap()` takes a snapshot of the array and returns the `snap_id`: the total number of times we called `snap()` minus `1`.
+- `int get(index, snap_id)` returns the value at the given `index`, at the time we took the snapshot with the given `snap_id`
+
+ 
+
+**Example 1:**
+
+```
+Input: ["SnapshotArray","set","snap","set","get"]
+[[3],[0,5],[],[0,6],[0,0]]
+Output: [null,null,0,null,5]
+Explanation: 
+SnapshotArray snapshotArr = new SnapshotArray(3); // set the length to be 3
+snapshotArr.set(0,5);  // Set array[0] = 5
+snapshotArr.snap();  // Take a snapshot, return snap_id = 0
+snapshotArr.set(0,6);
+snapshotArr.get(0,0);  // Get the value of array[0] with snap_id = 0, return 5
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= length <= 50000`
+- At most `50000` calls will be made to `set`, `snap`, and `get`.
+- `0 <= index < length`
+- `0 <= snap_id < `(the total number of times we call `snap()`)
+- `0 <= val <= 10^9`
+
+#### [410. Split Array Largest Sum](https://leetcode-cn.com/problems/split-array-largest-sum/)
+
+难度困难667
+
+Given an array `nums` which consists of non-negative integers and an integer `m`, you can split the array into `m` non-empty continuous subarrays.
+
+Write an algorithm to minimize the largest sum among these `m` subarrays.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [7,2,5,10,8], m = 2
+Output: 18
+Explanation:
+There are four ways to split nums into two subarrays.
+The best way is to split it into [7,2,5] and [10,8],
+where the largest sum among the two subarrays is only 18.
+```
+
+**Example 2:**
+
+```
+Input: nums = [1,2,3,4,5], m = 2
+Output: 9
+```
+
+**Example 3:**
+
+```
+Input: nums = [1,4,4], m = 3
+Output: 4
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= nums.length <= 1000`
+- `0 <= nums[i] <= 106`
+- `1 <= m <= min(50, nums.length)`
+
+
+
+#### [1847. Closest Room](https://leetcode-cn.com/problems/closest-room/)
+
+难度困难26
+
+There is a hotel with `n` rooms. The rooms are represented by a 2D integer array `rooms` where `rooms[i] = [roomIdi, sizei]` denotes that there is a room with room number `roomIdi` and size equal to `sizei`. Each `roomIdi` is guaranteed to be **unique**.
+
+You are also given `k` queries in a 2D array `queries` where `queries[j] = [preferredj, minSizej]`. The answer to the `jth` query is the room number `id` of a room such that:
+
+- The room has a size of **at least** `minSizej`, and
+- `abs(id - preferredj)` is **minimized**, where `abs(x)` is the absolute value of `x`.
+
+If there is a **tie** in the absolute difference, then use the room with the **smallest** such `id`. If there is **no such room**, the answer is `-1`.
+
+Return *an array* `answer` *of length* `k` *where* `answer[j]` *contains the answer to the* `jth` *query*.
+
+ 
+
+**Example 1:**
+
+```
+Input: rooms = [[2,2],[1,2],[3,2]], queries = [[3,1],[3,3],[5,2]]
+Output: [3,-1,3]
+Explanation: The answers to the queries are as follows:
+Query = [3,1]: Room number 3 is the closest as abs(3 - 3) = 0, and its size of 2 is at least 1. The answer is 3.
+Query = [3,3]: There are no rooms with a size of at least 3, so the answer is -1.
+Query = [5,2]: Room number 3 is the closest as abs(3 - 5) = 2, and its size of 2 is at least 2. The answer is 3.
+```
+
+**Example 2:**
+
+```
+Input: rooms = [[1,4],[2,3],[3,5],[4,1],[5,2]], queries = [[2,3],[2,4],[2,5]]
+Output: [2,1,3]
+Explanation: The answers to the queries are as follows:
+Query = [2,3]: Room number 2 is the closest as abs(2 - 2) = 0, and its size of 3 is at least 3. The answer is 2.
+Query = [2,4]: Room numbers 1 and 3 both have sizes of at least 4. The answer is 1 since it is smaller.
+Query = [2,5]: Room number 3 is the only room with a size of at least 5. The answer is 3.
+```
+
+ 
+
+**Constraints:**
+
+- `n == rooms.length`
+- `1 <= n <= 105`
+- `k == queries.length`
+- `1 <= k <= 104`
+- `1 <= roomIdi, preferredj <= 107`
+- `1 <= sizei, minSizej <= 107`
+
+
+
+#### [1760. Minimum Limit of Balls in a Bag](https://leetcode-cn.com/problems/minimum-limit-of-balls-in-a-bag/)
+
+难度中等70
+
+You are given an integer array `nums` where the `ith` bag contains `nums[i]` balls. You are also given an integer `maxOperations`.
+
+You can perform the following operation at most `maxOperations` times:
+
+- Take any bag of balls and divide it into two new bags with a
+
+   
+
+  positive 
+
+  number of balls.
+
+  - For example, a bag of `5` balls can become two new bags of `1` and `4` balls, or two new bags of `2` and `3` balls.
+
+Your penalty is the **maximum** number of balls in a bag. You want to **minimize** your penalty after the operations.
+
+Return *the minimum possible penalty after performing the operations*.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [9], maxOperations = 2
+Output: 3
+Explanation: 
+- Divide the bag with 9 balls into two bags of sizes 6 and 3. [9] -> [6,3].
+- Divide the bag with 6 balls into two bags of sizes 3 and 3. [6,3] -> [3,3,3].
+The bag with the most number of balls has 3 balls, so your penalty is 3 and you should return 3.
+```
+
+**Example 2:**
+
+```
+Input: nums = [2,4,8,2], maxOperations = 4
+Output: 2
+Explanation:
+- Divide the bag with 8 balls into two bags of sizes 4 and 4. [2,4,8,2] -> [2,4,4,4,2].
+- Divide the bag with 4 balls into two bags of sizes 2 and 2. [2,4,4,4,2] -> [2,2,2,4,4,2].
+- Divide the bag with 4 balls into two bags of sizes 2 and 2. [2,2,2,4,4,2] -> [2,2,2,2,2,4,2].
+- Divide the bag with 4 balls into two bags of sizes 2 and 2. [2,2,2,2,2,4,2] -> [2,2,2,2,2,2,2,2].
+The bag with the most number of balls has 2 balls, so your penalty is 2 an you should return 2.
+```
+
+**Example 3:**
+
+```
+Input: nums = [7,17], maxOperations = 2
+Output: 7
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= nums.length <= 105`
+- `1 <= maxOperations, nums[i] <= 109`

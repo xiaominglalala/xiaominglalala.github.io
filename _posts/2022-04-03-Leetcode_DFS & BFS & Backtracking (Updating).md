@@ -276,7 +276,274 @@ tags:
 解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
 ```
 
+#### [79. Word Search](https://leetcode-cn.com/problems/word-search/)
 
+难度中等1259
+
+Given an `m x n` grid of characters `board` and a string `word`, return `true` *if* `word` *exists in the grid*.
+
+The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+ 
+
+**Example 1:**
+
+![img](https://assets.leetcode.com/uploads/2020/11/04/word2.jpg)
+
+```
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+Output: true
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/word-1.jpg)
+
+```
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+Output: true
+```
+
+**Example 3:**
+
+![img](https://assets.leetcode.com/uploads/2020/10/15/word3.jpg)
+
+```
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+Output: false
+```
+
+ 
+
+**Constraints:**
+
+- `m == board.length`
+- `n = board[i].length`
+- `1 <= m, n <= 6`
+- `1 <= word.length <= 15`
+- `board` and `word` consists of only lowercase and uppercase English letters.
+
+ 
+
+**Follow up:** Could you use search pruning to make your solution faster with a larger `board`?
+
+#### [212. Word Search II](https://leetcode-cn.com/problems/word-search-ii/)
+
+难度困难641
+
+Given an `m x n` `board` of characters and a list of strings `words`, return *all words on the board*.
+
+Each word must be constructed from letters of sequentially adjacent cells, where **adjacent cells** are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
+
+ 
+
+**Example 1:**
+
+![img](https://assets.leetcode.com/uploads/2020/11/07/search1.jpg)
+
+```
+Input: board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
+Output: ["eat","oath"]
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/search2.jpg)
+
+```
+Input: board = [["a","b"],["c","d"]], words = ["abcb"]
+Output: []
+```
+
+ 
+
+**Constraints:**
+
+- `m == board.length`
+- `n == board[i].length`
+- `1 <= m, n <= 12`
+- `board[i][j]` is a lowercase English letter.
+- `1 <= words.length <= 3 * 104`
+- `1 <= words[i].length <= 10`
+- `words[i]` consists of lowercase English letters.
+- All the strings of `words` are unique.
+
+#### [297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)
+
+难度困难822
+
+序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
+
+请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。
+
+**提示:** 输入输出格式与 LeetCode 目前使用的方式一致，详情请参阅 [LeetCode 序列化二叉树的格式](https://leetcode-cn.com/faq/#binary-tree)。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/serdeser.jpg)
+
+```
+输入：root = [1,2,3,null,null,4,5]
+输出：[1,2,3,null,null,4,5]
+```
+
+**示例 2：**
+
+```
+输入：root = []
+输出：[]
+```
+
+**示例 3：**
+
+```
+输入：root = [1]
+输出：[1]
+```
+
+**示例 4：**
+
+```
+输入：root = [1,2]
+输出：[1,2]
+```
+
+ 
+
+**提示：**
+
+- 树中结点数在范围 `[0, 104]` 内
+- `-1000 <= Node.val <= 1000`
+
+#### [1192. 查找集群内的「关键连接」](https://leetcode-cn.com/problems/critical-connections-in-a-network/)
+
+难度困难185
+
+力扣数据中心有 `n` 台服务器，分别按从 `0` 到 `n-1` 的方式进行了编号。它们之间以「服务器到服务器」点对点的形式相互连接组成了一个内部集群，其中连接 `connections` 是无向的。从形式上讲，`connections[i] = [a, b]` 表示服务器 `a` 和 `b` 之间形成连接。任何服务器都可以直接或者间接地通过网络到达任何其他服务器。
+
+*「关键连接」* 是在该集群中的重要连接，也就是说，假如我们将它移除，便会导致某些服务器无法访问其他服务器。
+
+请你以任意顺序返回该集群内的所有 「关键连接」。
+
+ 
+
+**示例 1：**
+
+**![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/critical-connections-in-a-network.png)**
+
+```
+输入：n = 4, connections = [[0,1],[1,2],[2,0],[1,3]]
+输出：[[1,3]]
+解释：[[3,1]] 也是正确的。
+```
+
+**示例 2:**
+
+```
+输入：n = 2, connections = [[0,1]]
+输出：[[0,1]]
+```
+
+ 
+
+**提示：**
+
+- `1 <= n <= 10^5`
+- `n-1 <= connections.length <= 10^5`
+- `connections[i][0] != connections[i][1]`
+- 不存在重复的连接
+
+#### [399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
+
+难度中等724
+
+给你一个变量对数组 `equations` 和一个实数值数组 `values` 作为已知条件，其中 `equations[i] = [Ai, Bi]` 和 `values[i]` 共同表示等式 `Ai / Bi = values[i]` 。每个 `Ai` 或 `Bi` 是一个表示单个变量的字符串。
+
+另有一些以数组 `queries` 表示的问题，其中 `queries[j] = [Cj, Dj]` 表示第 `j` 个问题，请你根据已知条件找出 `Cj / Dj = ?` 的结果作为答案。
+
+返回 **所有问题的答案** 。如果存在某个无法确定的答案，则用 `-1.0` 替代这个答案。如果问题中出现了给定的已知条件中没有出现的字符串，也需要用 `-1.0` 替代这个答案。
+
+**注意：**输入总是有效的。你可以假设除法运算中不会出现除数为 0 的情况，且不存在任何矛盾的结果。
+
+ 
+
+**示例 1：**
+
+```
+输入：equations = [["a","b"],["b","c"]], values = [2.0,3.0], queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
+输出：[6.00000,0.50000,-1.00000,1.00000,-1.00000]
+解释：
+条件：a / b = 2.0, b / c = 3.0
+问题：a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ?
+结果：[6.0, 0.5, -1.0, 1.0, -1.0 ]
+```
+
+**示例 2：**
+
+```
+输入：equations = [["a","b"],["b","c"],["bc","cd"]], values = [1.5,2.5,5.0], queries = [["a","c"],["c","b"],["bc","cd"],["cd","bc"]]
+输出：[3.75000,0.40000,5.00000,0.20000]
+```
+
+**示例 3：**
+
+```
+输入：equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]]
+输出：[0.50000,2.00000,-1.00000,-1.00000]
+```
+
+ 
+
+**提示：**
+
+- `1 <= equations.length <= 20`
+- `equations[i].length == 2`
+- `1 <= Ai.length, Bi.length <= 5`
+- `values.length == equations.length`
+- `0.0 < values[i] <= 20.0`
+- `1 <= queries.length <= 20`
+- `queries[i].length == 2`
+- `1 <= Cj.length, Dj.length <= 5`
+- `Ai, Bi, Cj, Dj` 由小写英文字母与数字组成
+
+#### [572. 另一棵树的子树](https://leetcode-cn.com/problems/subtree-of-another-tree/)
+
+难度简单694
+
+给你两棵二叉树 `root` 和 `subRoot` 。检验 `root` 中是否包含和 `subRoot` 具有相同结构和节点值的子树。如果存在，返回 `true` ；否则，返回 `false` 。
+
+二叉树 `tree` 的一棵子树包括 `tree` 的某个节点和这个节点的所有后代节点。`tree` 也可以看做它自身的一棵子树。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/subtree1-tree.jpg)
+
+```
+输入：root = [3,4,5,1,2], subRoot = [4,1,2]
+输出：true
+```
+
+**示例 2：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/subtree2-tree.jpg)
+
+```
+输入：root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]
+输出：false
+```
+
+ 
+
+**提示：**
+
+- `root` 树上的节点数量范围是 `[1, 2000]`
+- `subRoot` 树上的节点数量范围是 `[1, 1000]`
+- `-104 <= root.val <= 104`
+- `-104 <= subRoot.val <= 104`
 
 ## 广度优先搜索
 
@@ -414,6 +681,209 @@ tags:
 输出：2
 解释：13 = 4 + 9
 ```
+
+#### [207. 课程表](https://leetcode-cn.com/problems/course-schedule/)
+
+难度中等1217
+
+你这个学期必须选修 `numCourses` 门课程，记为 `0` 到 `numCourses - 1` 。
+
+在选修某些课程之前需要一些先修课程。 先修课程按数组 `prerequisites` 给出，其中 `prerequisites[i] = [ai, bi]` ，表示如果要学习课程 `ai` 则 **必须** 先学习课程 `bi` 。
+
+- 例如，先修课程对 `[0, 1]` 表示：想要学习课程 `0` ，你需要先完成课程 `1` 。
+
+请你判断是否可能完成所有课程的学习？如果可以，返回 `true` ；否则，返回 `false` 。
+
+ 
+
+**示例 1：**
+
+```
+输入：numCourses = 2, prerequisites = [[1,0]]
+输出：true
+解释：总共有 2 门课程。学习课程 1 之前，你需要完成课程 0 。这是可能的。
+```
+
+**示例 2：**
+
+```
+输入：numCourses = 2, prerequisites = [[1,0],[0,1]]
+输出：false
+解释：总共有 2 门课程。学习课程 1 之前，你需要先完成课程 0 ；并且学习课程 0 之前，你还应先完成课程 1 。这是不可能的。
+```
+
+ 
+
+**提示：**
+
+- `1 <= numCourses <= 105`
+- `0 <= prerequisites.length <= 5000`
+- `prerequisites[i].length == 2`
+- `0 <= ai, bi < numCourses`
+- `prerequisites[i]` 中的所有课程对 **互不相同**
+
+#### [994. 腐烂的橘子](https://leetcode-cn.com/problems/rotting-oranges/)
+
+难度中等535
+
+在给定的 `m x n` 网格 `grid` 中，每个单元格可以有以下三个值之一：
+
+- 值 `0` 代表空单元格；
+- 值 `1` 代表新鲜橘子；
+- 值 `2` 代表腐烂的橘子。
+
+每分钟，腐烂的橘子 **周围 4 个方向上相邻** 的新鲜橘子都会腐烂。
+
+返回 *直到单元格中没有新鲜橘子为止所必须经过的最小分钟数。如果不可能，返回 `-1`* 。
+
+ 
+
+**示例 1：**
+
+**![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/02/16/oranges.png)**
+
+```
+输入：grid = [[2,1,1],[1,1,0],[0,1,1]]
+输出：4
+```
+
+**示例 2：**
+
+```
+输入：grid = [[2,1,1],[0,1,1],[1,0,1]]
+输出：-1
+解释：左下角的橘子（第 2 行， 第 0 列）永远不会腐烂，因为腐烂只会发生在 4 个正向上。
+```
+
+**示例 3：**
+
+```
+输入：grid = [[0,2]]
+输出：0
+解释：因为 0 分钟时已经没有新鲜橘子了，所以答案就是 0 。
+```
+
+ 
+
+**提示：**
+
+- `m == grid.length`
+- `n == grid[i].length`
+- `1 <= m, n <= 10`
+- `grid[i][j]` 仅为 `0`、`1` 或 `2`
+
+#### [127. 单词接龙](https://leetcode-cn.com/problems/word-ladder/)
+
+难度困难1002
+
+字典 `wordList` 中从单词 `beginWord` 和 `endWord` 的 **转换序列** 是一个按下述规格形成的序列 `beginWord -> s1 -> s2 -> ... -> sk`：
+
+- 每一对相邻的单词只差一个字母。
+-  对于 `1 <= i <= k` 时，每个 `si` 都在 `wordList` 中。注意， `beginWord` 不需要在 `wordList` 中。
+- `sk == endWord`
+
+给你两个单词 `beginWord` 和 `endWord` 和一个字典 `wordList` ，返回 *从 `beginWord` 到 `endWord` 的 **最短转换序列** 中的 **单词数目*** 。如果不存在这样的转换序列，返回 `0` 。
+
+**示例 1：**
+
+```
+输入：beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
+输出：5
+解释：一个最短转换序列是 "hit" -> "hot" -> "dot" -> "dog" -> "cog", 返回它的长度 5。
+```
+
+**示例 2：**
+
+```
+输入：beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"]
+输出：0
+解释：endWord "cog" 不在字典中，所以无法进行转换。
+```
+
+ 
+
+**提示：**
+
+- `1 <= beginWord.length <= 10`
+- `endWord.length == beginWord.length`
+- `1 <= wordList.length <= 5000`
+- `wordList[i].length == beginWord.length`
+- `beginWord`、`endWord` 和 `wordList[i]` 由小写英文字母组成
+- `beginWord != endWord`
+- `wordList` 中的所有字符串 **互不相同**
+
+
+
+#### [1293. 网格中的最短路径](https://leetcode-cn.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/)
+
+难度困难174
+
+给你一个 `m * n` 的网格，其中每个单元格不是 `0`（空）就是 `1`（障碍物）。每一步，您都可以在空白单元格中上、下、左、右移动。
+
+如果您 **最多** 可以消除 `k` 个障碍物，请找出从左上角 `(0, 0)` 到右下角 `(m-1, n-1)` 的最短路径，并返回通过该路径所需的步数。如果找不到这样的路径，则返回 `-1` 。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/short1-grid.jpg)
+
+```
+输入： grid = [[0,0,0],[1,1,0],[0,0,0],[0,1,1],[0,0,0]], k = 1
+输出：6
+解释：
+不消除任何障碍的最短路径是 10。
+消除位置 (3,2) 处的障碍后，最短路径是 6 。该路径是 (0,0) -> (0,1) -> (0,2) -> (1,2) -> (2,2) -> (3,2) -> (4,2).
+```
+
+**示例 2：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/short2-grid.jpg)
+
+```
+输入：grid = [[0,1,1],[1,1,1],[1,0,0]], k = 1
+输出：-1
+解释：我们至少需要消除两个障碍才能找到这样的路径。
+```
+
+#### [417. 太平洋大西洋水流问题](https://leetcode-cn.com/problems/pacific-atlantic-water-flow/)
+
+难度中等362
+
+有一个 `m × n` 的矩形岛屿，与 **太平洋** 和 **大西洋** 相邻。 **“太平洋”** 处于大陆的左边界和上边界，而 **“大西洋”** 处于大陆的右边界和下边界。
+
+这个岛被分割成一个由若干方形单元格组成的网格。给定一个 `m x n` 的整数矩阵 `heights` ， `heights[r][c]` 表示坐标 `(r, c)` 上单元格 **高于海平面的高度** 。
+
+岛上雨水较多，如果相邻单元格的高度 **小于或等于** 当前单元格的高度，雨水可以直接向北、南、东、西流向相邻单元格。水可以从海洋附近的任何单元格流入海洋。
+
+返回 *网格坐标 `result` 的 **2D列表** ，其中 `result[i] = [ri, ci]` 表示雨水可以从单元格 `(ri, ci)` 流向 **太平洋和大西洋*** 。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/waterflow-grid.jpg)
+
+```
+输入: heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
+输出: [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]
+```
+
+**示例 2：**
+
+```
+输入: heights = [[2,1],[1,2]]
+输出: [[0,0],[0,1],[1,0],[1,1]]
+```
+
+ 
+
+**提示：**
+
+- `m == heights.length`
+- `n == heights[r].length`
+- `1 <= m, n <= 200`
+- `0 <= heights[r][c] <= 105`
 
 ## 回溯法
 
@@ -626,6 +1096,38 @@ tags:
 
 - ![image.png](https://pic.leetcode-cn.com/0bf18f9b86a2542d1f6aa8db6cc45475fce5aa329a07ca02a9357c2ead81eec1-image.png)
 
+#### [47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
+
+难度中等1021
+
+给定一个可包含重复数字的序列 `nums` ，***按任意顺序*** 返回所有不重复的全排列。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [1,1,2]
+输出：
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+```
+
+**示例 2：**
+
+```
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 8`
+- `-10 <= nums[i] <= 10`
+
 #### [51. N 皇后](https://leetcode-cn.com/problems/n-queens/)
 
 难度困难1116
@@ -690,3 +1192,138 @@ tags:
 - `board[i][j]` 是一位数字或者 `'.'`
 - 题目数据 **保证** 输入数独仅有一个解
 
+#### [784. 字母大小写全排列](https://leetcode-cn.com/problems/letter-case-permutation/)
+
+难度中等373
+
+给定一个字符串 `s` ，通过将字符串 `s` 中的每个字母转变大小写，我们可以获得一个新的字符串。
+
+返回 *所有可能得到的字符串集合* 。以 **任意顺序** 返回输出。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "a1b2"
+输出：["a1b2", "a1B2", "A1b2", "A1B2"]
+```
+
+**示例 2:**
+
+```
+输入: s = "3z4"
+输出: ["3z4","3Z4"]
+```
+
+ 
+
+**提示:**
+
+- `1 <= s.length <= 12`
+- `s` 由小写英文字母、大写英文字母和数字组成
+
+#### [面试题 08.09. 括号](https://leetcode-cn.com/problems/bracket-lcci/) & [22. 括号生成](https://leetcode-cn.com/problems/generate-parentheses/) & [剑指 Offer II 085. 生成匹配的括号](https://leetcode-cn.com/problems/IDBivT/)
+
+难度中等110
+
+括号。设计一种算法，打印n对括号的所有合法的（例如，开闭一一对应）组合。
+
+说明：解集不能包含重复的子集。
+
+例如，给出 n = 3，生成结果为：
+
+```
+[
+  "((()))",
+  "(()())",
+  "(())()",
+  "()(())",
+  "()()()"
+]
+```
+
+#### [131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/) & [剑指 Offer II 086. 分割回文子字符串](https://leetcode-cn.com/problems/M99OJA/)
+
+难度中等1079
+
+给你一个字符串 `s`，请你将 `s` 分割成一些子串，使每个子串都是 **回文串** 。返回 `s` 所有可能的分割方案。
+
+**回文串** 是正着读和反着读都一样的字符串。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "aab"
+输出：[["a","a","b"],["aa","b"]]
+```
+
+**示例 2：**
+
+```
+输入：s = "a"
+输出：[["a"]]
+```
+
+ 
+
+**提示：**
+
+- `1 <= s.length <= 16`
+- `s` 仅由小写英文字母组成
+
+#### [93. 复原 IP 地址](https://leetcode-cn.com/problems/restore-ip-addresses/) & [剑指 Offer II 087. 复原 IP ](https://leetcode-cn.com/problems/0on3uN/)
+
+难度中等21
+
+给定一个只包含数字的字符串 `s` ，用以表示一个 IP 地址，返回所有可能从 `s` 获得的 **有效 IP 地址** 。你可以按任何顺序返回答案。
+
+**有效 IP 地址** 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 `0`），整数之间用 `'.'` 分隔。
+
+例如："0.1.2.201" 和 "192.168.1.1" 是 **有效** IP 地址，但是 "0.011.255.245"、"192.168.1.312" 和 "192.168@1.1" 是 **无效** IP 地址。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "25525511135"
+输出：["255.255.11.135","255.255.111.35"]
+```
+
+**示例 2：**
+
+```
+输入：s = "0000"
+输出：["0.0.0.0"]
+```
+
+**示例 3：**
+
+```
+输入：s = "1111"
+输出：["1.1.1.1"]
+```
+
+**示例 4：**
+
+```
+输入：s = "010010"
+输出：["0.10.0.10","0.100.1.0"]
+```
+
+**示例 5：**
+
+```
+输入：s = "10203040"
+输出：["10.20.30.40","102.0.30.40","10.203.0.40"]
+```
+
+ 
+
+**提示：**
+
+- `0 <= s.length <= 3000`
+- `s` 仅由数字组成
