@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      Two Pointers (Updating)
+subtitle:   
+date:       2022-04-13
+author:     Ethan
+header-img: img/city_10.jpg
+catalog: true
+tags:
+    - Leetcode
+    - Teo Pointers
+---
 ## 双指针
 
 #### [27. 移除元素](https://leetcode-cn.com/problems/remove-element/)
