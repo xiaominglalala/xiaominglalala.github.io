@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Hash Table (Updating)
+title:      Hash Table (Finished)
 subtitle:   
 date:       2022-04-05
 author:     Ethan
@@ -630,73 +630,6 @@ Space: O(1)
 
 ![image-20220413124153628](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220413124153628.png)
 
-#### [460. LFU 缓存](https://leetcode-cn.com/problems/lfu-cache/)
-
-难度困难521
-
-请你为 [最不经常使用（LFU）](https://baike.baidu.com/item/缓存算法)缓存算法设计并实现数据结构。
-
-实现 `LFUCache` 类：
-
-- `LFUCache(int capacity)` - 用数据结构的容量 `capacity` 初始化对象
-- `int get(int key)` - 如果键 `key` 存在于缓存中，则获取键的值，否则返回 `-1` 。
-- `void put(int key, int value)` - 如果键 `key` 已存在，则变更其值；如果键不存在，请插入键值对。当缓存达到其容量 `capacity` 时，则应该在插入新项之前，移除最不经常使用的项。在此问题中，当存在平局（即两个或更多个键具有相同使用频率）时，应该去除 **最近最久未使用** 的键。
-
-为了确定最不常使用的键，可以为缓存中的每个键维护一个 **使用计数器** 。使用计数最小的键是最久未使用的键。
-
-当一个键首次插入到缓存中时，它的使用计数器被设置为 `1` (由于 put 操作)。对缓存中的键执行 `get` 或 `put` 操作，使用计数器的值将会递增。
-
-函数 `get` 和 `put` 必须以 `O(1)` 的平均时间复杂度运行。
-
- 
-
-**示例：**
-
-```
-输入：
-["LFUCache", "put", "put", "get", "put", "get", "get", "put", "get", "get", "get"]
-[[2], [1, 1], [2, 2], [1], [3, 3], [2], [3], [4, 4], [1], [3], [4]]
-输出：
-[null, null, null, 1, null, -1, 3, null, -1, 3, 4]
-
-解释：
-// cnt(x) = 键 x 的使用计数
-// cache=[] 将显示最后一次使用的顺序（最左边的元素是最近的）
-LFUCache lfu = new LFUCache(2);
-lfu.put(1, 1);   // cache=[1,_], cnt(1)=1
-lfu.put(2, 2);   // cache=[2,1], cnt(2)=1, cnt(1)=1
-lfu.get(1);      // 返回 1
-                 // cache=[1,2], cnt(2)=1, cnt(1)=2
-lfu.put(3, 3);   // 去除键 2 ，因为 cnt(2)=1 ，使用计数最小
-                 // cache=[3,1], cnt(3)=1, cnt(1)=2
-lfu.get(2);      // 返回 -1（未找到）
-lfu.get(3);      // 返回 3
-                 // cache=[3,1], cnt(3)=2, cnt(1)=2
-lfu.put(4, 4);   // 去除键 1 ，1 和 3 的 cnt 相同，但 1 最久未使用
-                 // cache=[4,3], cnt(4)=1, cnt(3)=2
-lfu.get(1);      // 返回 -1（未找到）
-lfu.get(3);      // 返回 3
-                 // cache=[3,4], cnt(4)=1, cnt(3)=3
-lfu.get(4);      // 返回 4
-                 // cache=[3,4], cnt(4)=2, cnt(3)=3
-```
-
- 
-
-**提示：**
-
-- `0 <= capacity <= 104`
-- `0 <= key <= 105`
-- `0 <= value <= 109`
-- 最多调用 `2 * 105` 次 `get` 和 `put` 方法
-
-思路：
-
-- ![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/460-ep54-2.png)
-- ![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/460-ep54-3.png)
-
-代码：
-
 
 
 #### [904. 水果成篮](https://leetcode-cn.com/problems/fruit-into-baskets/)
@@ -760,6 +693,35 @@ lfu.get(4);      // 返回 4
 
 提交次数94,725
 
+思路：
+
+- 这道题的做法是滑动窗口，之后可以多做些这种类型的题目
+
+- 使用collections.Counter()来进行计数
+
+  ![image-20220416115140887](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416115140887.png)
+
+- 关键点是只能装俩种水果，而且从哪里开始摘了就必须一直摘下去，除非出现第三种水果
+
+- 假设是从下标i到下标j满足上述的要求，对于指定的j，我们希望i越小越好
+
+- 使用哈希表，走滑动窗口
+
+  - 创建一个空的哈希表，并设置左指针为0
+  - 然后遍历数组，将出现的次数记录在哈希表中
+  - 当哈希表的长度大于2时，右移左指针，在过程中删除哈希表中的对应内容，直至长度为2停止
+  - 循环上述两步，并持续计算满足要求后的最大长度即可。
+
+  
+
+代码：
+
+时间，空间复杂度都是O(N), N是len(fruits)
+
+![image-20220416121014606](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416121014606.png)
+
+
+
 #### [2013. 检测正方形](https://leetcode-cn.com/problems/detect-squares/)
 
 难度中等106
@@ -811,3 +773,13 @@ detectSquares.count([11, 10]); // 返回 2 。你可以选择：
 - `point.length == 2`
 - `0 <= x, y <= 1000`
 - 调用 `add` 和 `count` 的 **总次数** 最多为 `5000`
+
+思路：
+
+![image-20220416123520600](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416123520600.png)
+
+代码：
+
+![image-20220416123246515](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416123246515.png)
+
+注意p_0和p_1可能不存在，所以给默认值0！
