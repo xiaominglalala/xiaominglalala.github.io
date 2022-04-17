@@ -14,29 +14,11 @@ tags:
 
 ---
 
-## 知识学习
+## 1. 知识学习
 
 主要参考leetcode的书
 
-### 树的深度优先搜索：
-
-- 「根结点 → 右子树 → 左子树」
-- ![image-20220416234821547](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416234821547.png)
-- 前序（preorder）遍历：<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416235111780.png" alt="image-20220416235111780" style="zoom: 67%;" />
-- 中序(Inorder)遍历
-- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416235225435.png" alt="image-20220416235225435" style="zoom:67%;" />
-- 后序(Posorder)遍历
-- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417085922348.png" alt="image-20220417085922348" style="zoom:67%;" />
-
-> 后序遍历最为重要
-
-### 图的深度优先搜索：
-
-深度优先遍历有「回头」的过程，在树中由于不存在「环」（回路），对于每一个结点来说，每一个结点只会被递归处理一次。而「图」中由于存在「环」（回路），就需要 记录已经被递归处理的结点（通常使用布尔数组或者哈希表），以免结点被重复遍历到。
-
-
-
-### 深度优先遍历使用的数据结构（栈）：
+### 1.1 深度优先遍历使用的数据结构（栈）：
 
 在深度优先遍历的过程中，需要将 当前遍历到的结点 的相邻结点 暂时保存 起来，以便在回退的时候可以继续访问它们。遍历到的结点的顺序呈现「后进先出」的特点，因此 深度优先遍历可以通过「栈」实现。
 
@@ -47,6 +29,20 @@ tags:
 ![image-20220417084221574](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417084221574.png)
 
 主要是掌握前中后序的迭代和递归写法
+
+### 1.2 广度优先遍历使用的数据结构（队列）：
+
+### 1.3 树的深度优先搜索：
+
+- 「根结点 → 右子树 → 左子树」
+- ![image-20220416234821547](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416234821547.png)
+- 前序（preorder）遍历：<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416235111780.png" alt="image-20220416235111780" style="zoom: 67%;" />
+- 中序(Inorder)遍历
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416235225435.png" alt="image-20220416235225435" style="zoom:67%;" />
+- 后序(Posorder)遍历
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417085922348.png" alt="image-20220417085922348" style="zoom:67%;" />
+
+> 后序遍历最为重要
 
 #### Preorder Binary Tree (Iteration)
 
@@ -91,68 +87,219 @@ tags:
 
 > 之后再考虑下N叉树的iteration
 
-### 深度优先遍历的应用：
+### 
 
-在一些树的问题中，其实就是通过一次深度优先遍历，获得树的某些属性。例如：「二叉树」的最大深度、「二叉树」的最小深度、平衡二叉树、是否 BST。在遍历的过程中，通常需要设计一些变量，一边遍历，一边更新设计的变量的值
 
-#### [129. Sum Root to Leaf Numbers](https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/)
 
-难度中等511
+### 1.4 图的深度优先搜索：
 
-You are given the `root` of a binary tree containing digits from `0` to `9` only.
+深度优先遍历有「回头」的过程，在树中由于不存在「环」（回路），对于每一个结点来说，每一个结点只会被递归处理一次。而「图」中由于存在「环」（回路），就需要 记录已经被递归处理的结点（通常使用布尔数组或者哈希表），以免结点被重复遍历到。
 
-Each root-to-leaf path in the tree represents a number.
+### 1.5 树的广度优先遍历：
 
-- For example, the root-to-leaf path `1 -> 2 -> 3` represents the number `123`.
+- 树的广度优先遍历的写法模式相对固定：
+  - 使用队列；
+  - 在队列非空的时候，动态取出队首元素；
+  - 取出队首元素的时候，把队首元素相邻的结点（非空）加入队列。
 
-Return *the total sum of all root-to-leaf numbers*. Test cases are generated so that the answer will fit in a **32-bit** integer.
+比如对于102题的二叉树层序遍历：
 
-A **leaf** node is a node with no children.
+二叉树：`[3,9,20,null,null,15,7]`,
+
+```
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+
+<img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220217174904929.png" alt="image-20220217174904929" style="zoom:67%;" />
+
+
+
+### 1.6 图的广度优先遍历：
+
+- 在 无权图 中，由于广度优先遍历本身的特点，假设源点为 source，只有在遍历到 所有 距离源点 source 的距离为 d 的所有结点以后，才能遍历到所有 距离源点 source 的距离为 d + 1 的所有结点。也可以使用「两点之间、线段最短」这条经验来辅助理解如下结论：从源点 source 到目标结点 target 走直线走过的路径一定是最短的。
+
+- 和深度优先遍历一样，广度优先遍历也需要在遍历的时候记录已经遍历过的结点。
+
+- 特别注意：将结点添加到队列以后，一定要马上标记为「已经访问」，否则相同结点会重复入队，这一点在初学的时候很容易忽略。如果很难理解这样做的必要性，建议大家在代码中打印出队列中的元素进行调试：在图中，如果入队的时候不马上标记为「已访问」，相同的结点会重复入队
+
+- 广度优先遍历用于求解「无权图」的最短路径，因此一定要认清「无权图」这个前提条件。如果是带权图，就需要使用相应的专门的算法去解决它们。事实上，这些「专门」的算法的思想也都基于「广度优先遍历」的思想
+
+  - 带权有向图、且所有权重都非负的单源最短路径问题：使用 Dijkstra 算法；
+  - 带权有向图的单源最短路径问题：Bellman-Ford 算法；
+  - 一个图的所有结点对的最短路径问题：Floy-Warshall 算法。
+
+- 应用任何一种算法，都需要认清使用算法的前提，不满足前提直接套用算法是不可取的。深刻理解应用算法的前提，也是学习算法的重要方法。例如我们在学习「二分查找」算法、「滑动窗口」算法的时候，就可以问自己，这个问题为什么可以使用「二分查找」，为什么可以使用「滑动窗口」。我们知道一个问题可以使用「优先队列」解决，是什么样的需求促使我们想到使用「优先队列」，而不是「红黑树（平衡二叉搜索树）」，想清楚使用算法（数据结构）的前提更重要。
+
+
+#### [323. Number of Connected Components in an Undirected Graph](https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/)
+
+难度中等131
+
+You have a graph of `n` nodes. You are given an integer `n` and an array `edges` where `edges[i] = [ai, bi]` indicates that there is an edge between `ai` and `bi` in the graph.
+
+Return *the number of connected components in the graph*.
 
  
 
 **Example 1:**
 
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/num1tree.jpg)
+![img](https://assets.leetcode.com/uploads/2021/03/14/conn1-graph.jpg)
 
 ```
-Input: root = [1,2,3]
-Output: 25
-Explanation:
-The root-to-leaf path 1->2 represents the number 12.
-The root-to-leaf path 1->3 represents the number 13.
-Therefore, sum = 12 + 13 = 25.
+Input: n = 5, edges = [[0,1],[1,2],[3,4]]
+Output: 2
 ```
 
 **Example 2:**
 
-![img](https://assets.leetcode.com/uploads/2021/02/19/num2tree.jpg)
+![img](https://assets.leetcode.com/uploads/2021/03/14/conn2-graph.jpg)
 
 ```
-Input: root = [4,9,0,5,1]
-Output: 1026
-Explanation:
-The root-to-leaf path 4->9->5 represents the number 495.
-The root-to-leaf path 4->9->1 represents the number 491.
-The root-to-leaf path 4->0 represents the number 40.
-Therefore, sum = 495 + 491 + 40 = 1026.
+Input: n = 5, edges = [[0,1],[1,2],[2,3],[3,4]]
+Output: 1
 ```
 
  
 
 **Constraints:**
 
-- The number of nodes in the tree is in the range `[1, 1000]`.
-- `0 <= Node.val <= 9`
-- The depth of the tree will not exceed `10`.
+- `1 <= n <= 2000`
+- `1 <= edges.length <= 5000`
+- `edges[i].length == 2`
+- `0 <= ai <= bi < n`
+- `ai != bi`
+- There are no repeated edges.
 
-回溯搜索是深度优先搜索（DFS）的一种，回溯法通俗的将其采用的思想是“一直向下走，走不通就掉头”，类似于树的先序遍历。dfs和回溯法其主要的区别是：回溯法在求解过程中不保留完整的树结构，而深度优先搜索则记下完整的搜索树。
-  为了减少存储空间，在深度优先搜索中，用标志的方法记录访问过的状态，这种处理方法使得深度优先搜索法与回溯法没什么区别了。
-由于回溯法花费时间较长，所以对于没有明确的动态规划（DP）和递归解法的或问题要求满足某种性质（约束条件）的所有解或最优解时，才考虑使用回溯法。
+思路：
 
-  我们一般在求解**八皇后问题**的时候说使用的是回溯法，本质也是深搜。在求解有关树和图的问题时，习惯说成**深度优先搜索**。这里所说的回溯和深搜都是不做任何优化的方式实现，在全局解空间上寻找最优解，所花费的时间比较长，仅使用于数据规模较小的问题。
+- 首先需要对输入数组进行处理，由于 n 个结点的编号从 0 到 n - 1 ，因此可以使用「嵌套数组」表示邻接表
+  然后遍历每一个顶点，对每一个顶点执行一次广度优先遍历，注意：在遍历的过程中使用 visited 布尔数组记录已经遍历过的结点。
+- 注意defaultdict(list)维护的dict用list作为值
+  - ![image-20220417141036582](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417141036582.png)
+- 这个部分会不断递归<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417141206072.png" alt="image-20220417141206072" style="zoom:50%;" />
+  - 比如我们一开始看到的que是[0]， 在popleft了0后, 它在搜索后发现1是连着的，就会加上1，变成[1]; 
+  - 再popleft了1后发现2是连着的，就会加上2，变成2。
+  - 2会看2连什么，2连的是1，1已经visited了，所以就没了，但是这时候visited是[0,1,2]
+  - 然后回到第一的函数，找每visited的点
 
-## 深度优先搜索
+代码：
+
+![image-20220417130857404](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417130857404.png)
+
+![image-20220417133152089](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417133152089.png)
+
+
+
+- 广度优先遍历可以用于「树」和「图」的问题的遍历；
+- 广度优先遍历作用于「无权图」，得到的是「最短路径」。如果题目有让求「最小」、「最短」、「最少」，可以考虑这个问题是不是可以建立成一个「图形结构」或者「树形结构」，用「广度优先遍历」的思想求得「最小」、「最短」、「最少」的数值；
+- 广度优先遍历作用于图论问题的时候，结点在加入队列以后标记为已经访问，否则会出现结点重复入队的情况。
+
+### 1.7 回溯算法
+
+- 回溯算法是一种通过不断 尝试 ，搜索一个问题的一个解或者 所有解 的方法。在求解的过程中，如果继续求解不能得到题目要求的结果，就需要 回退 到上一步尝试新的求解路径。回溯算法的核心思想是：在一棵 隐式的树（看不见的树） 上进行一次深度优先遍历。
+- 问「一个问题 **所有的** 解」一般考虑使用回溯算法。因此回溯算法也叫「暴力搜索」，但不同于最粗暴的多个 `for` 循环，回溯算法是有方向的遍历。
+- 在一条路上错误了，就会跳过当前路径，所以比纯暴力快
+- 
+
+#### [51. N 皇后](https://leetcode-cn.com/problems/n-queens/)
+
+难度困难1116
+
+**n 皇后问题** 研究的是如何将 `n` 个皇后放置在 `n×n` 的棋盘上，并且使皇后彼此之间不能相互攻击。
+
+给你一个整数 `n` ，返回所有不同的 **n 皇后问题** 的解决方案。
+
+每一种解法包含一个不同的 **n 皇后问题** 的棋子放置方案，该方案中 `'Q'` 和 `'.'` 分别代表了皇后和空位。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/11/13/queens.jpg)
+
+```
+输入：n = 4
+输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+解释：如上图所示，4 皇后问题存在两个不同的解法。
+```
+
+**示例 2：**
+
+```
+输入：n = 1
+输出：[["Q"]]
+```
+
+思路：
+
+代码：
+
+### 1.8 二维平面的搜索问题（Flood Fill）
+
+![image.png](https://pic.leetcode-cn.com/1611489764-dXtjvl-image.png)
+
+#### [79. Word Search](https://leetcode-cn.com/problems/word-search/)
+
+难度中等1259
+
+Given an `m x n` grid of characters `board` and a string `word`, return `true` *if* `word` *exists in the grid*.
+
+The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+ 
+
+**Example 1:**
+
+![img](https://assets.leetcode.com/uploads/2020/11/04/word2.jpg)
+
+```
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+Output: true
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/word-1.jpg)
+
+```
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+Output: true
+```
+
+**Example 3:**
+
+![img](https://assets.leetcode.com/uploads/2020/10/15/word3.jpg)
+
+```
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+Output: false
+```
+
+ 
+
+**Constraints:**
+
+- `m == board.length`
+- `n = board[i].length`
+- `1 <= m, n <= 6`
+- `1 <= word.length <= 15`
+- `board` and `word` consists of only lowercase and uppercase English letters.
+
+ 
+
+**Follow up:** Could you use search pruning to make your solution faster with a larger `board`?
+
+思路：
+
+
+
+代码：
+
+
 
 #### [695. 岛屿的最大面积](https://leetcode-cn.com/problems/max-area-of-island/)
 
@@ -301,6 +448,101 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 
 
 
+### 1.9 抽象成图论问题
+
+抽象成图论问题
+在算法面试和笔试中，有一些问题问我们「最短」、「最少」、「最小」，可以尝试将它们转换为求解无权图的最短路径的问题求解。
+
+对于这一类问题，最重要的一点在于分析出这一类问题的「图」结构，也就是对图形问题建模。依然是要注意到这些问题的背后是一个「无权图」的最短路径问题，因此可以使用「广度优先遍历」。
+
+
+
+### 1.10 深度优先遍历的应用：
+
+在一些树的问题中，其实就是通过一次深度优先遍历，获得树的某些属性。例如：「二叉树」的最大深度、「二叉树」的最小深度、平衡二叉树、是否 BST。在遍历的过程中，通常需要设计一些变量，一边遍历，一边更新设计的变量的值
+
+#### [129. Sum Root to Leaf Numbers](https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/)
+
+难度中等511
+
+You are given the `root` of a binary tree containing digits from `0` to `9` only.
+
+Each root-to-leaf path in the tree represents a number.
+
+- For example, the root-to-leaf path `1 -> 2 -> 3` represents the number `123`.
+
+Return *the total sum of all root-to-leaf numbers*. Test cases are generated so that the answer will fit in a **32-bit** integer.
+
+A **leaf** node is a node with no children.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/num1tree.jpg)
+
+```
+Input: root = [1,2,3]
+Output: 25
+Explanation:
+The root-to-leaf path 1->2 represents the number 12.
+The root-to-leaf path 1->3 represents the number 13.
+Therefore, sum = 12 + 13 = 25.
+```
+
+**Example 2:**
+
+![img](https://assets.leetcode.com/uploads/2021/02/19/num2tree.jpg)
+
+```
+Input: root = [4,9,0,5,1]
+Output: 1026
+Explanation:
+The root-to-leaf path 4->9->5 represents the number 495.
+The root-to-leaf path 4->9->1 represents the number 491.
+The root-to-leaf path 4->0 represents the number 40.
+Therefore, sum = 495 + 491 + 40 = 1026.
+```
+
+ 
+
+**Constraints:**
+
+- The number of nodes in the tree is in the range `[1, 1000]`.
+- `0 <= Node.val <= 9`
+- The depth of the tree will not exceed `10`.
+
+思路：
+
+- 思路上使用DFS是很自然的：从根部开始，每次遇到结点，就把之前的数值*10再加上节点的值。
+  - 如果遇到叶子节点，就把计算出来的值加到result里面
+  - 如果不是叶子节点，则递归遍历
+- 如果使用BFS，需要维护两个队列，分别存储节点和数值
+
+### 1.11 拓扑排序
+
+### 1.12 双向BFS和多源BFS
+
+### 1.13 动态规划和深度优先遍历的结合
+
+代码：
+
+回溯搜索是深度优先搜索（DFS）的一种，回溯法通俗的将其采用的思想是“一直向下走，走不通就掉头”，类似于树的先序遍历。dfs和回溯法其主要的区别是：回溯法在求解过程中不保留完整的树结构，而深度优先搜索则记下完整的搜索树。
+  为了减少存储空间，在深度优先搜索中，用标志的方法记录访问过的状态，这种处理方法使得深度优先搜索法与回溯法没什么区别了。
+由于回溯法花费时间较长，所以对于没有明确的动态规划（DP）和递归解法的或问题要求满足某种性质（约束条件）的所有解或最优解时，才考虑使用回溯法。
+
+  我们一般在求解**八皇后问题**的时候说使用的是回溯法，本质也是深搜。在求解有关树和图的问题时，习惯说成**深度优先搜索**。这里所说的回溯和深搜都是不做任何优化的方式实现，在全局解空间上寻找最优解，所花费的时间比较长，仅使用于数据规模较小的问题。
+
+
+
+
+
+## 深度优先搜索
+
+
+
+
+
 #### [207. 课程表](https://leetcode-cn.com/problems/course-schedule/)
 
 难度中等1067
@@ -408,56 +650,7 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
 ```
 
-#### [79. Word Search](https://leetcode-cn.com/problems/word-search/)
 
-难度中等1259
-
-Given an `m x n` grid of characters `board` and a string `word`, return `true` *if* `word` *exists in the grid*.
-
-The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
-
- 
-
-**Example 1:**
-
-![img](https://assets.leetcode.com/uploads/2020/11/04/word2.jpg)
-
-```
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
-Output: true
-```
-
-**Example 2:**
-
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/word-1.jpg)
-
-```
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
-Output: true
-```
-
-**Example 3:**
-
-![img](https://assets.leetcode.com/uploads/2020/10/15/word3.jpg)
-
-```
-Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
-Output: false
-```
-
- 
-
-**Constraints:**
-
-- `m == board.length`
-- `n = board[i].length`
-- `1 <= m, n <= 6`
-- `1 <= word.length <= 15`
-- `board` and `word` consists of only lowercase and uppercase English letters.
-
- 
-
-**Follow up:** Could you use search pruning to make your solution faster with a larger `board`?
 
 #### [212. Word Search II](https://leetcode-cn.com/problems/word-search-ii/)
 
@@ -1259,35 +1452,6 @@ Output: []
 
 - `1 <= nums.length <= 8`
 - `-10 <= nums[i] <= 10`
-
-#### [51. N 皇后](https://leetcode-cn.com/problems/n-queens/)
-
-难度困难1116
-
-**n 皇后问题** 研究的是如何将 `n` 个皇后放置在 `n×n` 的棋盘上，并且使皇后彼此之间不能相互攻击。
-
-给你一个整数 `n` ，返回所有不同的 **n 皇后问题** 的解决方案。
-
-每一种解法包含一个不同的 **n 皇后问题** 的棋子放置方案，该方案中 `'Q'` 和 `'.'` 分别代表了皇后和空位。
-
- 
-
-**示例 1：**
-
-![img](https://assets.leetcode.com/uploads/2020/11/13/queens.jpg)
-
-```
-输入：n = 4
-输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
-解释：如上图所示，4 皇后问题存在两个不同的解法。
-```
-
-**示例 2：**
-
-```
-输入：n = 1
-输出：[["Q"]]
-```
 
 #### [37. 解数独](https://leetcode-cn.com/problems/sudoku-solver/)
 
