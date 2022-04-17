@@ -14,7 +14,139 @@ tags:
 
 ---
 
- 回溯搜索是深度优先搜索（DFS）的一种，回溯法通俗的将其采用的思想是“一直向下走，走不通就掉头”，类似于树的先序遍历。dfs和回溯法其主要的区别是：回溯法在求解过程中不保留完整的树结构，而深度优先搜索则记下完整的搜索树。
+## 知识学习
+
+主要参考leetcode的书
+
+### 树的深度优先搜索：
+
+- 「根结点 → 右子树 → 左子树」
+- ![image-20220416234821547](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416234821547.png)
+- 前序（preorder）遍历：<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416235111780.png" alt="image-20220416235111780" style="zoom: 67%;" />
+- 中序(Inorder)遍历
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416235225435.png" alt="image-20220416235225435" style="zoom:67%;" />
+- 后序(Posorder)遍历
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417085922348.png" alt="image-20220417085922348" style="zoom:67%;" />
+
+> 后序遍历最为重要
+
+### 图的深度优先搜索：
+
+深度优先遍历有「回头」的过程，在树中由于不存在「环」（回路），对于每一个结点来说，每一个结点只会被递归处理一次。而「图」中由于存在「环」（回路），就需要 记录已经被递归处理的结点（通常使用布尔数组或者哈希表），以免结点被重复遍历到。
+
+
+
+### 深度优先遍历使用的数据结构（栈）：
+
+在深度优先遍历的过程中，需要将 当前遍历到的结点 的相邻结点 暂时保存 起来，以便在回退的时候可以继续访问它们。遍历到的结点的顺序呈现「后进先出」的特点，因此 深度优先遍历可以通过「栈」实现。
+
+在Python中，列表就满足后进先出的要求（append，pop）
+
+对于之前做过的二叉树的前中后序遍历，使用recursion（递归）是很容易想到的，但是使用iteration是比较难的，也是可能会被作为follow up的考点。推荐DFS都使用recursion来实现
+
+![image-20220417084221574](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417084221574.png)
+
+主要是掌握前中后序的迭代和递归写法
+
+#### Preorder Binary Tree (Iteration)
+
+- 前序遍历是中左右；
+- <img src="https://pic.leetcode-cn.com/6233a9685447d0b4d7b513f739151ca065e5697e24070bcafc1ee5d28f9155a6.png" alt="中序遍历流程图" style="zoom: 33%;" />
+- ![image-20220417100825910](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417100825910.png)
+
+#### Preorder Binary Tree (Recursion)
+
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220217135851527.png" alt="image-20220217135851527" style="zoom: 67%;" />
+
+#### Postorder Binary Tree (Iteration)
+
+- 对于后序遍历的迭代法，就基本改一下前序遍历中的内容即可
+- 前序遍历是中左右，后序遍历是左右中
+- 那么我们只需要压入左右时和前序换一下，先压入左再压入右
+- 最后反转数组
+
+![image-20220417102432062](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417102432062.png)
+
+注意不可以return list.reverse()
+
+![image-20220417102509035](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417102509035.png)
+
+#### Postorder Binary Tree (Recursion)
+
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417102542959.png" alt="image-20220417102542959" style="zoom:50%;" />
+
+#### Inorder Binary Tree (Iteration)
+
+- 前序遍历的顺序是中左右, 而对于一个binary tree, 先访问的元素是中间节点，要处理的元素也是中间节点。**前序要访问的元素和要处理的元素顺序是一致的，都是中间节点。**
+- 中序遍历的顺序是左中右，先访问的是二叉树顶部的节点，然后一层一层向下访问，直到到达树左面的最底部，再开始处理节点（也就是在把节点的数值放进result数组中）就造成了**处理顺序和访问顺序是不一致的。**
+- **使用迭代法写中序遍历，就需要借用指针的遍历来帮助访问节点，栈则用来处理节点上的元素。**
+
+![image-20220417103649282](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417103649282.png)
+
+
+
+#### Inorder Binary Tree (Recursion)
+
+<img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220217142708700.png" alt="image-20220217142708700" style="zoom: 67%;" />
+
+> 之后再考虑下N叉树的iteration
+
+### 深度优先遍历的应用：
+
+在一些树的问题中，其实就是通过一次深度优先遍历，获得树的某些属性。例如：「二叉树」的最大深度、「二叉树」的最小深度、平衡二叉树、是否 BST。在遍历的过程中，通常需要设计一些变量，一边遍历，一边更新设计的变量的值
+
+#### [129. Sum Root to Leaf Numbers](https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/)
+
+难度中等511
+
+You are given the `root` of a binary tree containing digits from `0` to `9` only.
+
+Each root-to-leaf path in the tree represents a number.
+
+- For example, the root-to-leaf path `1 -> 2 -> 3` represents the number `123`.
+
+Return *the total sum of all root-to-leaf numbers*. Test cases are generated so that the answer will fit in a **32-bit** integer.
+
+A **leaf** node is a node with no children.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/num1tree.jpg)
+
+```
+Input: root = [1,2,3]
+Output: 25
+Explanation:
+The root-to-leaf path 1->2 represents the number 12.
+The root-to-leaf path 1->3 represents the number 13.
+Therefore, sum = 12 + 13 = 25.
+```
+
+**Example 2:**
+
+![img](https://assets.leetcode.com/uploads/2021/02/19/num2tree.jpg)
+
+```
+Input: root = [4,9,0,5,1]
+Output: 1026
+Explanation:
+The root-to-leaf path 4->9->5 represents the number 495.
+The root-to-leaf path 4->9->1 represents the number 491.
+The root-to-leaf path 4->0 represents the number 40.
+Therefore, sum = 495 + 491 + 40 = 1026.
+```
+
+ 
+
+**Constraints:**
+
+- The number of nodes in the tree is in the range `[1, 1000]`.
+- `0 <= Node.val <= 9`
+- The depth of the tree will not exceed `10`.
+
+回溯搜索是深度优先搜索（DFS）的一种，回溯法通俗的将其采用的思想是“一直向下走，走不通就掉头”，类似于树的先序遍历。dfs和回溯法其主要的区别是：回溯法在求解过程中不保留完整的树结构，而深度优先搜索则记下完整的搜索树。
   为了减少存储空间，在深度优先搜索中，用标志的方法记录访问过的状态，这种处理方法使得深度优先搜索法与回溯法没什么区别了。
 由于回溯法花费时间较长，所以对于没有明确的动态规划（DP）和递归解法的或问题要求满足某种性质（约束条件）的所有解或最优解时，才考虑使用回溯法。
 

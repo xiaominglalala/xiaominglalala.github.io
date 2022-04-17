@@ -96,6 +96,10 @@ tags:
 
 <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220217134834347.png" alt="image-20220217134834347" style="zoom: 67%;" />
 
+递归算法很简单，你可以通过迭代算法完成吗？
+
+
+
 #### [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)
 
 难度简单755

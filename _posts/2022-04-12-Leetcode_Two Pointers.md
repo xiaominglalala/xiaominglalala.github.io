@@ -61,11 +61,13 @@ for (int i = 0; i < len; i++) {
 
 思路：<img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211230223738928.png" alt="image-20211230223738928" style="zoom: 10%;" />
 
-- 快指针每次都会往后走一步，走到list的边界，走出去后停止。
-- 通常，慢指针先和快指针的值交换，再往后面走一步
-- 
+- 一开始没遇到val，fast和slow在一起，所以交换没有关系，
+- 当遇到val，fast继续前进，直到遇到不是val或者走出去。
+- 再和slow交换
 
 代码：
+
+![image-20220416175359604](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416175359604.png)
 
 #### [26. 删除有序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
@@ -178,6 +180,161 @@ for (int i = 0; i < len; i++) {
 - `-104 <= nums[i] <= 104`
 - `nums` 已按升序排列
 
+#### [283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)
+
+难度简单1548收藏分享切换为英文接收动态反馈
+
+给定一个数组 `nums`，编写一个函数将所有 `0` 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+**请注意** ，必须在不复制数组的情况下原地对数组进行操作。
+
+ 
+
+**示例 1:**
+
+```
+输入: nums = [0,1,0,3,12]
+输出: [1,3,12,0,0]
+```
+
+**示例 2:**
+
+```
+输入: nums = [0]
+输出: [0]
+```
+
+ 
+
+**提示**:
+
+- `1 <= nums.length <= 104`
+- `-231 <= nums[i] <= 231 - 1`
+
+ 
+
+**进阶：**你能尽量减少完成的操作次数吗？
+
+#### [844. 比较含退格的字符串](https://leetcode-cn.com/problems/backspace-string-compare/)
+
+难度简单408收藏分享切换为英文接收动态反馈
+
+给定 `s` 和 `t` 两个字符串，当它们分别被输入到空白的文本编辑器后，如果两者相等，返回 `true` 。`#` 代表退格字符。
+
+**注意：**如果对空文本输入退格字符，文本继续为空。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "ab#c", t = "ad#c"
+输出：true
+解释：s 和 t 都会变成 "ac"。
+```
+
+**示例 2：**
+
+```
+输入：s = "ab##", t = "c#d#"
+输出：true
+解释：s 和 t 都会变成 ""。
+```
+
+**示例 3：**
+
+```
+输入：s = "a#c", t = "b"
+输出：false
+解释：s 会变成 "c"，但 t 仍然是 "b"。
+```
+
+ 
+
+**提示：**
+
+- `1 <= s.length, t.length <= 200`
+- `s` 和 `t` 只含有小写字母以及字符 `'#'`
+
+ 
+
+**进阶：**
+
+- 你可以用 `O(n)` 的时间复杂度和 `O(1)` 的空间复杂度解决该问题吗？
+
+思路：
+
+- string 不能这样赋值 ：string[slow] = string[fast]
+- 所以先保留每个字母到新的list，再合并
+- 注意#要pop出去一个
+
+代码：
+
+时间复杂度：O(N+M)，其中 N 和 M 分别为字符串 S 和 T 的长度。我们需要遍历两字符串各一次。
+
+空间复杂度：O(N+M)，其中 N 和 M 分别为字符串 S和 T 的长度。主要为还原出的字符串的开销。
+
+
+
+![image-20220416184358875](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416184358875.png)
+
+#### [977. 有序数组的平方](https://leetcode-cn.com/problems/squares-of-a-sorted-array/)
+
+难度简单498收藏分享切换为英文接收动态反馈
+
+给你一个按 **非递减顺序** 排序的整数数组 `nums`，返回 **每个数字的平方** 组成的新数组，要求也按 **非递减顺序** 排序。
+
+
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [-4,-1,0,3,10]
+输出：[0,1,9,16,100]
+解释：平方后，数组变为 [16,1,0,9,100]
+排序后，数组变为 [0,1,9,16,100]
+```
+
+**示例 2：**
+
+```
+输入：nums = [-7,-3,2,3,11]
+输出：[4,9,9,49,121]
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 104`
+- `-104 <= nums[i] <= 104`
+- `nums` 已按 **非递减顺序** 排序
+
+ 
+
+**进阶：**
+
+- 请你设计时间复杂度为 `O(n)` 的算法解决本问题
+
+
+
+思路：
+
+假如使用暴力法，对于数组平方后再排序，时间复杂度是O(nlgn), 空间复杂度是O(lgn)
+
+代码：
+
+![image-20220416175921117](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416175921117.png)
+
+- 或者我们可以找到数组中负和非负的分界线，然后使用归并排序，具体上就是对正负两个数组都平方后，设置两个指针，依次比较，较小的放入数组中，如果一个走到头，就把另一个中剩余的全放在数组中。
+  - 时间复杂度是O(n), 空间复杂度是O(1).除了存储答案的数组以外，我们只需要维护常量空间.
+- 另一种方法是我们可以使用两个指针分别指向位置 00 和 n-1n−1，每次比较两个指针对应的数，选择较大的那个逆序放入答案并移动指针。这种方法无需处理某一指针移动至边界的情况，
+  - 时间复杂度是O(n), 空间复杂度是O(1).除了存储答案的数组以外，我们只需要维护常量空间.
+
+![image-20220416182830811](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416182830811.png)
+
 #### [344. 反转字符串](https://leetcode-cn.com/problems/reverse-string/)
 
 难度简单504
@@ -223,7 +380,25 @@ for (int i = 0; i < len; i++) {
 
 思路：
 
+移除类和替换类双指针还蛮适合的
+
 代码：
+
+![image-20220416193006373](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416193006373.png)
+
+- **时间复杂度 O(N)：** 遍历使用 O(N)，每轮添加（修改）字符操作使用)*O*(1) ；
+- **空间复杂度 O(N)** 
+
+**其实很多数组填充类的问题，都可以先预先给数组扩容带填充后的大小，然后在从后向前进行操作。**
+
+这么做有两个好处：
+
+1. 不用申请新数组。
+2. 从后向前填充元素，避免了从前先后填充元素要来的 每次添加元素都要将添加元素之后的所有元素向后移动。
+
+如果希望空间复杂度是(1), 那么就原地扩展s。先计算出需要几个空格，再把s扩充到那么长，再双指针修改
+
+![image-20220416203948930](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416203948930.png)
 
 #### [151. Reverse Words in a String](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
 
@@ -273,6 +448,30 @@ Explanation: You need to reduce multiple spaces between two words to a single sp
  
 
 **Follow-up:** If the string data type is mutable in your language, can you solve it **in-place** with `O(1)` extra space?
+
+
+
+思路：
+
+- 使用split库函数，分隔单词，然后定义一个新的string字符串，最后再把单词倒序相加，那么这道题题目就是一道水题了，失去了它的意义
+
+![image-20220416202726483](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416202726483.png)
+
+- 本题的难点在于：**不要使用辅助空间，空间复杂度要求为O(1)**  但只有C++可以做到，python还是O(n)
+- 不能使用辅助空间之后，那么只能在原字符串上下功夫了
+- 所以解题思路如下：
+  - 移除多余空格
+  - 将整个字符串反转
+  - 将每个单词反转
+- 举个例子，源字符串为："the sky is blue "
+  - 移除多余空格 : "the sky is blue"
+  - 字符串反转："eulb si yks eht"
+  - 单词反转："blue is sky the"
+- 使用双指针法来去移除空格，最后resize（重新设置）一下字符串的大小，就可以做到O(n)的时间复杂度。
+
+代码：
+
+
 
 #### [206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
