@@ -1,19 +1,3 @@
----
-layout:     post
-title:      DFS & BFS & Backtracking (Updating)
-subtitle:   
-date:       2022-04-3
-author:     Ethan
-header-img: img/11.jpg
-catalog: true
-tags:
-    - Leetcode
-        - DFS
-        - BFS
-        - Backtracking
----
-## 1. 知识学习
-
 主要参考leetcode的书
 
 ### 1.1 深度优先遍历使用的数据结构（栈）：
@@ -694,11 +678,35 @@ Output: ["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
 思路：
 
 - 这是切割问题，**切割问题就可以使用回溯搜索法把所有可能性搜出来**，和刚做过的[131.分割回文串 (opens new window)](https://programmercarl.com/0131.分割回文串.html)就十分类似了。
+
 - ![93.复原IP地址](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20201123203735933.png)
+
+- 终止条件和[131.分割回文串 (opens new window)](https://programmercarl.com/0131.分割回文串.html)情况就不同了，本题明确要求只会分成4段，所以不能用切割线切到最后作为终止条件，而是分割的段数作为终止条件。然后验证一下第四段是否合法，如果合法就加入到结果集里
+
+- 在[131.分割回文串 (opens new window)](https://programmercarl.com/0131.分割回文串.html)中已经讲过在循环遍历中如何截取子串。
+
+  在`for (int i = startIndex; i < s.size(); i++)`循环中 [startIndex, i] 这个区间就是截取的子串，需要判断这个子串是否合法。
+
+  如果合法就在字符串后面加上符号`.`表示已经分割。
+
+  如果不合法就结束本层循环，如图中剪掉的分支：
+
+- 然后就是递归和回溯的过程：
+
+  递归调用时，下一层递归的startIndex要从i+2开始（因为需要在字符串中加入了分隔符`.`），同时记录分割符的数量pointNum 要 +1。
+
+  回溯的时候，就将刚刚加入的分隔符`.` 删掉就可以了，pointNum也要-1。
+
+- 判断子串是否合法
+
+  - 段位以0为开头的数字不合法，除非本身是0
+  - 段位里有非正整数字符不合法
+  - 段位如果大于255了不合法
+
 
 代码：
 
-
+![image-20220419204907361](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220419204907361.png)
 
 #### [78. Subsets](https://leetcode-cn.com/problems/subsets/)
 
@@ -732,6 +740,17 @@ Output: [[],[0]]
 - `-10 <= nums[i] <= 10`
 - All the numbers of `nums` are **unique**.
 
+思路：
+
+- 子集问题和[77.组合 (opens new window)](https://programmercarl.com/0077.组合.html)和[131.分割回文串 (opens new window)](https://programmercarl.com/0131.分割回文串.html)又不一样了。**组合问题和分割问题都是收集树的叶子节点，而子集问题是找树的所有节点！**
+- 但是子集也是一种组合问题，因为它的集合是无序的，子集{1,2} 和 子集{2,1}是一样的。**那么既然是无序，取过的元素不会重复取，写回溯算法的时候，for就要从startIndex开始，而不是从0开始！**
+- 求排列问题的时候，就要从0开始，因为集合是有序的，{1, 2} 和{2, 1}是两个集合
+- ![78.子集](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/202011232041348.png)
+
+代码：
+
+![image-20220419211905738](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220419211905738.png)
+
 #### [90. Subsets II](https://leetcode-cn.com/problems/subsets-ii/)
 
 难度中等805
@@ -762,6 +781,77 @@ Output: [[],[0]]
 
 - `1 <= nums.length <= 10`
 - `-10 <= nums[i] <= 10`
+
+思路：
+
+- 这道题目和[78.子集 (opens new window)](https://programmercarl.com/0078.子集.html)区别就是集合里有重复元素了，而且求取的子集要去重。
+- 那么关于回溯算法中的去重问题，**在[40.组合总和II (opens new window)](https://programmercarl.com/0040.组合总和II.html)中已经详细讲解过了，和本题是一个套路**。
+- 同一树层不可以取相同的，同一树枝可以
+- 树层去重的话，需要对数组排序
+- ![90.子集II](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20201124195411977.png)
+
+代码：
+
+![image-20220419234404702](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220419234404702.png)
+
+#### [491. Increasing Subsequences](https://leetcode-cn.com/problems/increasing-subsequences/)
+
+难度中等429
+
+Given an integer array `nums`, return all the different possible increasing subsequences of the given array with ==**at least two elements**.== You may return the answer in **any order**.
+
+The given array may contain duplicates, and two equal integers should also be considered a special case of increasing sequence.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [4,6,7,7]
+Output: [[4,6],[4,6,7],[4,6,7,7],[4,7],[4,7,7],[6,7],[6,7,7],[7,7]]
+```
+
+**Example 2:**
+
+```
+Input: nums = [4,4,3,2,1]
+Output: [[4,4]]
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= nums.length <= 15`
+- `-100 <= nums[i] <= 100`
+
+思路：
+
+- 在[90.子集II (opens new window)](https://programmercarl.com/0090.子集II.html)中我们是通过排序，再加一个标记数组来达到去重的目的。
+
+  而本题求自增子序列，是不能对原数组经行排序的，排完序的数组都是自增子序列了。
+
+- 本题给出的示例，还是一个有序数组 [4, 6, 7, 7]，这更容易误导大家按照排序的思路去做了。为了有鲜明的对比，我用[4, 7, 6, 7]这个数组来举例，抽象为树形结构如图：
+
+  ![491. 递增子序列1](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20201124200229824.png)
+
+- 本题收集结果有所不同，题目要求递增子序列大小至少为2
+
+- **同一父节点下的同层上使用过的元素就不能在使用了**
+
+- 注意题目中说了，数值范围[-100,100]，所以完全可以用数组来做哈希。
+
+  
+
+代码：
+
+![image-20220420143531054](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220420143531054.png)
+
+可以使用hash table来去重，因为`-100 <= nums[i] <= 100`
+
+![image-20220420144553016](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220420144553016.png)
+
+但不知道为什么实际跑出来时间更长
 
 #### [46. 全排列](https://leetcode-cn.com/problems/permutations/)
 
@@ -796,7 +886,30 @@ Output: [[],[0]]
 
 **分析：**
 
-- ![image.png](https://pic.leetcode-cn.com/0bf18f9b86a2542d1f6aa8db6cc45475fce5aa329a07ca02a9357c2ead81eec1-image.png)
+- ![46.全排列](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20211027181706.png)
+
+- 当收集元素的数组path的大小达到和nums数组一样大的时候，说明找到了一个全排列，也表示到达了叶子节点。
+
+- 这里和[77.组合问题 (opens new window)](https://programmercarl.com/0077.组合.html)、[131.切割问题 (opens new window)](https://programmercarl.com/0131.分割回文串.html)和[78.子集问题 (opens new window)](https://programmercarl.com/0078.子集.html)最大的不同就是for循环里不用startIndex了。
+
+  因为排列问题，每次都要从头开始搜索，例如元素1在[1,2]中已经使用过了，但是在[2,1]中还要再使用一次1。
+
+  **而used数组，其实就是记录此时path里都有哪些元素使用了，一个排列里一个元素只能使用一次**。
+
+- 那天和暴力的区别在哪里？
+
+- 暴力的话，数组长度加一就要多一个for
+
+- 大家此时可以感受出排列问题的不同：
+
+  - 每层都是从0开始搜索而不是startIndex
+  - 需要used数组记录path里都放了哪些元素了
+
+代码：
+
+- 需要对这题的used和上提的used看一下，为什么这里要改为False，为什么上一题不需要
+
+![image-20220420150529264](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220420150529264.png)
 
 #### [47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
 
@@ -829,6 +942,49 @@ Output: [[],[0]]
 
 - `1 <= nums.length <= 8`
 - `-10 <= nums[i] <= 10`
+
+
+
+思路：
+
+- 和上一题的区别在于可能包含重复的items
+
+- 如果nums都不重复，结果将和上一题一样
+
+- 在[40.组合总和II (opens new window)](https://programmercarl.com/0040.组合总和II.html)、[90.子集II (opens new window)](https://programmercarl.com/0090.子集II.html)我们分别详细讲解了组合问题和子集问题如何去重。
+
+  那么排列问题其实也是一样的套路。
+
+  **还要强调的是去重一定要对元素进行排序，这样我们才方便通过相邻的节点来判断是否重复使用了**。
+
+  我以示例中的 [1,1,2]为例 （为了方便举例，已经排序）抽象为一棵树，去重过程如图：
+
+  ![47.全排列II1](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20201124201331223.png)
+
+- 可以看到同一树层不能存在重复的值，同一树枝可以存在重复的值
+
+- 总结一下：**一般来说：组合问题和排列问题是在树形结构的叶子节点上收集结果，而子集问题就是取树上所有节点的结果**。
+
+代码：
+
+![image-20220420214402048](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220420214402048.png)
+
+- 子集问题分析：
+
+  - 时间复杂度：$O(n × 2^n)$，因为每一个元素的状态无外乎取与不取，所以时间复杂度为$O(2^n)$，构造每一组子集都需要填进数组，又有需要$O(n)$，最终时间复杂度：$O(n × 2^n)$。
+  - 空间复杂度：$O(n)$，递归深度为n，所以系统栈所用空间为$O(n)$，每一层递归所用的空间都是常数级别，注意代码里的result和path都是全局变量，就算是放在参数里，传的也是引用，并不会新申请内存空间，最终空间复杂度为$O(n)$。
+
+  排列问题分析：
+
+  - 时间复杂度：$O(n!)$，这个可以从排列的树形图中很明显发现，每一层节点为n，第二层每一个分支都延伸了n-1个分支，再往下又是n-2个分支，所以一直到叶子节点一共就是 n * n-1 * n-2 * ..... 1 = n!。
+  - 空间复杂度：$O(n)$，和子集问题同理。
+
+  组合问题分析：
+
+  - 时间复杂度：$O(n × 2^n)$，组合问题其实就是一种子集的问题，所以组合问题最坏的情况，也不会超过子集问题的时间复杂度。
+  - 空间复杂度：$O(n)$，和子集问题同理。
+
+  **一般说道回溯算法的复杂度，都说是指数级别的时间复杂度，这也算是一个概括吧！**
 
 #### [332. Reconstruct Itinerary](https://leetcode-cn.com/problems/reconstruct-itinerary/)
 
@@ -874,6 +1030,98 @@ Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","
 - `fromi` and `toi` consist of uppercase English letters.
 - `fromi != toi`
 
+
+
+思路：
+
+- 直觉上来看 这道题和回溯法没有什么关系，更像是图论中的深度优先搜索。
+
+  实际上确实是深搜，但这是深搜中使用了回溯的例子，在查找路径的时候，如果不回溯，怎么能查到目标路径呢。
+
+  所以我倾向于说本题应该使用回溯法，那么我也用回溯法的思路来讲解本题，其实深搜一般都使用了回溯法的思路
+
+- **这道题目有几个难点：**
+
+  1. 一个行程中，如果航班处理不好容易变成一个圈，成为死循环
+  2. 有多种解法，字母序靠前排在前面，让很多同学望而退步，如何该记录映射关系呢 ？
+  3. 使用回溯法（也可以说深搜） 的话，那么终止条件是什么呢？
+  4. 搜索的过程中，如何遍历一个机场所对应的所有机场。
+
+- 对于死循环：
+
+  <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20201115180537865.png" alt="332.重新安排行程" style="zoom:50%;" />
+
+  - 本题以输入：[["JFK", "KUL"], ["JFK", "NRT"], ["NRT", "JFK"]为例，抽象为树形结构如下：
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/2020111518065555.png" alt="332.重新安排行程1" style="zoom:50%;" />
+  - 递归终止条件：
+  - 输入: [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]] ，这是有4个航班，那么只要找出一种行程，行程里的机场个数是5就可以了。
+  - 所以终止条件是：我们回溯遍历的过程中，遇到的机场个数，如果达到了（航班数量+1），那么我们就找到了一个行程，把所有航班串在一起了
+
+代码：
+
+![image-20220421125949015](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421125949015.png)
+
+#### [51. N 皇后](https://leetcode-cn.com/problems/n-queens/)
+
+难度困难1116
+
+**n 皇后问题** 研究的是如何将 `n` 个皇后放置在 `n×n` 的棋盘上，并且使皇后彼此之间不能相互攻击。
+
+给你一个整数 `n` ，返回所有不同的 **n 皇后问题** 的解决方案。
+
+每一种解法包含一个不同的 **n 皇后问题** 的棋子放置方案，该方案中 `'Q'` 和 `'.'` 分别代表了皇后和空位。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/11/13/queens.jpg)
+
+```
+输入：n = 4
+输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+解释：如上图所示，4 皇后问题存在两个不同的解法。
+```
+
+**示例 2：**
+
+```
+输入：n = 1
+输出：[["Q"]]
+```
+
+思路：
+
+首先来看一下皇后们的约束条件：
+
+1. 不能同行
+2. 不能同列
+3. 不能同斜线
+
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210130182532303.jpg" alt="51.N皇后" style="zoom:50%;" />
+
+**只要搜索到了树的叶子节点，说明就找到了皇后们的合理位置了**
+
+- 递归函数参数:
+
+  定义全局变量二维数组result_list来记录最终结果。
+
+  参数n是棋盘的大小，然后用row来记录当前遍历到棋盘的第几层了
+
+- 终止条件：
+
+  可以看出，当递归到棋盘最底层（也就是叶子节点）的时候，就可以收集结果并返回了
+
+- 验证棋盘是否合法
+
+  - 不能同行
+  - 不能同列
+  - 不能同斜线 （45度和135度角）
+
+
+
+代码：
+
 #### [37. 解数独](https://leetcode-cn.com/problems/sudoku-solver/)
 
 难度困难1212
@@ -908,6 +1156,18 @@ Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","
 - `board[i].length == 9`
 - `board[i][j]` 是一位数字或者 `'.'`
 - 题目数据 **保证** 输入数独仅有一个解
+
+
+
+思路：
+
+
+
+代码：
+
+
+
+
 
 #### [784. 字母大小写全排列](https://leetcode-cn.com/problems/letter-case-permutation/)
 
@@ -962,38 +1222,82 @@ Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","
 
 
 
-#### [51. N 皇后](https://leetcode-cn.com/problems/n-queens/)
 
-难度困难1116
 
-**n 皇后问题** 研究的是如何将 `n` 个皇后放置在 `n×n` 的棋盘上，并且使皇后彼此之间不能相互攻击。
+#### [401. Binary Watch](https://leetcode-cn.com/problems/binary-watch/)
 
-给你一个整数 `n` ，返回所有不同的 **n 皇后问题** 的解决方案。
+难度简单356
 
-每一种解法包含一个不同的 **n 皇后问题** 的棋子放置方案，该方案中 `'Q'` 和 `'.'` 分别代表了皇后和空位。
+A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59). Each LED represents a zero or one, with the least significant bit on the right.
+
+- For example, the below binary watch reads `"4:51"`.
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/binarywatch.jpg)
+
+Given an integer `turnedOn` which represents the number of LEDs that are currently on, return *all possible times the watch could represent*. You may return the answer in **any order**.
+
+The hour must not contain a leading zero.
+
+- For example, `"01:00"` is not valid. It should be `"1:00"`.
+
+The minute must be consist of two digits and may contain a leading zero.
+
+- For example, `"10:2"` is not valid. It should be `"10:02"`.
 
  
 
-**示例 1：**
-
-![img](https://assets.leetcode.com/uploads/2020/11/13/queens.jpg)
+**Example 1:**
 
 ```
-输入：n = 4
-输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
-解释：如上图所示，4 皇后问题存在两个不同的解法。
+Input: turnedOn = 1
+Output: ["0:01","0:02","0:04","0:08","0:16","0:32","1:00","2:00","4:00","8:00"]
 ```
 
-**示例 2：**
+**Example 2:**
 
 ```
-输入：n = 1
-输出：[["Q"]]
+Input: turnedOn = 9
+Output: []
 ```
 
-思路：
+ 
 
-代码：
+**Constraints:**
+
+- `0 <= turnedOn <= 10`
+
+#### [257. Binary Tree Paths](https://leetcode-cn.com/problems/binary-tree-paths/)
+
+难度简单714
+
+Given the `root` of a binary tree, return *all root-to-leaf paths in **any order***.
+
+A **leaf** is a node with no children.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/paths-tree.jpg)
+
+```
+Input: root = [1,2,3,null,5]
+Output: ["1->2->5","1->3"]
+```
+
+**Example 2:**
+
+```
+Input: root = [1]
+Output: ["1"]
+```
+
+ 
+
+**Constraints:**
+
+- The number of nodes in the tree is in the range `[1, 100]`.
+- `-100 <= Node.val <= 100`
 
 ### 1.8 二维平面的搜索问题（Flood Fill）
 
@@ -1278,6 +1582,403 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 
 ### 1.11 拓扑排序
 
+#### [1136. Parallel Courses](https://leetcode-cn.com/problems/parallel-courses/)
+
+难度中等46
+
+You are given an integer `n`, which indicates that there are `n` courses labeled from `1` to `n`. You are also given an array `relations` where `relations[i] = [prevCoursei, nextCoursei]`, representing a prerequisite relationship between course `prevCoursei` and course `nextCoursei`: course `prevCoursei` has to be taken before course `nextCoursei`.
+
+In one semester, you can take **any number** of courses as long as you have taken all the prerequisites in the **previous** semester for the courses you are taking.
+
+Return *the **minimum** number of semesters needed to take all courses*. If there is no way to take all the courses, return `-1`.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/course1graph.jpg)
+
+```
+Input: n = 3, relations = [[1,3],[2,3]]
+Output: 2
+Explanation: The figure above represents the given graph.
+In the first semester, you can take courses 1 and 2.
+In the second semester, you can take course 3.
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/course2graph.jpg)
+
+```
+Input: n = 3, relations = [[1,2],[2,3],[3,1]]
+Output: -1
+Explanation: No course can be studied because they are prerequisites of each other.
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= n <= 5000`
+- `1 <= relations.length <= 5000`
+- `relations[i].length == 2`
+- `1 <= prevCoursei, nextCoursei <= n`
+- `prevCoursei != nextCoursei`
+- All the pairs `[prevCoursei, nextCoursei]` are **unique**.
+
+#### [207. Course Schedule](https://leetcode-cn.com/problems/course-schedule/)
+
+难度中等1231
+
+There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]` indicates that you **must** take course `bi` first if you want to take course `ai`.
+
+- For example, the pair `[0, 1]`, indicates that to take course `0` you have to first take course `1`.
+
+Return `true` if you can finish all courses. Otherwise, return `false`.
+
+ 
+
+**Example 1:**
+
+```
+Input: numCourses = 2, prerequisites = [[1,0]]
+Output: true
+Explanation: There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0. So it is possible.
+```
+
+**Example 2:**
+
+```
+Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
+Output: false
+Explanation: There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= numCourses <= 105`
+- `0 <= prerequisites.length <= 5000`
+- `prerequisites[i].length == 2`
+- `0 <= ai, bi < numCourses`
+- All the pairs prerequisites[i] are **unique**.
+
+通过次数197,923
+
+提交次数367,451
+
+#### [269. Alien Dictionary](https://leetcode-cn.com/problems/alien-dictionary/) & [剑指 Offer II 114. 外星文字典](https://leetcode-cn.com/problems/Jf1JuT/)
+
+难度困难218
+
+There is a new alien language that uses the English alphabet. However, the order among the letters is unknown to you.
+
+You are given a list of strings `words` from the alien language's dictionary, where the strings in `words` are **sorted lexicographically** by the rules of this new language.
+
+Return *a string of the unique letters in the new alien language sorted in **lexicographically increasing order** by the new language's rules. If there is no solution, return* `""`*. If there are multiple solutions, return **any of them***.
+
+A string `s` is **lexicographically smaller** than a string `t` if at the first letter where they differ, the letter in `s` comes before the letter in `t` in the alien language. If the first `min(s.length, t.length)` letters are the same, then `s` is smaller if and only if `s.length < t.length`.
+
+ 
+
+**Example 1:**
+
+```
+Input: words = ["wrt","wrf","er","ett","rftt"]
+Output: "wertf"
+```
+
+**Example 2:**
+
+```
+Input: words = ["z","x"]
+Output: "zx"
+```
+
+**Example 3:**
+
+```
+Input: words = ["z","x","z"]
+Output: ""
+Explanation: The order is invalid, so return "".
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= words.length <= 100`
+- `1 <= words[i].length <= 100`
+- `words[i]` consists of only lowercase English letters.
+
+
+
+#### [210. Course Schedule II](https://leetcode-cn.com/problems/course-schedule-ii/)
+
+难度中等609
+
+There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]` indicates that you **must** take course `bi` first if you want to take course `ai`.
+
+- For example, the pair `[0, 1]`, indicates that to take course `0` you have to first take course `1`.
+
+Return *the ordering of courses you should take to finish all courses*. If there are many valid answers, return **any** of them. If it is impossible to finish all courses, return **an empty array**.
+
+ 
+
+**Example 1:**
+
+```
+Input: numCourses = 2, prerequisites = [[1,0]]
+Output: [0,1]
+Explanation: There are a total of 2 courses to take. To take course 1 you should have finished course 0. So the correct course order is [0,1].
+```
+
+**Example 2:**
+
+```
+Input: numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]
+Output: [0,2,1,3]
+Explanation: There are a total of 4 courses to take. To take course 3 you should have finished both courses 1 and 2. Both courses 1 and 2 should be taken after you finished course 0.
+So one correct course order is [0,1,2,3]. Another correct ordering is [0,2,1,3].
+```
+
+**Example 3:**
+
+```
+Input: numCourses = 1, prerequisites = []
+Output: [0]
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= numCourses <= 2000`
+- `0 <= prerequisites.length <= numCourses * (numCourses - 1)`
+- `prerequisites[i].length == 2`
+- `0 <= ai, bi < numCourses`
+- `ai != bi`
+- All the pairs `[ai, bi]` are **distinct**.
+
+#### [630. Course Schedule III](https://leetcode-cn.com/problems/course-schedule-iii/)
+
+难度困难327
+
+There are `n` different online courses numbered from `1` to `n`. You are given an array `courses` where `courses[i] = [durationi, lastDayi]` indicate that the `ith` course should be taken **continuously** for `durationi` days and must be finished before or on `lastDayi`.
+
+You will start on the `1st` day and you cannot take two or more courses simultaneously.
+
+Return *the maximum number of courses that you can take*.
+
+ 
+
+**Example 1:**
+
+```
+Input: courses = [[100,200],[200,1300],[1000,1250],[2000,3200]]
+Output: 3
+Explanation: 
+There are totally 4 courses, but you can take 3 courses at most:
+First, take the 1st course, it costs 100 days so you will finish it on the 100th day, and ready to take the next course on the 101st day.
+Second, take the 3rd course, it costs 1000 days so you will finish it on the 1100th day, and ready to take the next course on the 1101st day. 
+Third, take the 2nd course, it costs 200 days so you will finish it on the 1300th day. 
+The 4th course cannot be taken now, since you will finish it on the 3300th day, which exceeds the closed date.
+```
+
+**Example 2:**
+
+```
+Input: courses = [[1,2]]
+Output: 1
+```
+
+**Example 3:**
+
+```
+Input: courses = [[3,2],[4,3]]
+Output: 0
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= courses.length <= 104`
+- `1 <= durationi, lastDayi <= 104`
+
+#### [261. Graph Valid Tree](https://leetcode-cn.com/problems/graph-valid-tree/)
+
+难度中等165
+
+You have a graph of `n` nodes labeled from `0` to `n - 1`. You are given an integer n and a list of `edges` where `edges[i] = [ai, bi]` indicates that there is an undirected edge between nodes `ai` and `bi` in the graph.
+
+Return `true` *if the edges of the given graph make up a valid tree, and* `false` *otherwise*.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/tree1-graph.jpg)
+
+```
+Input: n = 5, edges = [[0,1],[0,2],[0,3],[1,4]]
+Output: true
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/tree2-graph.jpg)
+
+```
+Input: n = 5, edges = [[0,1],[1,2],[2,3],[1,3],[1,4]]
+Output: false
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= n <= 2000`
+- `0 <= edges.length <= 5000`
+- `edges[i].length == 2`
+- `0 <= ai, bi < n`
+- `ai != bi`
+- There are no self-loops or repeated edges.
+
+#### [310. Minimum Height Trees](https://leetcode-cn.com/problems/minimum-height-trees/)
+
+难度中等636
+
+A tree is an undirected graph in which any two vertices are connected by *exactly* one path. In other words, any connected graph without simple cycles is a tree.
+
+Given a tree of `n` nodes labelled from `0` to `n - 1`, and an array of `n - 1` `edges` where `edges[i] = [ai, bi]` indicates that there is an undirected edge between the two nodes `ai` and `bi` in the tree, you can choose any node of the tree as the root. When you select a node `x` as the root, the result tree has height `h`. Among all possible rooted trees, those with minimum height (i.e. `min(h)`) are called **minimum height trees** (MHTs).
+
+Return *a list of all **MHTs'** root labels*. You can return the answer in **any order**.
+
+The **height** of a rooted tree is the number of edges on the longest downward path between the root and a leaf.
+
+ 
+
+**Example 1:**
+
+![img](https://assets.leetcode.com/uploads/2020/09/01/e1.jpg)
+
+```
+Input: n = 4, edges = [[1,0],[1,2],[1,3]]
+Output: [1]
+Explanation: As shown, the height of the tree is 1 when the root is the node with label 1 which is the only MHT.
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/e2.jpg)
+
+```
+Input: n = 6, edges = [[3,0],[3,1],[3,2],[3,4],[5,4]]
+Output: [3,4]
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= n <= 2 * 104`
+- `edges.length == n - 1`
+- `0 <= ai, bi < n`
+- `ai != bi`
+- All the pairs `(ai, bi)` are distinct.
+- The given input is **guaranteed** to be a tree and there will be **no repeated** edges.
+
+#### [886. Possible Bipartition](https://leetcode-cn.com/problems/possible-bipartition/)
+
+难度中等168
+
+We want to split a group of `n` people (labeled from `1` to `n`) into two groups of **any size**. Each person may dislike some other people, and they should not go into the same group.
+
+Given the integer `n` and the array `dislikes` where `dislikes[i] = [ai, bi]` indicates that the person labeled `ai` does not like the person labeled `bi`, return `true` *if it is possible to split everyone into two groups in this way*.
+
+ 
+
+**Example 1:**
+
+```
+Input: n = 4, dislikes = [[1,2],[1,3],[2,4]]
+Output: true
+Explanation: group1 [1,4] and group2 [2,3].
+```
+
+**Example 2:**
+
+```
+Input: n = 3, dislikes = [[1,2],[1,3],[2,3]]
+Output: false
+```
+
+**Example 3:**
+
+```
+Input: n = 5, dislikes = [[1,2],[2,3],[3,4],[4,5],[1,5]]
+Output: false
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= n <= 2000`
+- `0 <= dislikes.length <= 104`
+- `dislikes[i].length == 2`
+- `1 <= dislikes[i][j] <= n`
+- `ai < bi`
+- All the pairs of `dislikes` are **unique**.
+
+- 
+
+#### [1245. Tree Diameter](https://leetcode-cn.com/problems/tree-diameter/)
+
+难度中等90
+
+The **diameter** of a tree is **the number of edges** in the longest path in that tree.
+
+There is an undirected tree of `n` nodes labeled from `0` to `n - 1`. You are given a 2D array `edges` where `edges.length == n - 1` and `edges[i] = [ai, bi]` indicates that there is an undirected edge between nodes `ai` and `bi` in the tree.
+
+Return *the **diameter** of the tree*.
+
+ 
+
+**Example 1:**
+
+![img](https://assets.leetcode.com/uploads/2022/01/19/tree1.jpg)
+
+```
+Input: edges = [[0,1],[0,2]]
+Output: 2
+Explanation: The longest path of the tree is the path 1 - 0 - 2.
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/tree2.jpg)
+
+```
+Input: edges = [[0,1],[1,2],[2,3],[1,4],[4,5]]
+Output: 4
+Explanation: The longest path of the tree is the path 3 - 2 - 1 - 4 - 5.
+```
+
+ 
+
+**Constraints:**
+
+- `n == edges.length + 1`
+- `1 <= n <= 104`
+- `0 <= ai, bi < n`
+- `ai != bi`
+
 ### 1.12 双向BFS和多源BFS
 
 ### 1.13 动态规划和深度优先遍历的结合
@@ -1292,7 +1993,187 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 
 
 
+### 1.14 Union Find 专题
 
+#### Part 1. 基本概念
+
+- 并查集是一种数据结构
+- 并查集这三个字，一个字代表一个意思。
+- 并（Union），代表合并
+- 查（Find），代表查找
+- 集（Set），代表这是一个以字典为基础的数据结构，它的基本功能是合并集合中的元素，查找集合中的元素
+- 并查集的典型应用是有关连通分量的问题
+- 并查集解决单个问题（添加，合并，查找）的时间复杂度都是O(1)
+- 因此，并查集可以应用到在线算法中
+
+#### Part 2. Union Find的实现
+
+- 数据结构
+  - 并查集跟树有些类似，只不过她跟树是相反的。在树这个数据结构里面，每个节点会记录它的子节点。在并查集里，每个节点会记录它的父节
+  - ![image-20220421173045861](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421173045861.png)
+  - <img src="https://pic.leetcode-cn.com/1609980000-ofFjdW-幻灯片1.JPG" alt="幻灯片1.JPG" style="zoom:50%;" />
+  - 如果节点是相互连通的（从一个节点可以到达另一个节点），那么他们在同一棵树里，或者说在同一个集合里，或者说他们的**祖先是相同的**。
+- 初始化：
+  - 当把一个新节点添加到并查集中，它的父节点应该为空![image-20220421173335822](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421173335822.png)
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421173355463.png" alt="image-20220421173355463" style="zoom:50%;" />
+
+- 合并节点:
+  - 如果发现两个节点是连通的，那么就要把他们合并，也就是他们的祖先是相同的。这里究竟把谁当做父节点一般是没有区别的。
+  - ![image-20220421173615698](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421173615698.png)
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421173551977.png" alt="image-20220421173551977" style="zoom:50%;" />
+
+- 两节点是否连通
+  - 我们判断两个节点是否处于同一个连通分量的时候，就需要判断它们的祖先是否相同
+  - ![image-20220421173713692](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421173713692.png)
+
+- 查找祖先
+  - 查找祖先的方法是：如果节点的父节点不为空，那就不断迭代
+  - ![image-20220421173741018](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421173741018.png)
+  - 这里有一个优化的点：如果我们树很深，比如说退化成链表，那么每次查询的效率都会非常低。所以我们要做一下路径压缩。也就是把树的深度固定为二。这么做可行的原因是，并查集只是记录了节点之间的连通关系，而节点相互连通只需要有一个相同的祖先就可以了。
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421174025892.png" alt="image-20220421174025892" style="zoom:67%;" />
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421173938999.png" alt="image-20220421173919553" style="zoom: 67%;" />
+  - ![image-20220421174047065](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421174047065.png)
+  - ![image-20220421174107828](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421174107828.png)
+
+- 完整模板
+  - ![image-20220421174643330](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421174643330.png)
+
+
+上述的模板是无权的，加上权重以后，在原模板上添加几行即可。
+
+#### [990. Satisfiability of Equality Equations](https://leetcode-cn.com/problems/satisfiability-of-equality-equations/)
+
+难度中等230
+
+You are given an array of strings `equations` that represent relationships between variables where each string `equations[i]` is of length `4` and takes one of two different forms: `"xi==yi"` or `"xi!=yi"`.Here, `xi` and `yi` are lowercase letters (not necessarily different) that represent one-letter variable names.
+
+Return `true` *if it is possible to assign integers to variable names so as to satisfy all the given equations, or* `false` *otherwise*.
+
+ 
+
+**Example 1:**
+
+```
+Input: equations = ["a==b","b!=a"]
+Output: false
+Explanation: If we assign say, a = 1 and b = 1, then the first equation is satisfied, but not the second.
+There is no way to assign the variables to satisfy both equations.
+```
+
+**Example 2:**
+
+```
+Input: equations = ["b==a","a==b"]
+Output: true
+Explanation: We could assign a = 1 and b = 1 to satisfy both equations.
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= equations.length <= 500`
+- `equations[i].length == 4`
+- `equations[i][0]` is a lowercase letter.
+- `equations[i][1]` is either `'='` or `'!'`.
+- `equations[i][2]` is `'='`.
+- `equations[i][3]` is a lowercase letter.
+
+思路：
+
+- 并查集分为两部分：
+
+  - 合并
+    两棵树合并，即：把【其中一颗树的根节点】的【父节点】，置为【另一颗树的根节点】
+  - 查询
+    根节点：父节点是它的本身
+    其他：递归查询它的父节点
+  
+- 主函数
+
+  - 构建包含所有相等元素的图
+    针对包含【!=】的式子，查询两端的字母是否包含在同一个集合中（即：根节点相同）
+
+  
+
+代码：
+
+![image-20220421205913446](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421205913446.png)
+
+#### [399. Evaluate Division](https://leetcode-cn.com/problems/evaluate-division/)
+
+难度中等727
+
+You are given an array of variable pairs `equations` and an array of real numbers `values`, where `equations[i] = [Ai, Bi]` and `values[i]` represent the equation `Ai / Bi = values[i]`. Each `Ai` or `Bi` is a string that represents a single variable.
+
+You are also given some `queries`, where `queries[j] = [Cj, Dj]` represents the `jth` query where you must find the answer for `Cj / Dj = ?`.
+
+Return *the answers to all queries*. If a single answer cannot be determined, return `-1.0`.
+
+**Note:** The input is always valid. You may assume that evaluating the queries will not result in division by zero and that there is no contradiction.
+
+ 
+
+**Example 1:**
+
+```
+Input: equations = [["a","b"],["b","c"]], values = [2.0,3.0], queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
+Output: [6.00000,0.50000,-1.00000,1.00000,-1.00000]
+Explanation: 
+Given: a / b = 2.0, b / c = 3.0
+queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ?
+return: [6.0, 0.5, -1.0, 1.0, -1.0 ]
+```
+
+**Example 2:**
+
+```
+Input: equations = [["a","b"],["b","c"],["bc","cd"]], values = [1.5,2.5,5.0], queries = [["a","c"],["c","b"],["bc","cd"],["cd","bc"]]
+Output: [3.75000,0.40000,5.00000,0.20000]
+```
+
+**Example 3:**
+
+```
+Input: equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]]
+Output: [0.50000,2.00000,-1.00000,-1.00000]
+```
+
+ 
+
+**Constraints:**
+
+- `1 <= equations.length <= 20`
+- `equations[i].length == 2`
+- `1 <= Ai.length, Bi.length <= 5`
+- `values.length == equations.length`
+- `0.0 < values[i] <= 20.0`
+- `1 <= queries.length <= 20`
+- `queries[i].length == 2`
+- `1 <= Cj.length, Dj.length <= 5`
+- `Ai, Bi, Cj, Dj` consist of lower case English letters and digits.
+
+思路：
+
+- <img src="https://pic.leetcode-cn.com/1609860627-dZoDYx-image.png" alt="img" style="zoom:50%;" />
+
+- 如何在「find查询」操作的「路径压缩」优化中维护权值变化
+
+- ![image.png](https://pic.leetcode-cn.com/1609861645-DbxMDs-image.png)
+
+- 如何在「合并」操作中维护权值的变化。
+
+- 合并」操作基于这样一个 很重要的前提：我们将要合并的两棵树的高度最多为 2，换句话说两棵树都必需是「路径压缩」以后的效果，两棵树的叶子结点到根结点最多只需要经过一条有向边。
+
+- ![image-20220421210710678](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421210710678.png)
+
+- ![image-20220421211411623](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220421211411623.png)
+
+- 
+
+- 
+
+  
 
 ## 深度优先搜索
 
@@ -1329,6 +2210,8 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 输出：false
 解释：总共有 2 门课程。学习课程 1 之前，你需要先完成课程 0 ；并且学习课程 0 之前，你还应先完成课程 1 。这是不可能的。
 ```
+
+
 
 #### [417. 太平洋大西洋水流问题](https://leetcode-cn.com/problems/pacific-atlantic-water-flow/)
 
@@ -1966,3 +2849,6 @@ Output: []
 - `n == heights[r].length`
 - `1 <= m, n <= 200`
 - `0 <= heights[r][c] <= 105`
+
+
+
