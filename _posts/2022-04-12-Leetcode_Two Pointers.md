@@ -8,7 +8,7 @@ header-img: img/city_10.jpg
 catalog: true
 tags:
     - Leetcode
-    - Teo Pointers
+    - Two Pointers
 ---
 ## 双指针
 
@@ -741,157 +741,6 @@ Output: [1]
 - `-1000 <= nums[i] <= 1000`
 - `-104 <= target <= 104`
 
-#### [42. Trapping Rain Water](https://leetcode-cn.com/problems/trapping-rain-water/)
-
-难度困难3336
-
-Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.
-
- 
-
-**Example 1:**
-
-![img](https://assets.leetcode.com/uploads/2018/10/22/rainwatertrap.png)
-
-```
-Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
-Output: 6
-Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
-```
-
-**Example 2:**
-
-```
-Input: height = [4,2,0,3,2,5]
-Output: 9
-```
-
- 
-
-**Constraints:**
-
-- `n == height.length`
-- `1 <= n <= 2 * 104`
-- `0 <= height[i] <= 105`
-
-#### [11. Container With Most Water](https://leetcode-cn.com/problems/container-with-most-water/)
-
-难度中等3397
-
-You are given an integer array `height` of length `n`. There are `n` vertical lines drawn such that the two endpoints of the `ith` line are `(i, 0)` and `(i, height[i])`.
-
-Find two lines that together with the x-axis form a container, such that the container contains the most water.
-
-Return *the maximum amount of water a container can store*.
-
-**Notice** that you may not slant the container.
-
- 
-
-**Example 1:**
-
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/question_11.jpg)
-
-```
-Input: height = [1,8,6,2,5,4,8,3,7]
-Output: 49
-Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
-```
-
-**Example 2:**
-
-```
-Input: height = [1,1]
-Output: 1
-```
-
- 
-
-**Constraints:**
-
-- `n == height.length`
-- `2 <= n <= 105`
-- `0 <= height[i] <= 104`
-
-#### [539. 最小时间差](https://leetcode-cn.com/problems/minimum-time-difference/) & [剑指 Offer II 035. 最小时间差](https://leetcode-cn.com/problems/569nqc/) 
-
-难度中等193
-
-给定一个 24 小时制（小时:分钟 **"HH:MM"**）的时间列表，找出列表中任意两个时间的最小时间差并以分钟数表示。
-
- 
-
-**示例 1：**
-
-```
-输入：timePoints = ["23:59","00:00"]
-输出：1
-```
-
-**示例 2：**
-
-```
-输入：timePoints = ["00:00","23:59","00:00"]
-输出：0
-```
-
-思路:
-
-
-
-代码：
-
-#### [165. 比较版本号](https://leetcode-cn.com/problems/compare-version-numbers/)
-
-难度中等278
-
-给你两个版本号 `version1` 和 `version2` ，请你比较它们。
-
-版本号由一个或多个修订号组成，各修订号由一个 `'.'` 连接。每个修订号由 **多位数字** 组成，可能包含 **前导零** 。每个版本号至少包含一个字符。修订号从左到右编号，下标从 0 开始，最左边的修订号下标为 0 ，下一个修订号下标为 1 ，以此类推。例如，`2.5.33` 和 `0.1` 都是有效的版本号。
-
-比较版本号时，请按从左到右的顺序依次比较它们的修订号。比较修订号时，只需比较 **忽略任何前导零后的整数值** 。也就是说，修订号 `1` 和修订号 `001` **相等** 。如果版本号没有指定某个下标处的修订号，则该修订号视为 `0` 。例如，版本 `1.0` 小于版本 `1.1` ，因为它们下标为 `0` 的修订号相同，而下标为 `1` 的修订号分别为 `0` 和 `1` ，`0 < 1` 。
-
-返回规则如下：
-
-- 如果 `*version1* > *version2*` 返回 `1`，
-- 如果 `*version1* < *version2*` 返回 `-1`，
-- 除此之外返回 `0`。
-
- 
-
-**示例 1：**
-
-```
-输入：version1 = "1.01", version2 = "1.001"
-输出：0
-解释：忽略前导零，"01" 和 "001" 都表示相同的整数 "1"
-```
-
-**示例 2：**
-
-```
-输入：version1 = "1.0", version2 = "1.0.0"
-输出：0
-解释：version1 没有指定下标为 2 的修订号，即视为 "0"
-```
-
-**示例 3：**
-
-```
-输入：version1 = "0.1", version2 = "1.1"
-输出：-1
-解释：version1 中下标为 0 的修订号是 "0"，version2 中下标为 0 的修订号是 "1" 。0 < 1，所以 version1 < version2
-```
-
- 
-
-**提示：**
-
-- `1 <= version1.length, version2.length <= 500`
-- `version1` 和 `version2` 仅包含数字和 `'.'`
-- `version1` 和 `version2` 都是 **有效版本号**
-- `version1` 和 `version2` 的所有修订号都可以存储在 **32 位整数** 中
-
 #### [31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)
 
 难度中等1647
@@ -1075,36 +924,156 @@ Output: 1
 - 尽可能想出更多的解决方案，至少有 **三种** 不同的方法可以解决这个问题。
 - 你可以使用空间复杂度为 `O(1)` 的 **原地** 算法解决这个问题吗
 
-#### [61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/)
+#### [42. Trapping Rain Water](https://leetcode-cn.com/problems/trapping-rain-water/)
 
-难度中等753
+难度困难3336
 
-给你一个链表的头节点 `head` ，旋转链表，将链表每个节点向右移动 `k` 个位置。
+Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.
+
+ 
+
+**Example 1:**
+
+![img](https://assets.leetcode.com/uploads/2018/10/22/rainwatertrap.png)
+
+```
+Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+```
+
+**Example 2:**
+
+```
+Input: height = [4,2,0,3,2,5]
+Output: 9
+```
+
+ 
+
+**Constraints:**
+
+- `n == height.length`
+- `1 <= n <= 2 * 104`
+- `0 <= height[i] <= 105`
+
+
+
+#### [11. Container With Most Water](https://leetcode-cn.com/problems/container-with-most-water/)
+
+难度中等3397
+
+You are given an integer array `height` of length `n`. There are `n` vertical lines drawn such that the two endpoints of the `ith` line are `(i, 0)` and `(i, height[i])`.
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+Return *the maximum amount of water a container can store*.
+
+**Notice** that you may not slant the container.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/question_11.jpg)
+
+```
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+```
+
+**Example 2:**
+
+```
+Input: height = [1,1]
+Output: 1
+```
+
+ 
+
+**Constraints:**
+
+- `n == height.length`
+- `2 <= n <= 105`
+- `0 <= height[i] <= 104`
+
+#### [539. 最小时间差](https://leetcode-cn.com/problems/minimum-time-difference/) & [剑指 Offer II 035. 最小时间差](https://leetcode-cn.com/problems/569nqc/) 
+
+难度中等193
+
+给定一个 24 小时制（小时:分钟 **"HH:MM"**）的时间列表，找出列表中任意两个时间的最小时间差并以分钟数表示。
 
  
 
 **示例 1：**
 
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/rotate1.jpg)
-
 ```
-输入：head = [1,2,3,4,5], k = 2
-输出：[4,5,1,2,3]
+输入：timePoints = ["23:59","00:00"]
+输出：1
 ```
 
 **示例 2：**
 
-![img](https://assets.leetcode.com/uploads/2020/11/13/roate2.jpg)
+```
+输入：timePoints = ["00:00","23:59","00:00"]
+输出：0
+```
+
+思路:
+
+
+
+代码：
+
+#### [165. 比较版本号](https://leetcode-cn.com/problems/compare-version-numbers/)
+
+难度中等278
+
+给你两个版本号 `version1` 和 `version2` ，请你比较它们。
+
+版本号由一个或多个修订号组成，各修订号由一个 `'.'` 连接。每个修订号由 **多位数字** 组成，可能包含 **前导零** 。每个版本号至少包含一个字符。修订号从左到右编号，下标从 0 开始，最左边的修订号下标为 0 ，下一个修订号下标为 1 ，以此类推。例如，`2.5.33` 和 `0.1` 都是有效的版本号。
+
+比较版本号时，请按从左到右的顺序依次比较它们的修订号。比较修订号时，只需比较 **忽略任何前导零后的整数值** 。也就是说，修订号 `1` 和修订号 `001` **相等** 。如果版本号没有指定某个下标处的修订号，则该修订号视为 `0` 。例如，版本 `1.0` 小于版本 `1.1` ，因为它们下标为 `0` 的修订号相同，而下标为 `1` 的修订号分别为 `0` 和 `1` ，`0 < 1` 。
+
+返回规则如下：
+
+- 如果 `*version1* > *version2*` 返回 `1`，
+- 如果 `*version1* < *version2*` 返回 `-1`，
+- 除此之外返回 `0`。
+
+ 
+
+**示例 1：**
 
 ```
-输入：head = [0,1,2], k = 4
-输出：[2,0,1]
+输入：version1 = "1.01", version2 = "1.001"
+输出：0
+解释：忽略前导零，"01" 和 "001" 都表示相同的整数 "1"
+```
+
+**示例 2：**
+
+```
+输入：version1 = "1.0", version2 = "1.0.0"
+输出：0
+解释：version1 没有指定下标为 2 的修订号，即视为 "0"
+```
+
+**示例 3：**
+
+```
+输入：version1 = "0.1", version2 = "1.1"
+输出：-1
+解释：version1 中下标为 0 的修订号是 "0"，version2 中下标为 0 的修订号是 "1" 。0 < 1，所以 version1 < version2
 ```
 
  
 
 **提示：**
 
-- 链表中节点的数目在范围 `[0, 500]` 内
-- `-100 <= Node.val <= 100`
-- `0 <= k <= 2 * 109`
+- `1 <= version1.length, version2.length <= 500`
+- `version1` 和 `version2` 仅包含数字和 `'.'`
+- `version1` 和 `version2` 都是 **有效版本号**
+- `version1` 和 `version2` 的所有修订号都可以存储在 **32 位整数** 中
+
