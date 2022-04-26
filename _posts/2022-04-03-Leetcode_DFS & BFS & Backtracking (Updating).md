@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      BFS & DFS & Backtracking
+subtitle:   
+date:       2022-04-13
+author:     Ethan
+header-img: img/2.jpg
+catalog: true
+tags:
+    - Leetcode
+    - BFS
+    - DFS
+    - Backtracking
+---
+
 主要参考leetcode的书
 
 ### 1.1 深度优先遍历使用的数据结构（栈）：

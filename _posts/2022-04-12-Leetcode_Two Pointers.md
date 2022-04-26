@@ -67,7 +67,9 @@ for (int i = 0; i < len; i++) {
 
 代码：
 
-![image-20220416175359604](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416175359604.png)
+![image-20220425113615530](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220425113615530.png)
+
+为什么是slow不是slow + 1
 
 #### [26. 删除有序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
@@ -125,6 +127,8 @@ for (int i = 0; i < k; i++) {
 - `-104 <= nums[i] <= 104`
 - `nums` 已按 **升序** 排列
 
+![image-20220425120812489](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220425120812489.png)
+
 #### [80. 删除有序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)
 
 难度中等672
@@ -180,6 +184,14 @@ for (int i = 0; i < len; i++) {
 - `-104 <= nums[i] <= 104`
 - `nums` 已按升序排列
 
+思路：
+
+![image-20220426103224730](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426103224730.png)
+
+时间复杂度O(N),空间复杂度O(1)
+
+
+
 #### [283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)
 
 难度简单1548收藏分享切换为英文接收动态反馈
@@ -214,6 +226,16 @@ for (int i = 0; i < len; i++) {
  
 
 **进阶：**你能尽量减少完成的操作次数吗？
+
+思路：
+
+- 使用双指针，slow在0，fast在1
+- fast在迭代的过程中，
+  - 如果fast指向的位置不是0，而slow的是0，就把fast和slow调换
+  - 如果slow不是0，slow加1
+- 注意第一个if里面也要给slow+1！
+
+![image-20220426105310541](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426105310541.png)
 
 #### [844. 比较含退格的字符串](https://leetcode-cn.com/problems/backspace-string-compare/)
 
@@ -278,6 +300,24 @@ for (int i = 0; i < len; i++) {
 
 ![image-20220416184358875](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416184358875.png)
 
+
+
+如何使用O(1)的空间？
+
+- 一个字符是否会被删掉，只取决于该字符后面的退格符，而与该字符前面的退格符无关。因此当我们逆序地遍历字符串，就可以立即确定当前字符是否会被删掉
+- 首先是倒序遍历，然后定义skip来记录需要多少个跳过
+- 每次只比一位！
+- 假设我们有“ab#c”和“ad#c”
+  现在，我们从末尾开始遍历
+  - i = 3 和 j = 3：
+    - 我们看到 S[i] 和 T[j] 是**有效字符**。因此，我们只是比较它们，然后分别减小 i 和 j 的值。现在我们要比较“ab#”和ad#”
+  - i = 2 和 j = 2：
+    - 我们看到 S[i] 不是一个**有效的字符**。因此，我们必须跳过可能遇到的下一个**有效字符。**在这种情况下，我们跳过“b”。现在必须与下一个未被跳过的**有效字符进行比较，即“a”。**类似地，在 T[j] 的情况下，下一个**有效字符**是“a”。我们比较两者，它们匹配。
+
+![image-20220426113814283](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426113814283.png)
+
+注意第34行，# eg. S = "a#", T = "a"
+
 #### [977. 有序数组的平方](https://leetcode-cn.com/problems/squares-of-a-sorted-array/)
 
 难度简单498收藏分享切换为英文接收动态反馈
@@ -328,10 +368,8 @@ for (int i = 0; i < len; i++) {
 
 ![image-20220416175921117](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416175921117.png)
 
-- 或者我们可以找到数组中负和非负的分界线，然后使用归并排序，具体上就是对正负两个数组都平方后，设置两个指针，依次比较，较小的放入数组中，如果一个走到头，就把另一个中剩余的全放在数组中。
-  - 时间复杂度是O(n), 空间复杂度是O(1).除了存储答案的数组以外，我们只需要维护常量空间.
-- 另一种方法是我们可以使用两个指针分别指向位置 00 和 n-1n−1，每次比较两个指针对应的数，选择较大的那个逆序放入答案并移动指针。这种方法无需处理某一指针移动至边界的情况，
-  - 时间复杂度是O(n), 空间复杂度是O(1).除了存储答案的数组以外，我们只需要维护常量空间.
+- 另一种方法是我们可以使用两个指针分别指向位置 0 和 n-1，每次比较两个指针对应的数，选择较大的那个逆序放入答案并移动指针。这种方法无需处理某一指针移动至边界的情况，
+  - 时间复杂度是O(n), 空间复杂度是O(N).
 
 ![image-20220416182830811](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416182830811.png)
 
@@ -359,9 +397,11 @@ for (int i = 0; i < len; i++) {
 输出：["h","a","n","n","a","H"]
 ```
 
-思路：
-
 代码：
+
+![image-20220426105953207](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426105953207.png)
+
+时间复杂度O(n), 空间复杂度O(1)
 
 #### [剑指 Offer 05. 替换空格](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
 
@@ -424,7 +464,7 @@ Output: "blue is sky the"
 **Example 2:**
 
 ```
-Input: s = "  hello world  "
+Input: s = "  head += 1 world  "
 Output: "world hello"
 Explanation: Your reversed string should not contain leading or trailing spaces.
 ```
@@ -457,7 +497,7 @@ Explanation: You need to reduce multiple spaces between two words to a single sp
 
 ![image-20220416202726483](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220416202726483.png)
 
-- 本题的难点在于：**不要使用辅助空间，空间复杂度要求为O(1)**  但只有C++可以做到，python还是O(n)
+- 本题的难点在于：**不要使用辅助空间，空间复杂度要求为O(1)**  但只有C++可以做到，需要使用指针。python还是O(n)，因为python的字符串str是不可变的，如果要用list，就要多余的空间
 - 不能使用辅助空间之后，那么只能在原字符串上下功夫了
 - 所以解题思路如下：
   - 移除多余空格
@@ -470,6 +510,8 @@ Explanation: You need to reduce multiple spaces between two words to a single sp
 - 使用双指针法来去移除空格，最后resize（重新设置）一下字符串的大小，就可以做到O(n)的时间复杂度。
 
 代码：
+
+![image-20220426150017842](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426150017842.png)
 
 
 
@@ -508,7 +550,23 @@ Explanation: You need to reduce multiple spaces between two words to a single sp
 
 思路：
 
+- 如果再定义一个新的链表，实现链表元素的反转，其实这是对内存空间的浪费。
+
+  其实只需要改变链表的next指针的指向，直接将链表反转 
+
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/008eGmZEly1gnrf1oboupg30gy0c44qp.gif" alt="img" style="zoom:50%;" />
+
+- 
+
 代码：
+
+Iteration：
+
+![image-20220426151112265](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426151112265.png)
+
+Recursion：
+
+![image-20220426151357493](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426151357493.png)
 
 #### [19. Remove Nth Node From End of List](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
 
@@ -553,6 +611,16 @@ Output: [1]
  
 
 **Follow up:** Could you do this in one pass?
+
+
+
+思路：
+
+
+
+代码：
+
+
 
 #### [15. 三数之和](https://leetcode-cn.com/problems/3sum/) & [剑指 Offer II 007. 数组中和为 0 的三个数](https://leetcode-cn.com/problems/1fGaJU/)
 
