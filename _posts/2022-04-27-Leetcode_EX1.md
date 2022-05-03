@@ -12,75 +12,6 @@ tags:
 
 ## Exercise 1 (11题)
 
-#### [588. Design In-Memory File System](https://leetcode-cn.com/problems/design-in-memory-file-system/)
-
-难度困难76
-
-Design a data structure that simulates an in-memory file system.
-
-Implement the FileSystem class:
-
-- `FileSystem()` Initializes the object of the system.
-
-- ```
-  List<String> ls(String path)
-  ```
-
-  - If `path` is a file path, returns a list that only contains this file's name.
-  - If `path` is a directory path, returns the list of file and directory names **in this directory**.
-
-  The answer should in
-
-   
-
-  lexicographic order
-
-  .
-
-- `void mkdir(String path)` Makes a new directory according to the given `path`. The given directory path does not exist. If the middle directories in the path do not exist, you should create them as well.
-
-- ```
-  void addContentToFile(String filePath, String content)
-  ```
-
-  - If `filePath` does not exist, creates that file containing given `content`.
-  - If `filePath` already exists, appends the given `content` to original content.
-
-- `String readContentFromFile(String filePath)` Returns the content in the file at `filePath`.
-
- 
-
-**Example 1:**
-
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/filesystem.png)
-
-```
-Input
-["FileSystem", "ls", "mkdir", "addContentToFile", "ls", "readContentFromFile"]
-[[], ["/"], ["/a/b/c"], ["/a/b/c/d", "hello"], ["/"], ["/a/b/c/d"]]
-Output
-[null, [], null, null, ["a"], "hello"]
-
-Explanation
-FileSystem fileSystem = new FileSystem();
-fileSystem.ls("/");                         // return []
-fileSystem.mkdir("/a/b/c");
-fileSystem.addContentToFile("/a/b/c/d", "hello");
-fileSystem.ls("/");                         // return ["a"]
-fileSystem.readContentFromFile("/a/b/c/d"); // return "hello"
-```
-
- 
-
-**Constraints:**
-
-- `1 <= path.length, filePath.length <= 100`
-- `path` and `filePath` are absolute paths which begin with `'/'` and do not end with `'/'` except that the path is just `"/"`.
-- You can assume that all directory names and file names only contain lowercase letters, and the same names will not exist in the same directory.
-- You can assume that all operations will be passed valid parameters, and users will not attempt to retrieve file content or list a directory or file that does not exist.
-- `1 <= content.length <= 50`
-- At most `300` calls will be made to `ls`, `mkdir`, `addContentToFile`, and `readContentFromFile`.
-
 #### [273. Integer to English Words](https://leetcode-cn.com/problems/integer-to-english-words/)
 
 难度困难268
@@ -528,3 +459,61 @@ minStack.getMin(); // return -2
 - `s` 表示一个 **有效表达式**
 - 表达式中的所有整数都是非负整数，且在范围 `[0, 231 - 1]` 内
 - 题目数据保证答案是一个 **32-bit 整数**
+
+#### [65. 有效数字](https://leetcode-cn.com/problems/valid-number/)
+
+难度困难310
+
+**有效数字**（按顺序）可以分成以下几个部分：
+
+1. 一个 **小数** 或者 **整数**
+2. （可选）一个 `'e'` 或 `'E'` ，后面跟着一个 **整数**
+
+**小数**（按顺序）可以分成以下几个部分：
+
+1. （可选）一个符号字符（`'+'` 或 `'-'`）
+2. 下述格式之一：
+   1. 至少一位数字，后面跟着一个点 `'.'`
+   2. 至少一位数字，后面跟着一个点 `'.'` ，后面再跟着至少一位数字
+   3. 一个点 `'.'` ，后面跟着至少一位数字
+
+**整数**（按顺序）可以分成以下几个部分：
+
+1. （可选）一个符号字符（`'+'` 或 `'-'`）
+2. 至少一位数字
+
+部分有效数字列举如下：`["2", "0089", "-0.1", "+3.14", "4.", "-.9", "2e10", "-90E3", "3e+7", "+6e-1", "53.5e93", "-123.456e789"]`
+
+部分无效数字列举如下：`["abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53"]`
+
+给你一个字符串 `s` ，如果 `s` 是一个 **有效数字** ，请返回 `true` 。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "0"
+输出：true
+```
+
+**示例 2：**
+
+```
+输入：s = "e"
+输出：false
+```
+
+**示例 3：**
+
+```
+输入：s = "."
+输出：false
+```
+
+ 
+
+**提示：**
+
+- `1 <= s.length <= 20`
+- `s` 仅含英文字母（大写和小写），数字（`0-9`），加号 `'+'` ，减号 `'-'` ，或者点 `'.'` 。
