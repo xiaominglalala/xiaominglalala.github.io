@@ -436,6 +436,53 @@ fileSystem.readContentFromFile("/a/b/c/d"); // return "hello"
 
 **进阶：**你所设计算法的时间复杂度 **必须** 优于 `O(n log n)` ，其中 `n` 是数组大小。
 
+#### [373. 查找和最小的 K 对数字](https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/)
+
+难度中等394
+
+给定两个以 **升序排列** 的整数数组 `nums1` 和 `nums2` , 以及一个整数 `k` 。
+
+定义一对值 `(u,v)`，其中第一个元素来自 `nums1`，第二个元素来自 `nums2` 。
+
+请找到和最小的 `k` 个数对 `(u1,v1)`, ` (u2,v2)` ...  `(uk,vk)` 。
+
+ 
+
+**示例 1:**
+
+```
+输入: nums1 = [1,7,11], nums2 = [2,4,6], k = 3
+输出: [1,2],[1,4],[1,6]
+解释: 返回序列中的前 3 对数：
+     [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]
+```
+
+**示例 2:**
+
+```
+输入: nums1 = [1,1,2], nums2 = [1,2,3], k = 2
+输出: [1,1],[1,1]
+解释: 返回序列中的前 2 对数：
+     [1,1],[1,1],[1,2],[2,1],[1,2],[2,2],[1,3],[1,3],[2,3]
+```
+
+**示例 3:**
+
+```
+输入: nums1 = [1,2], nums2 = [3], k = 3 
+输出: [1,3],[2,3]
+解释: 也可能序列中所有的数对都被返回:[1,3],[2,3]
+```
+
+ 
+
+**提示:**
+
+- `1 <= nums1.length, nums2.length <= 105`
+- `-109 <= nums1[i], nums2[i] <= 109`
+- `nums1` 和 `nums2` 均为升序排列
+- `1 <= k <= 1000`
+
 #### [692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words/)
 
 难度中等448
@@ -517,3 +564,45 @@ fileSystem.readContentFromFile("/a/b/c/d"); // return "hello"
 
 - `1 <= k <= points.length <= 104`
 - `-104 < xi, yi < 104`
+
+#### [703. 数据流中的第 K 大元素](https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/)
+
+难度简单342
+
+设计一个找到数据流中第 `k` 大元素的类（class）。注意是排序后的第 `k` 大元素，不是第 `k` 个不同的元素。
+
+请实现 `KthLargest` 类：
+
+- `KthLargest(int k, int[] nums)` 使用整数 `k` 和整数流 `nums` 初始化对象。
+- `int add(int val)` 将 `val` 插入数据流 `nums` 后，返回当前数据流中第 `k` 大的元素。
+
+ 
+
+**示例：**
+
+```
+输入：
+["KthLargest", "add", "add", "add", "add", "add"]
+[[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]
+输出：
+[null, 4, 5, 5, 8, 8]
+
+解释：
+KthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);
+kthLargest.add(3);   // return 4
+kthLargest.add(5);   // return 5
+kthLargest.add(10);  // return 5
+kthLargest.add(9);   // return 8
+kthLargest.add(4);   // return 8
+```
+
+ 
+
+**提示：**
+
+- `1 <= k <= 104`
+- `0 <= nums.length <= 104`
+- `-104 <= nums[i] <= 104`
+- `-104 <= val <= 104`
+- 最多调用 `add` 方法 `104` 次
+- 题目数据保证，在查找第 `k` 大元素时，数组中至少有 `k` 个元素

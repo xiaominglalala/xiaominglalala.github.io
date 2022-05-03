@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Stack & Queue (Updating)
+title:      Heap & Stack & Queue (Finished)
 subtitle:   
 date:       2022-03-30
 author:     Ethan
@@ -10,8 +10,94 @@ tags:
     - Leetcode
     - Stack
     - Queue
-
+    - Heap
 ---
+
+### 堆（Heap）
+
+- **优先队列** 是一种抽象的数据类型，而 **堆** 是一种数据结构。所以 **堆** 并不是 **优先队列** ， **堆** 是实现 **优先队列** 的一种方式。
+
+- 实现 优先队列 的方式有很多种，比如数组和链表。但是，这些实现方式只能保证插入操作和删除操作中的一种操作可以在 O(1)的时间复杂度内完成，而另外一个操作则需要在 O(N)的时间复杂度内完成
+
+- 而 **堆** 能够使 **优先队列** 的插入操作在 O(log N)的时间复杂度内完成，删除操作在 O(log N)的时间复杂度内完成
+
+- **堆** 是一种特别的二叉树，满足以下条件的二叉树，可以称之为 **堆**：
+  1. 完全二叉树；
+  2. 每一个节点的值都必须 **大于等于或者小于等于** 其孩子节点的值。
+
+- 堆 具有以下的特点：
+
+  - 可以在 O(logN)的时间复杂度内向 堆 中插入元素；
+  - 可以在 O(logN)的时间复杂度内向 堆 中删除元素；
+  - 可以在 O(1) 的时间复杂度内获取 堆 中的最大值或最小值
+
+- 堆的分类
+  堆 有两种类型：最大堆 和 最小堆。
+
+  最大堆：堆中每一个节点的值 都大于等于 其孩子节点的值。所以最大堆的特性是 堆顶元素（根节点）是堆中的最大值。
+
+  最小堆：堆中每一个节点的值 都小于等于 其孩子节点的值。所以最小堆的特性是 堆顶元素（根节点）是堆中的最小值。
+
+#### 1. 创建堆
+
+
+  - 对于Python，使用heapq，但是只有最小堆，没有最大堆，最大堆是用取反
+
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003157991.png" alt="image-20220503003157991" style="zoom: 67%;" />
+
+  - **时间复杂度：**  O(N)
+
+    **空间复杂度：** O(N)
+  
+  - ![image-20220503003328209](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003328209.png)
+
+#### 2. 往堆插入元素
+
+![image-20220503003630401](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003630401.png)
+
+![image-20220503003641357](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003641357.png)
+
+#### 3. 获取堆顶元素
+
+![image-20220503003724161](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003724161.png)
+
+![image-20220503003737771](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003737771.png)
+
+#### 4. 删除堆顶元素
+
+![image-20220503003813687](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003813687.png)
+
+![image-20220503003822798](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003822798.png)
+
+#### 5. 获取堆的长度
+
+![image-20220503003907623](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003907623.png)
+
+![image-20220503003939092](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003939092.png)
+
+![image-20220503003956933](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503003956933.png)
+
+![image-20220503004142456](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503004142456.png)
+
+#### 6. 堆排序
+
+![image-20220503004258687](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503004258687.png)
+
+#### 7. TOP K问题 和 The Kth问题
+
+方法一：
+
+![image-20220503100438086](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503100438086.png)
+
+同理，获得第k个就是重复k次，但是只取第k次
+
+![image-20220503101740173](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503101740173.png)
+
+方法二：
+
+![image-20220503101631205](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503101631205.png)
+
+![image-20220503101802268](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220503101802268.png)
 
 ## 队列和栈
 
@@ -92,18 +178,18 @@ myQueue.empty(); // return false
   而之后提及这两个，也别忘加self
 
   此外，之后调用功能，比如empty，也要self！
-  ![image-20211228163615659](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211228163615659.png)
+  ![image-20211228163615659](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228163615659.png)
 
 - empty也有问题，但是没太理解
-  ![image-20211228164822733](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211228164822733.png)
+  ![image-20211228164822733](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228164822733.png)
 
-- <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211228183311419.png" alt="image-20211228183311419" style="zoom:15%;" />
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228183311419.png" alt="image-20211228183311419" style="zoom:15%;" />
 
 代码：
 
 ![image-20211228164837818](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228164837818.png)
 
-![image-20211228164900984](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211228164900984.png)
+![image-20211228164900984](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228164900984.png)
 
 #### [225. 用队列实现栈](https://leetcode-cn.com/problems/implement-stack-using-queues/)
 
@@ -152,23 +238,23 @@ myStack.empty(); // 返回 False
 - 需要使用到python的deque，也就是双向队列来完成
   - 它的操作很像list 同时相比于list实现的队列，deque实现拥有更低的时间和空间复杂度。
   - list实现在出队（pop）和插入（insert）时的空间复杂度大约为O(n)，deque在出队（pop）和入队（append）时的时间复杂度是O(1)。
-  - <img src="https://img2020.cnblogs.com/i-beta/1959611/202003/1959611-20200307215621460-1733987446.png" alt="img" style="zoom: 67%;" />
-  - <img src="C:\Users\ethan\AppData\Roaming\Typora\typora-user-images\image-20211228182210511.png" alt="image-20211228182210511" style="zoom: 50%;" />
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/1959611-20200307215621460-1733987446.png" alt="img" style="zoom: 67%;" />
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228182210511.png" alt="image-20211228182210511" style="zoom: 50%;" />
   - deque的内部还是list，所以append和pop都可以操作，都是末尾的。对于左边的，可以使用popleft和appendleft。而这道题，我们只是模拟基础的队列，所以我们用且只会用到append和popleft
 - 首先是push操作，就是对于queue_in进行append
 - 然后是empty，可以使用和之前一样的写法，区别在于这里只用关注in
-  - ![image-20211228185342526](C:\Users\ethan\AppData\Roaming\Typora\typora-user-images\image-20211228185342526.png)
+  - ![image-20211228185342526](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228185342526.png)
   - 但是不能是==[], 而必须是长度 ==0
 - 然后是pop，对于queue_in，先popleft到只剩下一个后，和queue_out进行交换，然后queue_out再popleft。
   - 我们可以看到，queue_out是一直保持空的状态，所以，empty只需要关于queue_in即可
 - 最后是top，top要出去的是栈顶，但是queue没有pop，只有popleft。所以我们使用deque的索引，找到queue_in的最后一位
-- <img src="C:\Users\ethan\AppData\Roaming\Typora\typora-user-images\image-20211228183217248.png" alt="image-20211228183217248" style="zoom: 15%;" />
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228183217248.png" alt="image-20211228183217248" style="zoom: 15%;" />
 
 代码:
 
-![image-20211228185429417](C:\Users\eTHAN\AppData\Roaming\Typora\typora-user-images\image-20211228185429417.png)
+![image-20211228185429417](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228185429417.png)
 
-![image-20211228185442972](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211228185442972.png)
+![image-20211228185442972](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211228185442972.png)
 
 #### [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
 
@@ -238,7 +324,7 @@ myStack.empty(); // 返回 False
 
 代码：
 
-![image-20211229175316595](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211229175316595.png)
+![image-20211229175316595](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211229175316595.png)
 
 #### [1047. 删除字符串中的所有相邻重复项](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
 
@@ -257,7 +343,7 @@ myStack.empty(); // 返回 False
 
 代码：
 
-![image-20211229181715495](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211229181715495.png)
+![image-20211229181715495](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211229181715495.png)
 
 
 
@@ -325,9 +411,9 @@ myStack.empty(); // 返回 False
 
 代码：
 
-![image-20211229204332424](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211229204332424.png)
+![image-20211229204332424](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211229204332424.png)
 
-![image-20211229204348197](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211229204348197.png)
+![image-20211229204348197](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211229204348197.png)
 
 #### [239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
@@ -398,13 +484,13 @@ myStack.empty(); // 返回 False
   - 相比起前k个。需要额外考虑的是：万一一直是最先进来的元素最大，比如[5,4,3,2,1],那么首部将不会被赶走。所以需要不断看当前queue中第一位所存储的位置是否满足queue[0]>i-k，如果不满足需要popleft把头部去掉
 
 - 注意，生成第一个queue的元素，要经历好几次pop。所以不能分开来，要在一个while里面：
-  ![image-20211229234910996](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211229234910996.png)
+  ![image-20211229234910996](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211229234910996.png)
 
-  ![image-20211229235256929](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211229235256929.png)
+  ![image-20211229235256929](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211229235256929.png)
 
 代码：
 
-![image-20211229235235768](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211229235235768.png)
+![image-20211229235235768](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211229235235768.png)
 
 #### [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
 
@@ -446,23 +532,21 @@ myStack.empty(); // 返回 False
 
   - 根据每个key，不断查询该key的出现频率，并进行更新
 
-  - ![image-20211230074024782](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230074024782.png)
+  - ![image-20211230074024782](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20211230074024782.png)
 
 - 对于频率比较，使用优先队列。
 
   - 这里使用heapq模块来进行堆操作。堆（heap）是一种优先队列。优先队列让你能够以任意顺序添加对象，并随时找出（并删除）最小的元素。相比于列表方法min，这样做的效率要高得多。
-  - <img src="C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211208182112339.png" alt="image-20211208182112339" style="zoom:50%;" />
+  - <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211208182112339.png" alt="image-20211208182112339" style="zoom:50%;" />
   - 创建`heap=[]`。然后将刚才得到的键值对压入heap中，注意压入负值，即负的频率。这样到时候pop出来的就是从大到小的顺序。
   - 此外，需要注意遍历heapmap的`key, value`的时候要加`.items()`
-  - ![image-20211230074226562](C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211230074226562.png)
+  - ![image-20211230074226562](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211230074226562.png)
 
 - 最后是前k个，进行`heappop(heap)[1]`。heappop得到的是最前面的，是负的最厉害的频率，也就是最大频率。[1]是他对于的键，因为heap里面存的是-value和key
 
 **代码：**
 
-<img src="C:\Users\BenWong\AppData\Roaming\Typora\typora-user-images\image-20211208184305119.png" alt="image-20211208184305119" style="zoom:50%;" />
-
-##### 
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20211208184305119.png" alt="image-20211208184305119" style="zoom:50%;" />
 
 
 
@@ -500,146 +584,7 @@ minStack.top();      --> 返回 0.
 minStack.getMin();   --> 返回 -2
 ```
 
-## 单调栈
 
-#### [739. Daily Temperatures](https://leetcode-cn.com/problems/daily-temperatures/)
-
-难度中等1085
-
-Given an array of integers `temperatures` represents the daily temperatures, return *an array* `answer` *such that* `answer[i]` *is the number of days you have to wait after the* `ith` *day to get a warmer temperature*. If there is no future day for which this is possible, keep `answer[i] == 0` instead.
-
- 
-
-**Example 1:**
-
-```
-Input: temperatures = [73,74,75,71,69,72,76,73]
-Output: [1,1,4,2,1,1,0,0]
-```
-
-**Example 2:**
-
-```
-Input: temperatures = [30,40,50,60]
-Output: [1,1,1,0]
-```
-
-**Example 3:**
-
-```
-Input: temperatures = [30,60,90]
-Output: [1,1,0]
-```
-
-#### [496. Next Greater Element I](https://leetcode-cn.com/problems/next-greater-element-i/)
-
-难度简单679
-
-The **next greater element** of some element `x` in an array is the **first greater** element that is **to the right** of `x` in the same array.
-
-You are given two **distinct 0-indexed** integer arrays `nums1` and `nums2`, where `nums1` is a subset of `nums2`.
-
-For each `0 <= i < nums1.length`, find the index `j` such that `nums1[i] == nums2[j]` and determine the **next greater element** of `nums2[j]` in `nums2`. If there is no next greater element, then the answer for this query is `-1`.
-
-Return *an array* `ans` *of length* `nums1.length` *such that* `ans[i]` *is the **next greater element** as described above.*
-
- 
-
-**Example 1:**
-
-```
-Input: nums1 = [4,1,2], nums2 = [1,3,4,2]
-Output: [-1,3,-1]
-Explanation: The next greater element for each value of nums1 is as follows:
-- 4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
-- 1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.
-- 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
-```
-
-**Example 2:**
-
-```
-Input: nums1 = [2,4], nums2 = [1,2,3,4]
-Output: [3,-1]
-Explanation: The next greater element for each value of nums1 is as follows:
-- 2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.
-- 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.
-```
-
-#### [503. Next Greater Element II](https://leetcode-cn.com/problems/next-greater-element-ii/)
-
-难度中等588
-
-Given a circular integer array `nums` (i.e., the next element of `nums[nums.length - 1]` is `nums[0]`), return *the **next greater number** for every element in* `nums`.
-
-The **next greater number** of a number `x` is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, return `-1` for this number.
-
- 
-
-**Example 1:**
-
-```
-Input: nums = [1,2,1]
-Output: [2,-1,2]
-Explanation: The first 1's next greater number is 2; 
-The number 2 can't find next greater number. 
-The second 1's next greater number needs to search circularly, which is also 2.
-```
-
-**Example 2:**
-
-```
-Input: nums = [1,2,3,4,3]
-Output: [2,3,4,-1,4]
-```
-
-#### [42. Trapping Rain Water](https://leetcode-cn.com/problems/trapping-rain-water/)
-
-难度困难3306
-
-Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.
-
- 
-
-**Example 1:**
-
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/rainwatertrap.png)
-
-```
-Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
-Output: 6
-Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
-```
-
-**Example 2:**
-
-```
-Input: height = [4,2,0,3,2,5]
-Output: 9
-```
-
-#### [84. Largest Rectangle in Histogram](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
-
-难度困难1855
-
-Given an array of integers `heights` representing the histogram's bar height where the width of each bar is `1`, return *the area of the largest rectangle in the histogram*.
-
- 
-
-**Example 1:**
-
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/histogram.jpg)
-
-```
-Input: heights = [2,1,5,6,2,3]
-Output: 10
-Explanation: The above is a histogram where width of each bar is 1.
-The largest rectangle is shown in the red area, which has an area = 10 units.
-```
-
-**Example 2:**
-
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/histogram-1.jpg)
 
 ```
 Input: heights = [2,4]
