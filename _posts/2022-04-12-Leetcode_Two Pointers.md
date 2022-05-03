@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Two Pointers (Updating)
+title:      Two Pointers (Finished)
 subtitle:   
 date:       2022-04-13
 author:     Ethan
@@ -616,11 +616,12 @@ Output: [1]
 
 思路：
 
-
+- 双指针的经典应用，如果要删除倒数第n个节点，让fast移动n步，然后让fast和slow同时移动，直到fast指向链表末尾。删掉slow.next就可以了。
+- 由于可能会涉及要删除实际的头节点，所以最好设置虚拟头节点
 
 代码：
 
-
+![image-20220426192236050](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426192236050.png)
 
 #### [15. 三数之和](https://leetcode-cn.com/problems/3sum/) & [剑指 Offer II 007. 数组中和为 0 的三个数](https://leetcode-cn.com/problems/1fGaJU/)
 
@@ -653,11 +654,60 @@ Output: [1]
 
 思路：
 
-
+- 首先将数组排序，将索引i定在下标0的地方开始，同时索引left 定义在i+1的位置上，定义索引right 在数组结尾的位置上。
+-  a = nums[i] b = nums[left] c = nums[right]
+- 如果nums[i] + nums[left] + nums[right] > target 就说明 此时三数之和大了，因为数组是排序后了，所以right下标就应该向左移动，这样才能让三数之和小一些。
+- 如果 nums[i] + nums[left] + nums[right] < target 说明 此时 三数之和小了，left 就向右移动，才能让三数之和大一些，直到left与right相遇为止。
+- 注意对于要放入result的三元组，会要走到最后一个重复的，比如222333456，left取2，他就会让left取到最后一个2，然后再+=1，取到3，进行下次计算
 
 代码：
 
+![image-20220426223513805](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426223513805.png)
 
+#### 16. 3Sum Closest
+
+Medium
+
+5717245Add to ListShare
+
+Given an integer array `nums` of length `n` and an integer `target`, find three integers in `nums` such that the sum is closest to `target`.
+
+Return *the sum of the three integers*.
+
+You may assume that each input would have exactly one solution.
+
+ 
+
+**Example 1:**
+
+```
+Input: nums = [-1,2,1,-4], target = 1
+Output: 2
+Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+```
+
+**Example 2:**
+
+```
+Input: nums = [0,0,0], target = 1
+Output: 0
+```
+
+ 
+
+**Constraints:**
+
+- `3 <= nums.length <= 1000`
+- `-1000 <= nums[i] <= 1000`
+- `-104 <= target <= 104`
+
+思路：
+
+- 存储当前的最近，根据数值范围现先给一个很大的result
+
+代码：
+
+![image-20220426235127492](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220426235127492.png)
 
 #### [18. 四数之和](https://leetcode-cn.com/problems/4sum/)
 
@@ -686,6 +736,29 @@ Output: [1]
 输入：nums = [2,2,2,2,2], target = 8
 输出：[[2,2,2,2]]
 ```
+
+思路：
+
+- 和[15.三数之和 (opens new window)](https://programmercarl.com/0015.三数之和.html)是一个思路，都是使用双指针法, 基本解法就是在[15.三数之和 (opens new window)](https://programmercarl.com/0015.三数之和.html)的基础上再套一层for循环。
+- 对于[15.三数之和 (opens new window)](https://programmercarl.com/0015.三数之和.html)双指针法就是将原本暴力$O(n^3)$的解法，降为$O(n^2)$的解法，四数之和的双指针解法就是将原本暴力$O(n^4)$的解法，降为$O(n^3)$的解法。
+- 三数之和的双指针是用for循环确定nums[i], 然后使用双指针找到nums[left], nums[right]
+- 四数之和是两层for循环确定nums[i], nums[j],然后最里面的循环使用双指针找到nums[left], nums[right]
+
+代码：
+
+注意可能存在重负的数字，所以要去重，这也就是sort的意义，16题不用因为它不在乎有哪些数字组合的，只要结果的数字，但是15题和这题一样要注意这一点。
+
+还有就是就是取一样的
+
+![image-20220430095513275](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220430095513275.png)
+
+注意就是第六行和第九行的两个判断，i和j都是在取第二个值才开始判断是否重复，而且是往后看，这样就保证至少第一次取没关系
+
+而且要注意17和19行在找left和right的重复时，要保证left<right
+
+![image-20220430095821592](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220430095821592.png)
+
+
 
 #### [167. 两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
 
@@ -733,6 +806,14 @@ Output: [1]
 - `-1000 <= target <= 1000`
 - **仅存在一个有效答案**
 
+思路：
+
+因为只有一个答案，所以不用太担心重复
+
+此外，不是返回python索引，从0开始。而是从1开始，这个细节面试一定要注意
+
+![image-20220430100944576](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220430100944576.png)
+
 #### [259. 较小的三数之和](https://leetcode-cn.com/problems/3sum-smaller/)
 
 难度中等108
@@ -774,40 +855,9 @@ Output: [1]
 - `-100 <= nums[i] <= 100`
 - `-100 <= target <= 100`
 
-#### [16. 最接近的三数之和](https://leetcode-cn.com/problems/3sum-closest/)
+![image-20220430102952035](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220430102952035.png)
 
-难度中等1116
 
-给你一个长度为 `n` 的整数数组 `nums` 和 一个目标值 `target`。请你从 `nums` 中选出三个整数，使它们的和与 `target` 最接近。
-
-返回这三个数的和。
-
-假定每组输入只存在恰好一个解。
-
- 
-
-**示例 1：**
-
-```
-输入：nums = [-1,2,1,-4], target = 1
-输出：2
-解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。
-```
-
-**示例 2：**
-
-```
-输入：nums = [0,0,0], target = 1
-输出：0
-```
-
- 
-
-**提示：**
-
-- `3 <= nums.length <= 1000`
-- `-1000 <= nums[i] <= 1000`
-- `-104 <= target <= 104`
 
 #### [31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)
 
@@ -849,6 +899,64 @@ Output: [1]
 输入：nums = [1,1,5]
 输出：[1,5,1]
 ```
+
+思路：
+
+In this approach, we find out every possible permutation of list formed by the elements of the given array and find out the permutation which is just larger than the given one. But this one will be a very naive approach, since it requires us to find out every possible permutation which will take really long time and the implementation is complex. Thus, this approach is not acceptable at all. Hence, we move on directly to the correct approach.
+
+- Time complexity : O(n!). Total possible permutations is n!*n*!.
+- Space complexity : O(n). Since an array will be used to store the permutations.
+
+First, we observe that for any given sequence that is in decreasing order, no next larget permutation is possible. For example, [9,5,4,3,1]
+
+We need to find the first pair of a[i] and a[i-1] from the right, which satisfy a[i] < a[i-1]
+
+We want to create the permutation just larger than the current one. Therefore, we need to replace a[i-1] with the number just larger than itself on his right, like a[j]
+
+![ Next Permutation ](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/31_nums_graph.png)
+
+We swap a[i-1] and a[j], all numbers to the right of a[i-1]were already sorted in descending order. Furthermore, swapping a[i-1] and a[j] didn't change that order. Therefore, we simply need to reverse the numbers following a[i-1] to get the next smallest lexicographic permutation.
+
+我们还希望下一个数增加的幅度尽可能的小，这样才满足“下一个排列与当前排列紧邻“的要求。为了满足这个要求，我们需要：
+在尽可能靠右的低位进行交换，需要从后向前查找
+将一个 尽可能小的「大数」 与前面的「小数」交换。比如 123465，下一个排列应该把 5 和 4 交换而不是把 6 和 4 交换
+将「大数」换到前面后，需要将「大数」后面的所有数重置为升序，升序排列就是最小的排列。以 123465 为例：首先按照上一步，交换 5 和 4，得到 123564；然后需要将 5 之后的数重置为升序，得到 123546。显然 123546 比 123564 更小，123546 就是 123465 的下一个排列
+
+算法过程：
+
+从后向前查找第一个相邻升序的元素对 (i,j)，满足 A[i] < A[j]。此时 [j,end) 必然是降序
+在 [j,end) 从后向前查找第一个满足 A[i] < A[k] 的 k。A[i]、A[k] 分别就是上文所说的「小数」、「大数」
+将 A[i] 与 A[k] 交换
+可以断定这时 [j,end) 必然是降序，逆置 [j,end)，使其升序
+如果在步骤 1 找不到符合的相邻元素对，说明当前 [begin,end) 为一个降序顺序，则直接跳到步骤 4
+
+<img src="https://pic.leetcode-cn.com/6e8c9822771be77c6f34cd3086153984eec386fb8376e09e36132ac36bb9cd6f-image.png" alt="image.png" style="zoom: 67%;" />
+
+首先从后向前找到第一个相邻的升序元素，这里是5，7；注意，找到5，7说明7后面都是递减的
+
+<img src="https://pic.leetcode-cn.com/d7acefea4f7d4e2f19fb5eaa269c448a3098eee53656926a0ab592c564dde150-image.png" alt="image.png" style="zoom:67%;" />
+
+然后在7后面找到第一个比5大的，就是6
+
+<img src="https://pic.leetcode-cn.com/061cf291c237e6f5bcd0554192f894cd0c3e361b4564aa542aabe96e644afbf1-image.png" alt="image.png" style="zoom:67%;" />
+
+交换5，6
+
+<img src="https://pic.leetcode-cn.com/eb1470fd9942da6d2ab4855d13dfadcb715b629b4ea9cba0edfe2d1298744186-image.png" alt="image.png" style="zoom:67%;" />
+
+此时7后面依然是保持递减的关系，然后反转754变成457
+
+<img src="https://pic.leetcode-cn.com/9d627a4ffda635bbf0c4fcdb7b1359c557db8e1c300ab54383a0bc89f6763c18-image.png" alt="image.png" style="zoom:67%;" />
+
+<img src="https://pic.leetcode-cn.com/e56a66ed318d1761cd8c8f9d1521f82a30c71ecc84f551912b90d8fe254c8f3d-image.png" alt="image.png" style="zoom:67%;" />
+
+
+
+代码：
+
+注意如果已经是递减了，就反过来，从头来过。第一个。
+
+![image-20220430114607330](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220430114607330.png)
 
 #### [88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 
@@ -904,49 +1012,13 @@ Output: [1]
 
 **进阶：**你可以设计实现一个时间复杂度为 `O(m + n)` 的算法解决此问题吗？
 
-#### [475. 供暖器](https://leetcode-cn.com/problems/heaters/)
+思路：
 
-难度中等390
+- 双指针，为了避免覆盖，取nums1和nums2中的后面
 
-冬季已经来临。 你的任务是设计一个有固定加热半径的供暖器向所有房屋供暖。
+代码：
 
-在加热器的加热半径范围内的每个房屋都可以获得供暖。
-
-现在，给出位于一条水平线上的房屋 `houses` 和供暖器 `heaters` 的位置，请你找出并返回可以覆盖所有房屋的最小加热半径。
-
-**说明**：所有供暖器都遵循你的半径标准，加热的半径也一样。
-
- 
-
-**示例 1:**
-
-```
-输入: houses = [1,2,3], heaters = [2]
-输出: 1
-解释: 仅在位置2上有一个供暖器。如果我们将加热半径设为1，那么所有房屋就都能得到供暖。
-```
-
-**示例 2:**
-
-```
-输入: houses = [1,2,3,4], heaters = [1,4]
-输出: 1
-解释: 在位置1, 4上有两个供暖器。我们需要将加热半径设为1，这样所有房屋就都能得到供暖。
-```
-
-**示例 3：**
-
-```
-输入：houses = [1,5], heaters = [2]
-输出：3
-```
-
- 
-
-**提示：**
-
-- `1 <= houses.length, heaters.length <= 3 * 104`
-- `1 <= houses[i], heaters[i] <= 109`
+![image-20220430161910560](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220430161910560.png)
 
 #### [189. 轮转数组](https://leetcode-cn.com/problems/rotate-array/)
 
@@ -992,6 +1064,30 @@ Output: [1]
 - 尽可能想出更多的解决方案，至少有 **三种** 不同的方法可以解决这个问题。
 - 你可以使用空间复杂度为 `O(1)` 的 **原地** 算法解决这个问题吗
 
+思路：
+
+- 如果使用暴力法，就先求出k%n，以防止k是比n大很多很多
+- 然后提取出最后一位，然后从头开始依次轮换
+- 这样的轮换需要做k%n次
+
+![image-20220501230519779](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220501230519779.png)
+
+
+
+- 如果希望原地替换，使用O(1)的空间复杂度
+- 外面使用变量temp来保存需要替换的item， 位置为0的会被放在x=(0+k)%len(nums)的位置， 令temp = nums[x], 此时交换temp和x[0]
+- 不断循环直到再次来到0位置
+- 使用count来计数，把count = len(nums)作为循环退出的判断条件。
+- ![Rotate Array](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/189_Rotate_Array.png)
+- 这是因为从头开始是不会遍历所有的点的，比如从1开始，只会是1，3，5.
+- 此时需要break一下，break的条件是回到了1，然后让开始的点加1
+
+![image-20220501234153712](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220501234153712.png)
+
+reverse之后试试
+
+![image-20220501231828155](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220501231828155.png)
+
 #### [42. Trapping Rain Water](https://leetcode-cn.com/problems/trapping-rain-water/)
 
 难度困难3336
@@ -1025,7 +1121,38 @@ Output: 9
 - `1 <= n <= 2 * 104`
 - `0 <= height[i] <= 105`
 
+![image-20220502124555172](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502124555172.png)
 
+- 对于下标i，如果它两边是封闭的，它的储水量为最矮的一边减去下标i的高度
+- ![image-20220502134832115](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502134832115.png)
+- 注意是找到左右max中的最小，找左右max才是真正包裹它的，而最小才是它真正可以触及到的
+- 这样是O(N^2)
+
+如果已经知道每个位置的两边的最大高度，则可以在O(N)完成，使用动态规划来预处理最大高度
+
+- leftmax[i]代表i节点及其左边的位置中，最高的高度
+
+- rightmax[i]代表i节点及其右边的位置中，最高的高度
+
+- 正向遍历height得到leftmax，反向遍历height得到rightmax
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/1.png" alt="fig1" style="zoom: 33%;" />
+- ![image-20220502144019929](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502144019929.png)
+
+由于需要维护left_max和right_max两个数组，所有空间复杂度为O(n)
+
+- 使用双指针，维护两个指针left = 0，right = len(n) - 1; 两个变量left_max, right_max
+
+- 定理一：在某个位置`i`处，它能存的水，取决于它左右两边的最大值中较小的一个。
+
+  定理二：当我们从左往右处理到left下标时，左边的最大值left_max对它而言是可信的，但right_max对它而言是不可信的。（见下图，由于中间状况未知，对于left下标而言，right_max未必就是它右边最大的值）
+
+  定理三：当我们从右往左处理到right下标时，右边的最大值right_max对它而言是可信的，但left_max对它而言是不可信的。
+
+- 对于位置`left`而言，它左边最大值一定是left_max，右边最大值“大于等于”right_max，这时候，如果`left_max<right_max`成立，那么它就知道自己能存多少水了。无论右边将来会不会出现更大的right_max，都不影响这个结果。 所以当`left_max<right_max`时，我们就希望去处理left下标，反之，我们希望去处理right下标
+
+- ![image-20220502144941056](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502144941056.png)
+
+- ![image-20220502145610153](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502145610153.png)
 
 #### [11. Container With Most Water](https://leetcode-cn.com/problems/container-with-most-water/)
 
@@ -1066,6 +1193,12 @@ Output: 1
 - `2 <= n <= 105`
 - `0 <= height[i] <= 104`
 
+思路：
+
+- 首先要意识到必须每一列一样高，否则全倒水就完事了
+- 很容易的想法是min(nums[left] - nums[right]) * (len(right) - len(left))
+- ![image-20220502151544434](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502151544434.png)
+
 #### [539. 最小时间差](https://leetcode-cn.com/problems/minimum-time-difference/) & [剑指 Offer II 035. 最小时间差](https://leetcode-cn.com/problems/569nqc/) 
 
 难度中等193
@@ -1090,9 +1223,11 @@ Output: 1
 
 思路:
 
-
+排序，排序后最小的要么是首尾，要么是中间
 
 代码：
+
+![image-20220502154716750](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502154716750.png)
 
 #### [165. 比较版本号](https://leetcode-cn.com/problems/compare-version-numbers/)
 
@@ -1144,4 +1279,6 @@ Output: 1
 - `version1` 和 `version2` 仅包含数字和 `'.'`
 - `version1` 和 `version2` 都是 **有效版本号**
 - `version1` 和 `version2` 的所有修订号都可以存储在 **32 位整数** 中
+
+![image-20220502215855925](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502215855925.png)
 
