@@ -1121,7 +1121,7 @@ Output: 9
 - `1 <= n <= 2 * 104`
 - `0 <= height[i] <= 105`
 
-![image-20220502124555172](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502124555172.png)
+<img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502124555172.png" alt="image-20220502124555172" style="zoom: 80%;" />
 
 - 对于下标i，如果它两边是封闭的，它的储水量为最矮的一边减去下标i的高度
 - ![image-20220502134832115](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220502134832115.png)
