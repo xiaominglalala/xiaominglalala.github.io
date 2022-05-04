@@ -307,10 +307,17 @@ obj.input("#"); // return []. The user finished the input, the sentence "i a" sh
 - 首先对于字典树的构成，我们可以用dict()也可以用list
 - 通常用dict()是担心列表存储的是数字，会很稀疏。但是字母就无所谓了
 - 不过用list要用ord()来计算下标，使用dict不用，所以综合来看，还是dict更好
+- 使用sorted而不是sort()
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504112719342.png" alt="image-20220504112719342" style="zoom:50%;" />
+- <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504112156889.png" alt="image-20220504112156889" style="zoom: 67%;" />
 
 代码：
 
+- 41行用set还是用list都一样
 
+![image-20220504113312494](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504113312494.png)
+
+![image-20220504113351077](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504113351077.png)
 
 ####  [211. 添加与搜索单词 - 数据结构设计](https://leetcode-cn.com/problems/design-add-and-search-words-data-structure/)
 
