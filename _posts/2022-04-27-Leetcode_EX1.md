@@ -80,6 +80,8 @@ Output: 1
 
 提交次数89,140
 
+
+
 #### [1010. Pairs of Songs With Total Durations Divisible by 60](https://leetcode-cn.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/)
 
 难度中等178
@@ -115,6 +117,28 @@ Explanation: All three pairs have a total duration of 120, which is divisible by
 
 - `1 <= time.length <= 6 * 104`
 - `1 <= time[i] <= 500`
+
+思路：
+
+- 最显然的方法是brute force，两层for循环
+- 时间复杂度是O(N*2), 空间复杂度是O(1)
+- 一开始在想双指针，但显然不是
+- 事实上是hash table和一些数学想法，主要是求模的思想
+- ![image-20220504135518390](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504135518390.png)
+- 如果a和b的和与60求模是0；那么a和b单独和60求模的和在和60求模也是0
+- 一个关键点是hash table不是存每个time，而是time%60后的结果
+- 分离a和b都是可以mod 60是为了排除hash table[0] and hash table[60]的冲突
+  - 因为else使用的是互补的逻辑，用60来减i%60
+  - ![image-20220504140518299](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504140518299.png)
+- 使用defaultdict()而不是一般的dict()来保证初始就是0。注意要写入类型是int才会是0
+  - ![image-20220504140307777](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504140307777.png)
+- 第十三行，每次结束要加一，别忘了！面试要注意细节
+
+代码：
+
+![image-20220504140609891](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504140609891.png)
+
+- 时间复杂度O(N), 空间复杂度O(1)
 
 #### [636. Exclusive Time of Functions](https://leetcode-cn.com/problems/exclusive-time-of-functions/)
 
@@ -384,6 +408,8 @@ minStack.getMin(); // return -2
 - `0 <= s.length <= 10^5`
 - `s` 只包含大写英文字符
 
+
+
 #### [71. 简化路径](https://leetcode-cn.com/problems/simplify-path/)
 
 难度中等475收藏分享切换为英文接收动态反馈
@@ -442,6 +468,27 @@ minStack.getMin(); // return -2
 - `path` 由英文字母，数字，`'.'`，`'/'` 或 `'_'` 组成。
 - `path` 是一个有效的 Unix 风格绝对路径。
 
+思路：
+
+- 使用stack，在python中是列表
+- 注意 `/a/b/c/..`是/a/b
+- **Algorithm**
+  1. Initialize a stack, `S` that we will be using for our implementation.
+  2. **Split the input string using `/` as the delimiter.** 
+     - This step is really important because no matter what, the given input is a `valid` path and we simply have to shorten it. So, that means that whatever we have between two `/` characters is either a directory name or a special character and we have to process them accordingly.
+  3. Once we are done splitting the input path, we will process one component at a time.
+  4. **If the current component is a `.` or an empty string,** **we will do nothing and simply continue.**
+     - Well if you think about it, the split string array for the string **`/a//b` would be `[a,,b]`.** yes, that's an empty string in between `a` and `b`. Again, from the perspective of the overall path, it doesn't mean anything.
+  5. **If we encounter a double-dot `..`**, we have to do some processing. This simply means go one level up in the current directory path. **So, we will pop an entry from our stack if it's not empty.**
+  6. Finally, if the component we are processing right now is not one of the special characters, then we will simply add it to our stack because it's a legitimate directory name.
+  7. Once we are done processing all the components, we simply have to connect all the directory names in our stack together using `/` as the delimiter and we will have our shortest path that leads us to the same directory as the one provided as an input.
+
+代码：
+
+![image-20220504124511610](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504124511610.png)
+
+![image-20220504124535699](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504124535699.png)
+
 #### [224. 基本计算器](https://leetcode-cn.com/problems/basic-calculator/)
 
 难度困难750收藏分享切换为英文接收动态反馈
@@ -484,6 +531,71 @@ minStack.getMin(); // return -2
 - '-' 可以用作一元运算(即 "-1" 和 `"-(2 + 3)"` 是有效的)
 - 输入中不存在两个连续的操作符
 - 每个数字和运行的计算将适合于一个有符号的 32位 整数
+
+
+
+思路：
+
+- 好像处理括号匹配的问题常常会用到栈或者队列，感觉有点类似波兰表达式那道题，之后再看看
+
+- 如果我们只是单纯把他插入stack再pop会有问题
+
+  - ![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/Basic_Calculator_1.png)
+
+- 我们应该先取反，再把它push到stack：
+
+  - ![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/Basic_Calculator_2.png)
+
+- Algorithm
+
+  - When we encounter an opening parenthesis `(`, **this means an expression just ended.**（因为刚刚反转了） Recall we have reversed the expression. So an opening bracket would signify the end of the an expression. This calls for evaluation of the expression by popping operands and operators off the stack till we pop corresponding closing parenthesis. The final result of the expression is pushed back onto the stack.
+
+- 上面这么做是由于“-”的处理，但是我们可以把“-”和数字绑在一起，用加号连接
+
+  - ![image-20220504180657617](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504180657617.png)
+
+- 例如，对于字符串1+2+(3-(4+5))：
+
+  ![image-20220504181414306](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504181414306.png)
+
+- **Algorithm**
+
+  1. Iterate the expression string one character at a time. Since we are reading the expression character by character, we need to be careful when we are reading digits and non-digits.
+  2. The operands could be formed by multiple characters. A string "123" would mean a numeric 123, which could be formed as: `123` >> `120 + 3` >> `100 + 20 + 3`. Thus, if the character read is a digit we need to form the operand by multiplying `10` to the previously formed continuing operand and adding the digit to it.
+  3. Whenever we encounter an operator such as `+` or `-` we first evaluate the expression to the left and then save this `sign` for the next evaluation.![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/Basic_Calculator_4.png)
+     - ![image-20220504183151611](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504183151611.png)![image-20220504183200857](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504183200857.png)
+     - ![image-20220504183213770](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504183213770.png)![image-20220504183220697](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504183220697.png)
+     - ![image-20220504183233783](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504183233783.png)![image-20220504183242772](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504183242772.png)
+     - 
+  4. If the character is an opening parenthesis `(`, we just push the result calculated so far and the `sign` on to the stack (the sign and the magnitude) and start a fresh as if we are calculating a new expression.
+     - ![image-20220504183333940](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504183333940.png)
+  5. If the character is a closing parenthesis `)`, we first calculate the expression to the left. The result from this would be the result of the expression within the set of parenthesis that just concluded. This result is then multiplied with the sign, if there is any on top of the stack. Remember we saved the `sign` on top of the stack when we had encountered an open parenthesis? This sign is associated with the parenthesis that started then, thus when the expression ends or concludes, we pop the `sign` and multiply it with result of the expression. It is then just added to the next element on top of the stack.
+     - 如果字符是闭合括号），则首先计算左侧的表达式。从此的结果将是刚刚结束的括号内表达式的结果。然后，如果堆栈顶部有任何符号，则此结果将乘以标志。还记得当我们遇到开放括号时，我们将标志保存在堆栈顶部吗？该符号与当时开始的括号相关联，因此，当表达式结束或结论时，我们会弹出符号并乘以表达式的结果。然后仅将其添加到堆栈顶部的下一个元素中。
+     - 注意 ( 时，会把 ( 前面的sign和result放进去
+     - ![image-20220504183603911](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504183603911.png)
+
+- 对于这个例子，在运行第一个右括号前，stack的样子：
+
+  - ![image-20220504184324719](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504184324719.png)
+  - 可以看到第一个左括号前是负号，所以是6，-1；第二个左括号前是负号，所以是8，-1，然后现在的sign还是存着9前面的负号，当前的result是负号前的7，operand是9
+
+- 执行完第一个右括号：
+
+  - ![image-20220504184607475](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504184607475.png)
+  - 先是算出来里面的是-2：result += sign * operand
+  - 再是pop出来8和-1
+  - 对于-1是乘法，对于8是加法，所以现在result是10
+  - 后面也一样，我们可以看到result就够了，operand就是0
+  - 但是为什么result后面还要加一段呢？
+  - 因为可能会有1+5这种情况，result只会存一个1，5存在operand里面，这就是安全没有调用stack的情况，就是没有处理括号的情况
+  - ![image-20220504185404065](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504185404065.png)
+  - 所以需要+sign*operand
+
+代码：
+
+![image-20220504182133271](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504182133271.png)
+
+
 
 #### [227. 基本计算器 II](https://leetcode-cn.com/problems/basic-calculator-ii/)
 
@@ -529,6 +641,14 @@ minStack.getMin(); // return -2
 - `s` 表示一个 **有效表达式**
 - 表达式中的所有整数都是非负整数，且在范围 `[0, 231 - 1]` 内
 - 题目数据保证答案是一个 **32-bit 整数**
+
+思路：
+
+- Meta好像一直对这道题情有独钟
+- 这道题不用进行括号判断
+- 由于乘除优先于加减计算，因此不妨考虑先进行所有乘除运算，并将这些乘除运算后的整数值放回原表达式的相应位置，则随后整个表达式的值，就等于一系列整数加减后的值。
+- 基于此，我们可以用一个栈，保存这些（进行乘除运算后的）整数的值。对于加减号后的数字，将其直接压入栈中；对于乘除号后的数字，可以直接与栈顶元素计算，并替换栈顶元素为计算后的结果。
+- 
 
 #### [65. 有效数字](https://leetcode-cn.com/problems/valid-number/)
 
@@ -587,3 +707,18 @@ minStack.getMin(); // return -2
 
 - `1 <= s.length <= 20`
 - `s` 仅含英文字母（大写和小写），数字（`0-9`），加号 `'+'` ，减号 `'-'` ，或者点 `'.'` 。
+
+思路：
+
+- this is not your typical LeetCode problem, but a problem that is highly representative of a "real world" problem - a seemingly simple task that is frustratingly full of edge cases.
+- **Interview Tip:** Asked a question like this in an interview? Be sure to communicate thoroughly with your interviewer to make sure you're covering all cases.
+- 如果到目前为止它可以认为是数字，就让seen_digit为True，如果碰到e，就要设置他为false
+  - At the end, return `seenDigit`. This is one reason why we have to reset `seenDigit` after seeing an exponent - otherwise an input like `"21e"` would be incorrectly judged as valid.
+  - 但也需要注意，dot不需要前面有digit，也不需要后面有，比如4.也是ok的
+
+代码：
+
+![image-20220504120110179](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504120110179.png)
+
+- 时间复杂度是O(N)
+- 空间复杂度是O(1)
