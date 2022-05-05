@@ -317,6 +317,16 @@ stk.top();     // return 5, [5] the stack did not change.
 
 **Follow up:** Could you come up with a solution that supports `O(1)` for each `top` call and `O(logn)` for each other call? 
 
+思路：
+
+- 对于pyhton要做到上述的事情是有一定困难的
+- 一个普通的栈可以支持前三种操作 `push(x)`，`pop()` 和 `top()`，所以我们需要考虑的仅为后两种操作 `peekMax()` 和 `popMax()`。
+- ![image-20220504211727323](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504211727323.png)
+
+代码：
+
+![image-20220504213658533](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504213658533.png)
+
 #### [155. Min Stack](https://leetcode-cn.com/problems/min-stack/)
 
 难度简单1280
@@ -648,7 +658,9 @@ minStack.getMin(); // return -2
 - 这道题不用进行括号判断
 - 由于乘除优先于加减计算，因此不妨考虑先进行所有乘除运算，并将这些乘除运算后的整数值放回原表达式的相应位置，则随后整个表达式的值，就等于一系列整数加减后的值。
 - 基于此，我们可以用一个栈，保存这些（进行乘除运算后的）整数的值。对于加减号后的数字，将其直接压入栈中；对于乘除号后的数字，可以直接与栈顶元素计算，并替换栈顶元素为计算后的结果。
-- 
+- 一开始想和上一题一样直接用i，不用index，但是最后一位还有问题
+
+![image-20220504193549198](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220504193549198.png)
 
 #### [65. 有效数字](https://leetcode-cn.com/problems/valid-number/)
 
