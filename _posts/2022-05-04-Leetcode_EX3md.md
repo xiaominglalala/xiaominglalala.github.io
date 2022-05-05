@@ -4,7 +4,7 @@ title:      Exercise 3
 subtitle:   
 date:       2022-05-04
 author:     Ethan
-header-img: img/5.jpg
+header-img: img/6.jpg
 catalog: true
 tags:
     - Leetcode
