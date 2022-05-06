@@ -10,7 +10,7 @@ tags:
     - Leetcode
 ---
 
-## Exercise 1 (12题)
+## Exercise 1 (17题)
 
 #### [273. Integer to English Words](https://leetcode-cn.com/problems/integer-to-english-words/)
 
@@ -210,61 +210,7 @@ So function 0 spends 2 + 4 + 1 = 7 units of total time executing, and function 1
 - No two end events will happen at the same timestamp.
 - Each function has an `"end"` log for each `"start"` log.
 
-#### [1152. 用户网站访问行为分析](https://leetcode-cn.com/problems/analyze-user-website-visit-pattern/)
 
-难度中等18
-
-给定两个字符串数组 `username` 和 `website` 和一个整数数组 `timestamp` 。给定的数组长度相同，其中元组 `[username[i], website[i], timestamp[i]]` 表示用户 `username[i]` 在时间 `timestamp[i]` 访问了网站 `website[i]` 。
-
-**访问模式** 是包含三个网站的列表(不一定是完全不同的)。
-
-- 例如，`["home"， "away"， "love"]`， `["leetcode"， "love"， "leetcode"]`，和 `["luffy"， "luffy"， "luffy"]` 都是模式。
-
-一种 **访问****模式** 的 **得分** 是访问该模式中所有网站的用户数量，这些网站在该模式中出现的顺序相同。
-
-- 例如，如果模式是 `[“home”，“away”，“love”] `，那么分数就是用户数量 `x` , `x` 访问了 “`home”` ，然后访问了 `“away”` ，然后访问了 `“love” `。
-- 同样，如果模式是 `["leetcode"， "love"， "leetcode"]` ，那么分数就是用户数量 `x` ，使得 `x` 访问了`"leetcode"`，然后访问了 `"love"` ，之后又访问了 `"leetcode"` 。
-- 另外，如果模式是 `[“luffy”，“luffy”，“luffy”]` ，那么分数就是用户数量 `x` ，这样 `x` 就可以在不同的时间戳上访问 `“luffy”` 三次。
-
-返回 ***得分** 最大的 **访问****模式*** 。如果有多个访问模式具有相同的最大分数，则返回字典序最小的。
-
- 
-
-**示例 1：**
-
-```
-输入：username = ["joe","joe","joe","james","james","james","james","mary","mary","mary"], timestamp = [1,2,3,4,5,6,7,8,9,10], website = ["home","about","career","home","cart","maps","home","home","about","career"]
-输出：["home","about","career"]
-解释：本例中的元组是:
-["joe","home",1],["joe","about",2],["joe","career",3],["james","home",4],["james","cart",5],["james","maps",6],["james","home",7],["mary","home",8],["mary","about",9], and ["mary","career",10].
-模式("home", "about", "career") has score 2 (joe and mary).
-模式("home", "cart", "maps") 的得分为 1 (james).
-模式 ("home", "cart", "home") 的得分为 1 (james).
-模式 ("home", "maps", "home") 的得分为 1 (james).
-模式 ("cart", "maps", "home") 的得分为 1 (james).
-模式 ("home", "home", "home") 的得分为 0(没有用户访问过home 3次)。
-```
-
-**示例 2：**
-
-```
-输入: username = ["ua","ua","ua","ub","ub","ub"], timestamp = [1,2,3,4,5,6], website = ["a","b","a","a","b","c"]
-输出: ["a","b","a"]
-```
-
- 
-
-**提示：**
-
-- `3 <= username.length <= 50`
-- `1 <= username[i].length <= 10`
-- `timestamp.length == username.length`
-- `1 <= timestamp[i] <= 109`
-- `website.length == username.length`
-- `1 <= website[i].length <= 10`
-- `username[i]` 和 `website[i]` 都只含小写字符
-- 它保证至少有一个用户访问了至少三个网站
-- 所有元组 `[username[i]， timestamp[i]， website[i]` 均 **不重复**
 
 #### [716. Max Stack](https://leetcode-cn.com/problems/max-stack/)
 
@@ -372,6 +318,16 @@ minStack.getMin(); // return -2
 - Methods `pop`, `top` and `getMin` operations will always be called on **non-empty** stacks.
 - At most `3 * 104` calls will be made to `push`, `pop`, `top`, and `getMin`.
 
+![image-20220505113939293](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220505113939293.png)
+
+- 时间复杂度为O(1), 空间复杂度为O(N)
+
+
+
+#### **(计算贡献828-2104)**
+
+
+
 #### [828. 统计子串中的唯一字符](https://leetcode-cn.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/)
 
 难度困难109
@@ -382,7 +338,7 @@ minStack.getMin(); // return -2
 
 本题将会给你一个字符串 `s` ，我们需要返回 `countUniqueChars(t)` 的总和，其中 `t` 是 `s` 的子字符串。注意，某些子字符串可能是重复的，但你统计时也必须算上这些重复的子字符串（也就是说，你必须统计 `s` 的所有子字符串中的唯一字符）。
 
-由于答案可能非常大，请将结果 **mod 10 ^ 9 + 7** 后再返回。
+**由于答案可能非常大，请将结果 mod 10 ^ 9 + 7 后再返回。**
 
  
 
@@ -418,7 +374,287 @@ minStack.getMin(); // return -2
 - `0 <= s.length <= 10^5`
 - `s` 只包含大写英文字符
 
+思路：
 
+- 想法是找到这个s中的所有字母，然后对于每个字母计算他单独出现的次数。因为求的是所有子串的单独出现的字母的次数的和，所以只要知道每个字母会单独出现多少次，所有字母次数加起来就是答案
+- 比如对于 xXXAXXAXXAX，我们计算A单独出现的次数，我们首先要找到所有的A，然后看怎么让他们单独出现，不和其他A一起出现,假设A是在所以3，6，9出现
+  - 第一个A的可能选择是（6-3）*（3-（-1））
+  - 对于第二个A是（9-6）*（6-3）
+  - 第三个是（len-9）*（9-6）
+- "XAXAXXAX“ 对于它的第二个A，是index的（3-1）*（6-3）=6
+  - For step 1 we have `"A(XA"` and `"AX(A"`, 2 possibility.
+    For step 2 we have `"A)XXA"`, `"AX)XA"` and `"AXX)A"`, 3 possibilities
+- 这道题可以用dict存所有index，会是O(N).但是前后只看三个位置，所以只要存最后两个，理论上是O(1)的空间
+- `index[26][2]`记录每个大写字符的最后两个出现索引。
+- 如果不是用ascii_uppercase，而是用字母索引，则是用ord()
+
+代码：
+
+![image-20220505124500642](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220505124500642.png)
+
+#### [2262. 字符串的总引力](https://leetcode-cn.com/problems/total-appeal-of-a-string/)
+
+难度困难47
+
+字符串的 **引力** 定义为：字符串中 **不同** 字符的数量。
+
+- 例如，`"abbca"` 的引力为 `3` ，因为其中有 `3` 个不同字符 `'a'`、`'b'` 和 `'c'` 。
+
+给你一个字符串 `s` ，返回 **其所有子字符串的总引力** **。**
+
+**子字符串** 定义为：字符串中的一个连续字符序列。
+
+ 
+
+**示例 1：**
+
+```
+输入：s = "abbca"
+输出：28
+解释："abbca" 的子字符串有：
+- 长度为 1 的子字符串："a"、"b"、"b"、"c"、"a" 的引力分别为 1、1、1、1、1，总和为 5 。
+- 长度为 2 的子字符串："ab"、"bb"、"bc"、"ca" 的引力分别为 2、1、2、2 ，总和为 7 。
+- 长度为 3 的子字符串："abb"、"bbc"、"bca" 的引力分别为 2、2、3 ，总和为 7 。
+- 长度为 4 的子字符串："abbc"、"bbca" 的引力分别为 3、3 ，总和为 6 。
+- 长度为 5 的子字符串："abbca" 的引力为 3 ，总和为 3 。
+引力总和为 5 + 7 + 7 + 6 + 3 = 28 。
+```
+
+**示例 2：**
+
+```
+输入：s = "code"
+输出：20
+解释："code" 的子字符串有：
+- 长度为 1 的子字符串："c"、"o"、"d"、"e" 的引力分别为 1、1、1、1 ，总和为 4 。
+- 长度为 2 的子字符串："co"、"od"、"de" 的引力分别为 2、2、2 ，总和为 6 。
+- 长度为 3 的子字符串："cod"、"ode" 的引力分别为 3、3 ，总和为 6 。
+- 长度为 4 的子字符串："code" 的引力为 4 ，总和为 4 。
+引力总和为 4 + 6 + 6 + 4 = 20 。
+```
+
+ 
+
+**提示：**
+
+- `1 <= s.length <= 105`
+- `s` 由小写英文字母组成
+
+思路：
+
+- 和上一题不同的点在于abb是2，之前会是1；bb是1，之前会是0
+
+- ![image-20220505131446922](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220505131446922.png)
+
+- ![image-20220505131621695](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220505131621695.png)
+
+- assume we have string xxxaxxxxb..., with s[i] = a and s[j] = b.
+  `s[i]` is th last character `a` before that `b`.
+
+  对于以b结尾，我们需要算有多少个包含a的，如果需要包含a很简单，我们只要记住最后一个a的出现，那么这个a前面的任意位置作为开头都一定包含a
+
+  We want to count, how many substring ending at `s[j]` contains character `a`.
+  They are xxxaxxxxb, xxaxxxxb, xaxxxxb, axxxxb ....,
+  `i + 1` substring ending with character `a` at `s[i]`,
+  so we do `res += i + 1`.
+
+  
+
+  We repeatly do this for every `s[i]` and every one of 26 characters.
+
+- ![image-20220505151338680](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220505151338680.png)
+
+- ![image-20220505131700479](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220505131700479.png)
+
+#### [907. 子数组的最小值之和](https://leetcode-cn.com/problems/sum-of-subarray-minimums/)
+
+难度中等340
+
+给定一个整数数组 `arr`，找到 `min(b)` 的总和，其中 `b` 的范围为 `arr` 的每个（连续）子数组。
+
+由于答案可能很大，因此 **返回答案模 `10^9 + 7`** 。
+
+ 
+
+**示例 1：**
+
+```
+输入：arr = [3,1,2,4]
+输出：17
+解释：
+子数组为 [3]，[1]，[2]，[4]，[3,1]，[1,2]，[2,4]，[3,1,2]，[1,2,4]，[3,1,2,4]。 
+最小值为 3，1，2，4，1，1，2，1，1，1，和为 17。
+```
+
+**示例 2：**
+
+```
+输入：arr = [11,81,94,43,3]
+输出：444
+```
+
+ 
+
+**提示：**
+
+- `1 <= arr.length <= 3 * 104`
+- `1 <= arr[i] <= 3 * 104`
+
+
+
+思路：
+
+- 给定输入序列`A=[3,1,2,5,4]`，我们可以循环遍历数组并写出所有 以第 i 个元素**结尾的子数组。**
+
+  ```
+  [3]
+  [3,1], [1]
+  [3,1,2], [1,2], [2]
+  [3,1,2,5], [1,2,5], [2,5], [5]
+  [3,1,2,5,4], [1,2,5,4], [2,5,4], [5,4], [4]
+  ```
+
+- 我们可以用`result[i]`这些子数组的最小值之和来表示（以第 i 个元素结尾）。他们是这样的：
+
+  ```
+  3
+  1 + 1
+  1 + 1 + 2
+  1 + 1 + 2 + 5
+  1 + 1 + 2 + 4 + 4
+  result = [3,2,4,9,12]
+  ```
+
+- 如果`A[i-1] <= A[i]`那时`result[i] = result[i-1] + A[i]`
+
+  - A[i-1] = 1, A[i] = 2, result[i-1] = 2, result[i] = 4
+  - A[i-1] = 2, A[i] = 5, result[i-1] = 4, result[i] = 5 
+
+- 这是因为以第 i 个值结尾的子数组与第 (i-1) 个值的子数组基本相同，只是以A[i-1]结尾的后面加上了A[i], 然后多了一个单独的A[i]。由于A[i-1] <= A[i], 所以前面几个是不会受影响的，只有最后一个会受到影响
+
+- 事实上，只要A[j] <= A[i], 并且j < i, 就可以得到result[i] = result[j] + A[i]*(i-j)
+
+  - Let's take `i=4` and look at subarrays for the element `A[i]=4`，[3,1,2,5,4], [1,2,5,4], [2,5,4], [5,4], [4]
+  - `j=2` as if we took those subarrays (`[3,1,2], [1,2], [2]`)， added elements `[5,4]` to each of them. Sum of those subarrays equals `result[j]`.
+
+- 所以如果我们构建了一个非递减的堆栈，就可以找到前一个小于等于它的
+
+- we add zeros to A and stack to avoid dealing with empty stack
+
+代码：
+
+![image-20220505162014566](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220505162014566.png)
+
+#### [1498. 满足条件的子序列数目](https://leetcode-cn.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/)
+
+难度中等87
+
+给你一个整数数组 `nums` 和一个整数 `target` 。
+
+请你统计并返回 `nums` 中能满足其最小元素与最大元素的 **和** 小于或等于 `target` 的 **非空** 子序列的数目。
+
+由于答案可能很大，请将结果对 `109 + 7` 取余后返回。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [3,5,6,7], target = 9
+输出：4
+解释：有 4 个子序列满足该条件。
+[3] -> 最小元素 + 最大元素 <= target (3 + 3 <= 9)
+[3,5] -> (3 + 5 <= 9)
+[3,5,6] -> (3 + 6 <= 9)
+[3,6] -> (3 + 6 <= 9)
+```
+
+**示例 2：**
+
+```
+输入：nums = [3,3,6,8], target = 10
+输出：6
+解释：有 6 个子序列满足该条件。（nums 中可以有重复数字）
+[3] , [3] , [3,3], [3,6] , [3,6] , [3,3,6]
+```
+
+**示例 3：**
+
+```
+输入：nums = [2,3,3,4,6,7], target = 12
+输出：61
+解释：共有 63 个非空子序列，其中 2 个不满足条件（[6,7], [7]）
+有效序列总数为（63 - 2 = 61）
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 105`
+- `1 <= nums[i] <= 106`
+- `1 <= target <= 106`
+
+#### [2104. 子数组范围和](https://leetcode-cn.com/problems/sum-of-subarray-ranges/)
+
+难度中等191
+
+给你一个整数数组 `nums` 。`nums` 中，子数组的 **范围** 是子数组中最大元素和最小元素的差值。
+
+返回 `nums` 中 **所有** 子数组范围的 **和** *。*
+
+子数组是数组中一个连续 **非空** 的元素序列。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [1,2,3]
+输出：4
+解释：nums 的 6 个子数组如下所示：
+[1]，范围 = 最大 - 最小 = 1 - 1 = 0 
+[2]，范围 = 2 - 2 = 0
+[3]，范围 = 3 - 3 = 0
+[1,2]，范围 = 2 - 1 = 1
+[2,3]，范围 = 3 - 2 = 1
+[1,2,3]，范围 = 3 - 1 = 2
+所有范围的和是 0 + 0 + 0 + 1 + 1 + 2 = 4
+```
+
+**示例 2：**
+
+```
+输入：nums = [1,3,3]
+输出：4
+解释：nums 的 6 个子数组如下所示：
+[1]，范围 = 最大 - 最小 = 1 - 1 = 0
+[3]，范围 = 3 - 3 = 0
+[3]，范围 = 3 - 3 = 0
+[1,3]，范围 = 3 - 1 = 2
+[3,3]，范围 = 3 - 3 = 0
+[1,3,3]，范围 = 3 - 1 = 2
+所有范围的和是 0 + 0 + 0 + 2 + 0 + 2 = 4
+```
+
+**示例 3：**
+
+```
+输入：nums = [4,-2,-3,4,1]
+输出：59
+解释：nums 中所有子数组范围的和是 59
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 1000`
+- `-109 <= nums[i] <= 109`
+
+ 
+
+**进阶：**你可以设计一种时间复杂度为 `O(n)` 的解决方案吗？
 
 #### [71. 简化路径](https://leetcode-cn.com/problems/simplify-path/)
 
@@ -734,3 +970,84 @@ minStack.getMin(); // return -2
 
 - 时间复杂度是O(N)
 - 空间复杂度是O(1)
+
+#### [918. 环形子数组的最大和](https://leetcode-cn.com/problems/maximum-sum-circular-subarray/)
+
+难度中等365
+
+给定一个长度为 `n` 的**环形整数数组** `nums` ，返回 *`nums` 的非空 **子数组** 的最大可能和* 。
+
+**环形数组** 意味着数组的末端将会与开头相连呈环状。形式上， `nums[i]` 的下一个元素是 `nums[(i + 1) % n]` ， `nums[i]` 的前一个元素是 `nums[(i - 1 + n) % n]` 。
+
+**子数组** 最多只能包含固定缓冲区 `nums` 中的每个元素一次。形式上，对于子数组 `nums[i], nums[i + 1], ..., nums[j]` ，不存在 `i <= k1, k2 <= j` 其中 `k1 % n == k2 % n` 。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [1,-2,3,-2]
+输出：3
+解释：从子数组 [3] 得到最大和 3
+```
+
+**示例 2：**
+
+```
+输入：nums = [5,-3,5]
+输出：10
+解释：从子数组 [5,5] 得到最大和 5 + 5 = 10
+```
+
+**示例 3：**
+
+```
+输入：nums = [3,-2,2,-3]
+输出：3
+解释：从子数组 [3] 和 [3,-2,2] 都可以得到最大和 3
+```
+
+ 
+
+**提示：**
+
+- `n == nums.length`
+- `1 <= n <= 3 * 104`
+- `-3 * 104 <= nums[i] <= 3 * 104`
+
+#### [1130. 叶值的最小代价生成树](https://leetcode-cn.com/problems/minimum-cost-tree-from-leaf-values/)
+
+难度中等227
+
+给你一个正整数数组 `arr`，考虑所有满足以下条件的二叉树：
+
+- 每个节点都有 0 个或是 2 个子节点。
+- 数组 `arr` 中的值与树的中序遍历中每个叶节点的值一一对应。（知识回顾：如果一个节点有 0 个子节点，那么该节点为叶节点。）
+- 每个非叶节点的值等于其左子树和右子树中叶节点的最大值的乘积。
+
+在所有这样的二叉树中，返回每个非叶节点的值的最小可能总和。这个和的值是一个 32 位整数。
+
+ 
+
+**示例：**
+
+```
+输入：arr = [6,2,4]
+输出：32
+解释：
+有两种可能的树，第一种的非叶节点的总和为 36，第二种非叶节点的总和为 32。
+
+    24            24
+   /  \          /  \
+  12   4        6    8
+ /  \               / \
+6    2             2   4
+```
+
+ 
+
+**提示：**
+
+- `2 <= arr.length <= 40`
+- `1 <= arr[i] <= 15`
+- 答案保证是一个 32 位带符号整数，即小于 `2^31`
