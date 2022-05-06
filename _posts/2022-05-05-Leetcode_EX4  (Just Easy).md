@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Exercise 4 (Just asy) 
+title:      Exercise 4 (Just Easy) 
 subtitle:   
 date:       2022-05-05
 author:     Ethan
