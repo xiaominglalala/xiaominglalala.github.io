@@ -53,6 +53,10 @@ tags:
 - 获得字母的顺序是ord()
 - ![image-20220410011836230](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220410011836230.png)
 
+![image-20220506140753994](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220506140753994.png)
+
+这个做法可以应对有unicode code的情况
+
 #### [349. 两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/)
 
 难度简单458
