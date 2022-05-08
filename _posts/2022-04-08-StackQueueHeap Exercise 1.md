@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Heap & Stack & Queue (Finished)
+title:      Heap & Stack & Queue Exercise 1
 subtitle:   
 date:       2022-04-08
 author:     Ethan
@@ -12,6 +12,8 @@ tags:
     - Queue
     - Heap
 ---
+
+## Heap & Stack & Queue Exercise 1
 
 ### 堆（Heap）
 

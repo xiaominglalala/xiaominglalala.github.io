@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Trie (Updating)
+title:      Trie Exercise 1
 subtitle:   
 date:       2022-05-03
 author:     Ethan
@@ -11,7 +11,7 @@ tags:
     - Trie
 ---
 
-## Trie (字典树)
+## Trie Exercise 1
 
 `前缀树` ，又称 `字典树` ，是 `N 叉树` 的特殊形式
 
@@ -362,35 +362,31 @@ wordDictionary.search("b.."); // 返回 True
 - `search` 中的 `word` 由 '.' 或小写英文字母组成
 - 最多调用 `104` 次 `addWord` 和 `search`
 
-#### [421. Maximum XOR of Two Numbers in an Array](https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/)
+思路：
 
-难度中等438
+- 使用hash map会是很简单的
+  - Why Trie and not HashMap？
+  - This solution passes all leetcode test cases, and formally has O(MN)  time complexity for the search, where M is a length of the word to find, and N*is the number of words. Although this solution is not efficient for the most important practical use cases:
+    - Finding all keys with a common prefix.
+    - Enumerating a dataset of strings in lexicographical order.按照词典顺序列举字符串数据集。
+    - Scaling for the large datasets.大型数据集的缩放 Once the hash table increases in size, there are a lot of hash collisions and the search time complexity could degrade to O(*N*^2⋅*M*), where Nis the number of the inserted keys.
+    - Trie could use less space compared to hashmap when storing many keys with the same prefix. In this case, using trie has only O(*M*⋅*N*) time complexity, where M is the key length, and N is the number of keys.
+    - ![image-20220507214614593](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220507214614593.png)
+- 好，那么我们怎么用trie解决这个问题？
 
-Given an integer array `nums`, return *the maximum result of* `nums[i] XOR nums[j]`, where `0 <= i <= j < n`.
+添加：
 
- 
+![image-20220507221501552](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220507221501552.png)
 
-**Example 1:**
+搜索：
 
-```
-Input: nums = [3,10,5,25,2,8]
-Output: 28
-Explanation: The maximum result is 5 XOR 25 = 28.
-```
 
-**Example 2:**
 
-```
-Input: nums = [14,70,53,83,49,91,36,80,92,51,66,70]
-Output: 127
-```
+![image-20220507221705156](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220507221705156.png)
 
- 
 
-**Constraints:**
 
-- `1 <= nums.length <= 2 * 105`
-- `0 <= nums[i] <= 231 - 1`
+
 
 #### [425. 单词方块](https://leetcode-cn.com/problems/word-squares/)
 

@@ -1,6 +1,18 @@
-## 链表
+---
+layout:     post
+title:      Linked List Exercise 1
+subtitle:   
+date:       2022-05-08
+author:     Ethan
+header-img: img/14.jpg
+catalog: true
+tags:
+    - Leetcode
+    - Linked List
 
-### 1.常见题
+---
+
+## Linked List Exercise 1
 
 #### [203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)
 
@@ -33,7 +45,7 @@
 输出：[]
 ```
 
-#### 思路：
+思路：
 
 - 删除节点有两种情况
   - 首先是非头节点
@@ -45,7 +57,7 @@
   - 首先是current_node初始化要是fake_head而不是head。这和下一点有关
   - 对于while循环中，注意我们看的是current_node的next的value，这样我们才能让current_node的next连到该连的人。如果是看current_node的value，那么如果要删current_node，我们又该怎么找他的父节点呢？
 
-#### 代码：
+代码：
 
 ![image-20220204183415370](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220204183415370.png)
 
@@ -77,7 +89,7 @@ linkedList.deleteAtIndex(1);  //现在链表是1-> 3
 linkedList.get(1);            //返回3
 ```
 
-#### 思路：
+思路：
 
 - 这道题因为没有给定Node的样子，所以我们既可以使用单向链表，也可以使用双向链表
 
@@ -119,7 +131,7 @@ linkedList.get(1);            //返回3
 
   - 同理删除node就是get_node，然后让他的前后接起来
 
-#### 代码：
+代码：
 
 ![image-20220210173902110](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220210173902110.png)
 
@@ -158,7 +170,7 @@ linkedList.get(1);            //返回3
 输出：[]
 ```
 
-#### 思路：
+思路：
 
 - 使用双指针，一个叫prev，一个叫cur
   - prev一开始指向None, cur指向第一个位置。
@@ -167,7 +179,7 @@ linkedList.get(1);            //返回3
 
 
 
-#### 代码：
+代码：
 
 ![image-20220210183901366](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220210183901366.png)
 
@@ -204,14 +216,14 @@ linkedList.get(1);            //返回3
 输出：[1]
 ```
 
-#### 思路：
+思路：
 
 - 这道题一定要设置虚拟头节点才好解决
   ![image-20220210185815506](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220210185815506.png)
 - 易错点是更新时不是node_0 = node_2，而应该是node_0 = node_0.next.next
 - <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220212115321793.png" alt="image-20220212115321793" style="zoom: 25%;" />
 
-#### 代码：
+代码：
 
 <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220212115101363.png" alt="image-20220212115101363" style="zoom: 67%;" />
 
@@ -248,7 +260,7 @@ linkedList.get(1);            //返回3
 输出：[1]
 ```
 
-#### 思路：
+思路：
 
 - 同样需要虚拟头节点, 便于返回链表能找到头
 - 设置快慢指针，假如删倒数第二个，我们就设计slow.next是倒数第二个，然后让slow.next=slow.next.next
@@ -258,7 +270,7 @@ linkedList.get(1);            //返回3
 - ![img](https://code-thinking.cdn.bcebos.com/pics/19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B91.png)
 - ![img](https://code-thinking.cdn.bcebos.com/pics/19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B92.png)![img](https://code-thinking.cdn.bcebos.com/pics/19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B93.png)
 
-#### 代码：
+代码：
 
 ![image-20220214143141293](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220214143141293.png)
 
@@ -314,7 +326,7 @@ linkedList.get(1);            //返回3
 这两个链表不相交，因此返回 null 。
 ```
 
-#### 思路：
+思路：
 
 - 这道题挺奇葩的，就当做着玩吧
 - ![Picture1.png](https://pic.leetcode-cn.com/1615224578-EBRtwv-Picture1.png)
@@ -324,7 +336,7 @@ linkedList.get(1);            //返回3
 - 在走完自己的后，走另一个链表，他们就一定会遇到。headA走了a+(b-c), headB走了b+a-c,最终一定会相见
 - 如果不相交，也就是会出现 c = 0，最终headA=headB=Null。所以循环判断是while(headA != headB)
 
-#### 代码：
+代码：
 
 ![image-20220212112431405](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220212112431405.png)
 
@@ -374,8 +386,7 @@ linkedList.get(1);            //返回3
 解释：链表中没有环。
 ```
 
-#### 思路：
+思路：
 
-#### 代码：
+代码：
 
-### 2.总结

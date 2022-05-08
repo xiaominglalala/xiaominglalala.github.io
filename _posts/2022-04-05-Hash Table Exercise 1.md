@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Hash Table (Finished)
+title:      Hash Table Exercise 1
 subtitle:   
 date:       2022-04-05
 author:     Ethan
@@ -11,7 +11,7 @@ tags:
     - Hash Table
 ---
 
-## 哈希表
+## Hash Table Exercise 1
 
 哈希表是根据关键码的值而直接进行访问的数据结构。
 

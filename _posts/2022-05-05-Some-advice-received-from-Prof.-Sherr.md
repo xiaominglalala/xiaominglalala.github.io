@@ -7,7 +7,7 @@ author:     Ethan
 header-img: img/8.jpg
 catalog: true
 tags:
-    - Leetcode
+    - Life experience
 
 ---
 

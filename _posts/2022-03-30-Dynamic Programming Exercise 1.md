@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Dynamic Programming (Finished)
+title:      Dynamic Programming Exercise 1
 subtitle:   
 date:       2022-03-30
 author:     Ethan
@@ -11,7 +11,7 @@ tags:
     - Dynamic Programming
 ---
 
-# 动态规划
+# Dynamic Programming Exercise 1
 
 - 动态规划和贪心的区别？
   - 贪心没有状态推导，而是从局部直接选最优的

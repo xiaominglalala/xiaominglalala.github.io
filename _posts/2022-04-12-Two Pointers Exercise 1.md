@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Two Pointers (Finished)
+title:      Two Pointers Exercise 1
 subtitle:   
 date:       2022-04-13
 author:     Ethan
@@ -10,7 +10,7 @@ tags:
     - Leetcode
     - Two Pointers
 ---
-## 双指针
+## Two Pointers Exercise 1
 
 #### [27. 移除元素](https://leetcode-cn.com/problems/remove-element/)
 

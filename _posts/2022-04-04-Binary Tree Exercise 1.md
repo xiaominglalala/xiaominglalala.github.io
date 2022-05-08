@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Binary Tree (Updating)
+title:      Binary Tree Exercise 1
 subtitle:   
 date:       2022-04-04
 author:     Ethan
@@ -12,7 +12,7 @@ tags:
 
 ---
 
-
+##    Binary Tree Exercise 1
 
 - 深度优先遍历
   - 前序遍历（递归法，迭代法）
