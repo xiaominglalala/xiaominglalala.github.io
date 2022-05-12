@@ -14,6 +14,8 @@ tags:
 
 ##    Binary Tree Exercise 1
 
+### 二叉树：
+
 - 深度优先遍历
   - 前序遍历（递归法，迭代法）
   - 中序遍历（递归法，迭代法）
@@ -23,17 +25,38 @@ tags:
 
 如何分别前中后序遍历？关键就是中间节点在哪里？
 
-- 前序遍历：**中**左右
-- 中序遍历：左**中**右
-- 后序遍历：左右**中**
+- ==前序遍历：**中**左右==
+- ==中序遍历：左**中**右==
+- ==后序遍历：左右**中**==
 
 <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220217134233435.png" alt="image-20220217134233435" style="zoom:50%;" />
 
 
 
+### 二叉搜索树：
+
+二叉搜索树是有数值的了，**二叉搜索树是一个有序树**。
+
+- 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；
+- 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；
+- 它的左、右子树也分别为二叉排序树
+
+下面这两棵树都是搜索树 ![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20200806190304693.png)
+
+### 平衡二叉搜索树
+
+平衡二叉搜索树：又被称为AVL（Adelson-Velsky and Landis）树，且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。
+
+如图：
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20200806190511967.png)
+
+最后一棵 不是平衡二叉树，因为它的左右两个子树的高度差的绝对值超过了1。
+
 ### 1.二叉树的深度优先遍历（前中后序）（递归法）
 
-迭代太蠢了
+> 迭代太蠢了，递归会简单，但是要回iteration的写法防止被考到
+>
 
 #### [144. 二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
 
@@ -86,11 +109,11 @@ tags:
 
 思路：
 
-- 对于前序，中序和后序分别有递归发和迭代法。我们先来看递归法
 - 写递归法，需要三要素
   - 首先是确定这个递归函数的参数和返回类型：对于前序遍历，就是输入当前节点
   - 确认终止条件：如果当前节点为空，则return
   - 确认每次递归的内容：如果当前节点不为空，则输出当前节点，再递归left，再递归right
+  - 前序是preorder
 
 代码：
 
@@ -98,7 +121,19 @@ tags:
 
 递归算法很简单，你可以通过迭代算法完成吗？
 
+Preorder Binary Tree (Iteration)
 
+- 前序遍历是中左右；
+- <img src="https://pic.leetcode-cn.com/6233a9685447d0b4d7b513f739151ca065e5697e24070bcafc1ee5d28f9155a6.png" alt="中序遍历流程图" style="zoom: 33%;" />
+- 注意要判断node.right,之前recursion不需要判断这个
+- 而且这里要初始化node
+- 先把中间pop，然后中间的val放入result，再把右放入stack，再把左放入stack；这样的pop出来是中左右
+- ![image-20220417100825910](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417100825910.png)
+
+- Time complexity : we visit each node exactly once, thus the time complexity isO(*N*), 
+- Space complexity : depending on the tree structure, we could keep up to the entire tree, therefore, the space complexity is O(*N*).
+
+![image-20220508193146490](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220508193146490.png)
 
 #### [145. 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)
 
@@ -138,6 +173,24 @@ tags:
 代码：
 
 <img src="https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220217135851527.png" alt="image-20220217135851527" style="zoom: 67%;" />
+
+Postorder Binary Tree (Iteration)
+
+- 对于后序遍历的迭代法，就基本改一下前序遍历中的内容即可
+- 前序遍历是中左右，后序遍历是左右中
+- 那么我们只需要压入左右时和前序换一下，先压入左再压入右
+- 最后反转数组
+- 注意不可以先左右再中，这将会和中序遍历一样，由于访问元素的顺序和处理的顺序不同，一开始访问的中间已经不去处理，就会有问题
+
+![image-20220417102432062](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417102432062.png)
+
+注意不可以return list.reverse()
+
+![image-20220417102509035](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417102509035.png)
+
+
+
+![image-20220508193128400](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220508193128400.png)
 
 #### [94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
@@ -192,6 +245,22 @@ tags:
 
 <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220217142708700.png" alt="image-20220217142708700" style="zoom: 67%;" />
 
+Inorder Binary Tree (Iteration)
+
+- 前序遍历的顺序是中左右, 而对于一个binary tree, 先访问的元素是中间节点，要处理的元素也是中间节点。**前序要访问的元素和要处理的元素顺序是一致的，都是中间节点。**
+- 中序遍历的顺序是左中右，先访问的是二叉树顶部的节点，然后一层一层向下访问，直到到达树左面的最底部，再开始处理节点（也就是在把节点的数值放进result数组中）就造成了**处理顺序和访问顺序是不一致的。**
+- **使用迭代法写中序遍历，就需要借用指针的遍历来帮助访问节点，栈则用来处理节点上的元素。**
+- 注意一开始不把root放进去，while是对node和stack都判断
+- 对于node还没走到最左边，就一直走，走的路上每个左节点都压入stack
+- 终于走到了最左边，再把节点的值放入result，然后让他变成右边的
+
+![image-20220417103649282](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220417103649282.png)
+
+- 上面那个不好，这个模板三个顺序就能统一了，区别主要在于要判断node是不是None, 是None就说明要处理
+- 通过添加None来提醒我们这个节点要提出来处理
+
+![image-20220508192333014](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220508192333014.png)
+
 #### [589. N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/)
 
 难度简单207
@@ -223,7 +292,15 @@ n 叉树 在输入中按层序遍历进行序列化表示，每组子节点由�
 
 代码：
 
+对于子节点，不存在左右了，就全部traversal
+
 <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220221121238273.png" alt="image-20220221121238273" style="zoom:67%;" />
+
+对于迭代法，注意21行是extend
+
+![image-20220509191013260](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220509191013260.png)
+
+![image-20220509191145790](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220509191145790.png)
 
 #### [590. N 叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/)
 
@@ -347,7 +424,7 @@ n 叉树 在输入中按层序遍历进行序列化表示，每组子节点由�
 
 思路：
 
-- 相对于上一题的结果，只要反转一下list就可以了：`result.reverse()`
+- 相对于上一题的结果，只要反转一下list就可以了：`result.reverse()`或者result = reversed(result) 
 - 注意不需要`result=result.reverse()`, 也不能`return result.reverse()`
 
 代码：
@@ -536,6 +613,18 @@ struct Node {
 输出：[]
 ```
 
+**Constraints:**
+
+- The number of nodes in the tree is in the range `[0, 212 - 1]`.
+- `-1000 <= Node.val <= 1000`
+
+ 
+
+**Follow-up:**
+
+- You may only use constant extra space.
+- The recursive approach is fine. You may assume implicit stack space does not count as extra space for this problem.
+
 思路：
 
 别想复杂了，就是que弹出来的那个，让他的next为que[0]，也就是目前que中的第一个。当然也需要长度判断来看是不是真的到最后了，只有不是最后一个的情况可以那么做
@@ -543,6 +632,10 @@ struct Node {
 代码：
 
 <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220219114003117.png" alt="image-20220219114003117" style="zoom: 67%;" />
+
+使用链表可以让O(N)的空间复杂度变为O(1)
+
+![image-20220509235110946](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220509235110946.png)
 
 #### [117. 填充每个节点的下一个右侧节点指针 II](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/)
 
@@ -589,6 +682,8 @@ struct Node {
 代码：
 
 <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220219114841136.png" alt="image-20220219114841136" style="zoom:67%;" />
+
+![image-20220510113532782](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510113532782.png)
 
 #### [104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
@@ -653,6 +748,16 @@ N 叉树输入按层序遍历序列化表示，每组子节点由空值分隔（
 输出：5
 ```
 
+思路：
+
+
+
+代码：
+
+![image-20220510115005706](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510115005706.png)
+
+
+
 #### [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)
 
 难度简单674
@@ -687,7 +792,12 @@ N 叉树输入按层序遍历序列化表示，每组子节点由空值分隔（
 - 注意一开始的深度就是1
 - 由于这里可能存在左边长，右边短，所以deque中把root的节点和深度绑定
 - ![image-20220220234116131](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220220234116131.png)
-- 注意deque()函数里面是[]和(), 然后popleft()不需要()
+- 注意deque()函数里面的样子，之前是[root], 现在是[(root, 1)], 或者[[root, 1]]
+  - ![image-20220510120019632](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510120019632.png)
+  - ![image-20220510120029422](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510120029422.png)
+  - ![image-20220510120136853](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510120136853.png)
+  - ![image-20220510120151069](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510120151069.png)
+
 - 注意最后往que里面append还是要()
 
 代码：
@@ -728,14 +838,14 @@ N 叉树输入按层序遍历序列化表示，每组子节点由空值分隔（
 - 首先是递归法
   - 迭代法永远都是内置一个新的函数
   - 我要解决的是什么？我递归的是什么？我递归的是两个节点的比较，是不是空，不空的话数值是不是相等。如果这两个点相等，我的下一层将是left的left和right的right，left的right和right的left
-  - <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220222195601449.png" alt="image-20220222195601449" style="zoom:67%;" />
+  - ![image-20220510134800756](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510134800756.png)
 - 然后是迭代法
   - 迭代法有两个选择，无非就是使用队列，也就是deque。或者是使用栈，就是单纯的[]。前者是popleft(), 后者是pop()
   - 虽然pop是从后面弹出，popleft是从左边弹出，但是压入都是成对压入，所以只要是相邻两个即可
   - 也就是按照left.left, right.right, left.right, right.left的顺序压入即可
   - 需要注意，发现两个都是空，不能像之前一样返回True，而是continue检查value
   - 队列
-    <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220222203029099.png" alt="image-20220222203029099" style="zoom:67%;" /><img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220222203102478.png" alt="image-20220222203102478" style="zoom:67%;" />
+    ![image-20220510134213374](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510134213374.png)
   - 堆栈
     <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220222203247875.png" alt="image-20220222203247875" style="zoom:67%;" />
     <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220222203311461.png" alt="image-20220222203311461" style="zoom:67%;" />
@@ -783,6 +893,16 @@ N 叉树输入按层序遍历序列化表示，每组子节点由空值分隔（
 
 代码：
 
+Iteration:
+
+![image-20220510142305605](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220510142305605.png)
+
+Recursion:
+
+![image-20220511124350274](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220511124350274.png)
+
+![image-20220510142659365](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220510142659365.png)
+
 #### [572. 另一棵树的子树](https://leetcode-cn.com/problems/subtree-of-another-tree/)
 
 难度简单651
@@ -814,6 +934,8 @@ N 叉树输入按层序遍历序列化表示，每组子节点由空值分隔（
 思路：
 
 代码：
+
+![image-20220511122659534](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220511122659534.png)
 
 #### [222. 完全二叉树的节点个数](https://leetcode-cn.com/problems/count-complete-tree-nodes/)
 
