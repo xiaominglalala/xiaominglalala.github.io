@@ -1,4 +1,3 @@
----
 layout:     post
 title:      Binary Tree Exercise 1
 subtitle:   
@@ -8,9 +7,7 @@ header-img: img/city_3.jpg
 catalog: true
 tags:
     - Leetcode
-    - Binary Tree
-
----
+        - Binary Tree
 
 ##    Binary Tree Exercise 1
 
@@ -992,10 +989,32 @@ Recursion:
 
 - 迭代法
   
-
   <img src="C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220222210701345.png" alt="image-20220222210701345" style="zoom:67%;" />
+  
+  但是上述的方法没有从complete binary tree这个消息中获利
+  
+  我们可以不计算前面的，因为他们必然是满的，只要知道最后一层有几个节点就可以知道全部的
 
+![fic](https://leetcode.com/problems/count-complete-tree-nodes/Figures/222/level.png)
 
+Now there are two questions:
+
+1. How many nodes in the last level have to be checked?
+2. What is the best time performance for such a check
+
+需要check的node数目：
+
+![pic](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/exist.png)
+
+每次check的复杂度：
+
+![pif](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/check.png)
+
+![image-20220512203651779](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220512203651779.png)
+
+记住node一定是都长在左边，我们要找到第一个没有的，也就是边界left，所以用二分查找
+
+![image-20220512205553200](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220512205553200.png)
 
 #### [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
 
