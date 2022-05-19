@@ -13,6 +13,201 @@ tags:
 ---
 ## Binary Tree Exercise 3
 
+#### [2096. Step-By-Step Directions From a Binary Tree Node to Another](https://leetcode-cn.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/)
+
+难度中等34
+
+You are given the `root` of a **binary tree** with `n` nodes. Each node is uniquely assigned a value from `1` to `n`. You are also given an integer `startValue` representing the value of the start node `s`, and a different integer `destValue` representing the value of the destination node `t`.
+
+Find the **shortest path** starting from node `s` and ending at node `t`. Generate step-by-step directions of such path as a string consisting of only the **uppercase** letters `'L'`, `'R'`, and `'U'`. Each letter indicates a specific direction:
+
+- `'L'` means to go from a node to its **left child** node.
+- `'R'` means to go from a node to its **right child** node.
+- `'U'` means to go from a node to its **parent** node.
+
+Return *the step-by-step directions of the **shortest path** from node* `s` *to node* `t`.
+
+ 
+
+**Example 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/eg1.png)
+
+```
+Input: root = [5,1,2,3,null,6,4], startValue = 3, destValue = 6
+Output: "UURL"
+Explanation: The shortest path is: 3 → 1 → 5 → 2 → 6.
+```
+
+**Example 2:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/eg2.png)
+
+```
+Input: root = [2,1], startValue = 2, destValue = 1
+Output: "L"
+Explanation: The shortest path is: 2 → 1.
+```
+
+ 
+
+**Constraints:**
+
+- The number of nodes in the tree is `n`.
+- `2 <= n <= 105`
+- `1 <= Node.val <= n`
+- All the values in the tree are **unique**.
+- `1 <= startValue, destValue <= n`
+- `startValue != destValue`
+
+#### [1740. 找到二叉树中的距离](https://leetcode-cn.com/problems/find-distance-in-a-binary-tree/)
+
+难度中等14
+
+给定一棵二叉树的根节点 `root` 以及两个整数 `p` 和 `q` ，返回该二叉树中值为 `p` 的结点与值为 `q` 的结点间的 **距离** 。
+
+两个结点间的 **距离** 就是从一个结点到另一个结点的路径上边的数目。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2018/12/14/binarytree.png)
+
+```
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 0
+输出：3
+解释：在 5 和 0 之间有 3 条边：5-3-1-0
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2018/12/14/binarytree.png)
+
+```
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 7
+输出：2
+解释：在 5 和 7 之间有 2 条边：5-2-7
+```
+
+**示例 3：**
+
+![img](https://assets.leetcode.com/uploads/2018/12/14/binarytree.png)
+
+```
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 5
+输出：0
+解释：一个结点与它本身之间的距离为 0
+```
+
+ 
+
+**提示：**
+
+- 树中结点个数的范围在 `[1, 104]`.
+- `0 <= Node.val <= 109`
+- 树中所有结点的值都是唯一的.
+- `p` 和`q` 是树中结点的值.
+
+#### [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst/)
+
+难度简单286
+
+给定二叉搜索树的根结点 `root`，返回值位于范围 *`[low, high]`* 之间的所有结点的值的和。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/11/05/bst1.jpg)
+
+```
+输入：root = [10,5,15,3,7,null,18], low = 7, high = 15
+输出：32
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2020/11/05/bst2.jpg)
+
+```
+输入：root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
+输出：23
+```
+
+ 
+
+**提示：**
+
+- 树中节点数目在范围 `[1, 2 * 104]` 内
+- `1 <= Node.val <= 105`
+- `1 <= low <= high <= 105`
+- 所有 `Node.val` **互不相同**
+
+#### [987. 二叉树的垂序遍历](https://leetcode-cn.com/problems/vertical-order-traversal-of-a-binary-tree/)
+
+难度困难189
+
+给你二叉树的根结点 `root` ，请你设计算法计算二叉树的 **垂序遍历** 序列。
+
+对位于 `(row, col)` 的每个结点而言，其左右子结点分别位于 `(row + 1, col - 1)` 和 `(row + 1, col + 1)` 。树的根结点位于 `(0, 0)` 。
+
+二叉树的 **垂序遍历** 从最左边的列开始直到最右边的列结束，按列索引每一列上的所有结点，形成一个按出现位置从上到下排序的有序列表。如果同行同列上有多个结点，则按结点的值从小到大进行排序。
+
+返回二叉树的 **垂序遍历** 序列。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2021/01/29/vtree1.jpg)
+
+```
+输入：root = [3,9,20,null,null,15,7]
+输出：[[9],[3,15],[20],[7]]
+解释：
+列 -1 ：只有结点 9 在此列中。
+列  0 ：只有结点 3 和 15 在此列中，按从上到下顺序。
+列  1 ：只有结点 20 在此列中。
+列  2 ：只有结点 7 在此列中。
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2021/01/29/vtree2.jpg)
+
+```
+输入：root = [1,2,3,4,5,6,7]
+输出：[[4],[2],[1,5,6],[3],[7]]
+解释：
+列 -2 ：只有结点 4 在此列中。
+列 -1 ：只有结点 2 在此列中。
+列  0 ：结点 1 、5 和 6 都在此列中。
+          1 在上面，所以它出现在前面。
+          5 和 6 位置都是 (2, 0) ，所以按值从小到大排序，5 在 6 的前面。
+列  1 ：只有结点 3 在此列中。
+列  2 ：只有结点 7 在此列中。
+```
+
+**示例 3：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/vtree3.jpg)
+
+```
+输入：root = [1,2,3,4,6,5,7]
+输出：[[4],[2],[1,5,6],[3],[7]]
+解释：
+这个示例实际上与示例 2 完全相同，只是结点 5 和 6 在树中的位置发生了交换。
+因为 5 和 6 的位置仍然相同，所以答案保持不变，仍然按值从小到大排序。
+```
+
+ 
+
+**提示：**
+
+- 树中结点数目总数在范围 `[1, 1000]` 内
+- `0 <= Node.val <= 1000`
+
 #### [426. 将二叉搜索树转化为排序的双向链表](https://leetcode-cn.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/)
 
 难度中等165

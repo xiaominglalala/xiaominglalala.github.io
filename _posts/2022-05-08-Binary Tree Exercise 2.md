@@ -85,6 +85,726 @@ Inorder Binary Tree (Recursion)
 
 ### 
 
+
+
+### 4.二叉树的改造和修改
+
+#### [226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
+
+难度简单1177
+
+给你一棵二叉树的根节点 `root` ，翻转这棵二叉树，并返回其根节点。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2021/03/14/invert1-tree.jpg)
+
+```
+输入：root = [4,2,7,1,3,6,9]
+输出：[4,7,2,9,6,3,1]
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2021/03/14/invert2-tree.jpg)
+
+```
+输入：root = [2,1,3]
+输出：[2,3,1]
+```
+
+**示例 3：**
+
+```
+输入：root = []
+输出：[]
+```
+
+思路：
+
+- 本质就是每个节点下面的两个换一下位置，所以很容易想到迭代法
+  - 先转换root下面的两个节点，再把这两个节点当作root进行迭代
+- 迭代法就是把这些node存储在一个东西里面
+
+代码：
+
+- 递归法（前序遍历）
+  - 使用前序遍历，就是中左右
+  - ![image-20220221113958199](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220221113958199.png)
+- 迭代法
+- ![image-20220221114807652](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220221114807652.png)
+
+#### [106. 从中序与后序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
+
+难度中等675
+
+给定两个整数数组 `inorder` 和 `postorder` ，其中 `inorder` 是二叉树的中序遍历， `postorder` 是同一棵树的后序遍历，请你构造并返回这颗 *二叉树* 。
+
+ 
+
+**示例 1:**
+
+![img](https://assets.leetcode.com/uploads/2021/02/19/tree.jpg)
+
+```
+输入：inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
+输出：[3,9,20,null,null,15,7]
+```
+
+**示例 2:**
+
+```
+输入：inorder = [-1], postorder = [-1]
+输出：[-1]
+```
+
+思路：
+
+代码：
+
+#### [105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+
+难度中等1432
+
+给定两个整数数组 `preorder` 和 `inorder` ，其中 `preorder` 是二叉树的**先序遍历**， `inorder` 是同一棵树的**中序遍历**，请构造二叉树并返回其根节点。
+
+ 
+
+**示例 1:**
+
+![img](https://assets.leetcode.com/uploads/2021/02/19/tree.jpg)
+
+```
+输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+输出: [3,9,20,null,null,15,7]
+```
+
+**示例 2:**
+
+```
+输入: preorder = [-1], inorder = [-1]
+输出: [-1]
+```
+
+思路：
+
+代码：
+
+#### [654. 最大二叉树](https://leetcode-cn.com/problems/maximum-binary-tree/)
+
+难度中等372
+
+给定一个不重复的整数数组 `nums` 。 **最大二叉树** 可以用下面的算法从 `nums` 递归地构建:
+
+1. 创建一个根节点，其值为 `nums` 中的最大值。
+2. 递归地在最大值 **左边** 的 **子数组前缀上** 构建左子树。
+3. 递归地在最大值 **右边** 的 **子数组后缀上** 构建右子树。
+
+返回 *`nums` 构建的* ***最大二叉树\*** 。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/12/24/tree1.jpg)
+
+```
+输入：nums = [3,2,1,6,0,5]
+输出：[6,3,5,null,2,0,null,null,1]
+解释：递归调用如下所示：
+- [3,2,1,6,0,5] 中的最大值是 6 ，左边部分是 [3,2,1] ，右边部分是 [0,5] 。
+    - [3,2,1] 中的最大值是 3 ，左边部分是 [] ，右边部分是 [2,1] 。
+        - 空数组，无子节点。
+        - [2,1] 中的最大值是 2 ，左边部分是 [] ，右边部分是 [1] 。
+            - 空数组，无子节点。
+            - 只有一个元素，所以子节点是一个值为 1 的节点。
+    - [0,5] 中的最大值是 5 ，左边部分是 [0] ，右边部分是 [] 。
+        - 只有一个元素，所以子节点是一个值为 0 的节点。
+        - 空数组，无子节点。
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2020/12/24/tree2.jpg)
+
+```
+输入：nums = [3,2,1]
+输出：[3,null,2,null,1]
+```
+
+思路：
+
+代码：
+
+#### [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)
+
+难度简单880
+
+给你两棵二叉树： `root1` 和 `root2` 。
+
+想象一下，当你将其中一棵覆盖到另一棵之上时，两棵树上的一些节点将会重叠（而另一些不会）。你需要将这两棵树合并成一棵新二叉树。合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；否则，**不为** null 的节点将直接作为新二叉树的节点。
+
+返回合并后的二叉树。
+
+**注意:** 合并过程必须从两个树的根节点开始。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/merge.jpg)
+
+```
+输入：root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]
+输出：[3,4,5,5,4,null,7]
+```
+
+**示例 2：**
+
+```
+输入：root1 = [1], root2 = [1,2]
+输出：[2,2]
+```
+
+思路：
+
+代码：
+
+#### [536. 从字符串生成二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-string/)
+
+难度中等83
+
+你需要用一个包括括号和整数的字符串构建一棵二叉树。
+
+输入的字符串代表一棵二叉树。它包括整数和随后的 0 、1 或 2 对括号。整数代表根的值，一对括号内表示同样结构的子树。
+
+若存在子结点，则从**左子结点**开始构建。
+
+ 
+
+**示例 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/butree.jpg)
+
+```
+输入： s = "4(2(3)(1))(6(5))"
+输出： [4,2,6,3,1,5]
+```
+
+**示例 2:**
+
+```
+输入： s = "4(2(3)(1))(6(5)(7))"
+输出： [4,2,6,3,1,5,7]
+```
+
+**示例 3:**
+
+```
+输入： s = "-4(2(3)(1))(6(5)(7))"
+输出： [-4,2,6,3,1,5,7]
+```
+
+ 
+
+**提示：**
+
+- `0 <= s.length <= 3 * 104`
+- 输入字符串中只包含 `'('`, `')'`, `'-'` 和 `'0'` ~ `'9'` 
+- 空树由 `""` 而非`"()"`表示。
+
+### 5.二叉搜索树的属性
+
+#### [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/)
+
+难度简单242
+
+给定二叉搜索树（BST）的根节点 `root` 和一个整数值 `val`。
+
+你需要在 BST 中找到节点值等于 `val` 的节点。 返回以该节点为根的子树。 如果节点不存在，则返回 `null` 。
+
+ 
+
+**示例 1:**
+
+![img](https://assets.leetcode.com/uploads/2021/01/12/tree1.jpg)
+
+```
+输入：root = [4,2,7,1,3], val = 2
+输出：[2,1,3]
+```
+
+**Example 2:**
+
+![img](https://assets.leetcode.com/uploads/2021/01/12/tree2.jpg)
+
+```
+输入：root = [4,2,7,1,3], val = 5
+输出：[]
+```
+
+#### [98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+
+难度中等1420
+
+给你一个二叉树的根节点 `root` ，判断其是否是一个有效的二叉搜索树。
+
+**有效** 二叉搜索树定义如下：
+
+- 节点的左子树只包含 **小于** 当前节点的数。
+- 节点的右子树只包含 **大于** 当前节点的数。
+- 所有左子树和右子树自身必须也是二叉搜索树。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/12/01/tree1.jpg)
+
+```
+输入：root = [2,1,3]
+输出：true
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2020/12/01/tree2.jpg)
+
+```
+输入：root = [5,1,4,null,null,3,6]
+输出：false
+解释：根节点的值是 5 ，但是右子节点的值是 4 。
+```
+
+#### [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/)
+
+难度简单308
+
+给你一个二叉搜索树的根节点 `root` ，返回 **树中任意两不同节点值之间的最小差值** 。
+
+差值是一个正数，其数值等于两值之差的绝对值。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2021/02/05/bst1.jpg)
+
+```
+输入：root = [4,2,6,1,3]
+输出：1
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2021/02/05/bst2.jpg)
+
+```
+输入：root = [1,0,48,null,null,12,49]
+输出：1
+```
+
+#### [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/)
+
+难度简单451
+
+给你一个含重复值的二叉搜索树（BST）的根节点 `root` ，找出并返回 BST 中的所有 [众数](https://baike.baidu.com/item/众数/44796)（即，出现频率最高的元素）。
+
+如果树中有不止一个众数，可以按 **任意顺序** 返回。
+
+假定 BST 满足如下定义：
+
+- 结点左子树中所含节点的值 **小于等于** 当前节点的值
+- 结点右子树中所含节点的值 **大于等于** 当前节点的值
+- 左子树和右子树都是二叉搜索树
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/mode-tree.jpg)
+
+```
+输入：root = [1,null,2,2]
+输出：[2]
+```
+
+**示例 2：**
+
+```
+输入：root = [0]
+输出：[0]
+```
+
+ 
+
+**提示：**
+
+- 树中节点的数目在范围 `[1, 104]` 内
+- `-105 <= Node.val <= 105`
+
+ 
+
+**进阶：**你可以不使用额外的空间吗？（假设由递归产生的隐式调用栈的开销不被计算在内）
+
+
+
+#### [538. 把二叉搜索树转换为累加树](https://leetcode-cn.com/problems/convert-bst-to-greater-tree/)
+
+难度中等713
+
+给出二叉 **搜索** 树的根节点，该树的节点值各不相同，请你将其转换为累加树（Greater Sum Tree），使每个节点 `node` 的新值等于原树中大于或等于 `node.val` 的值之和。
+
+提醒一下，二叉搜索树满足下列约束条件：
+
+- 节点的左子树仅包含键 **小于** 节点键的节点。
+- 节点的右子树仅包含键 **大于** 节点键的节点。
+- 左右子树也必须是二叉搜索树。
+
+**注意：**本题和 1038: https://leetcode-cn.com/problems/binary-search-tree-to-greater-sum-tree/ 相同
+
+ 
+
+**示例 1：**
+
+**![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/tree.png)**
+
+```
+输入：[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
+输出：[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
+```
+
+**示例 2：**
+
+```
+输入：root = [0,null,1]
+输出：[1,null,1]
+```
+
+**示例 3：**
+
+```
+输入：root = [1,0,2]
+输出：[3,3,2]
+```
+
+**示例 4：**
+
+```
+输入：root = [3,2,4,1]
+输出：[7,9,4,10]
+```
+
+ 
+
+**提示：**
+
+- 树中的节点数介于 `0` 和 `104` 之间。
+- 每个节点的值介于 `-104` 和 `104` 之间。
+- 树中的所有值 **互不相同**。
+- 给定的树为二叉搜索树
+
+### 6. 二叉树的公共祖先
+
+#### [235. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+
+难度简单829
+
+给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
+
+[百度百科](https://baike.baidu.com/item/最近公共祖先/8918834?fr=aladdin)中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（**一个节点也可以是它自己的祖先**）。”
+
+例如，给定如下二叉搜索树: root = [6,2,8,0,4,7,9,null,null,3,5]
+
+![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/binarysearchtree_improved.png)
+
+ 
+
+**示例 1:**
+
+```
+输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+输出: 6 
+解释: 节点 2 和节点 8 的最近公共祖先是 6。
+```
+
+**示例 2:**
+
+```
+输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
+输出: 2
+解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。
+```
+
+ 
+
+**说明:**
+
+- 所有节点的值都是唯一的。
+- p、q 为不同节点且均存在于给定的二叉搜索树中。
+
+#### [236. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+难度中等1731
+
+给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+
+[百度百科](https://baike.baidu.com/item/最近公共祖先/8918834?fr=aladdin)中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（**一个节点也可以是它自己的祖先**）。”
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2018/12/14/binarytree.png)
+
+```
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+输出：3
+解释：节点 5 和节点 1 的最近公共祖先是节点 3 。
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2018/12/14/binarytree.png)
+
+```
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+输出：5
+解释：节点 5 和节点 4 的最近公共祖先是节点 5 。因为根据定义最近公共祖先节点可以为节点本身。
+```
+
+**示例 3：**
+
+```
+输入：root = [1,2], p = 1, q = 2
+输出：1
+```
+
+ 
+
+**提示：**
+
+- 树中节点数目在范围 `[2, 105]` 内。
+- `-109 <= Node.val <= 109`
+- 所有 `Node.val` `互不相同` 。
+- `p != q`
+- `p` 和 `q` 均存在于给定的二叉树中。
+
+### 7. 二叉搜索树的修改和构造
+
+#### [701. 二叉搜索树中的插入操作](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
+
+难度中等304
+
+给定二叉搜索树（BST）的根节点 `root` 和要插入树中的值 `value` ，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。 输入数据 **保证** ，新值和原始二叉搜索树中的任意节点值都不同。
+
+**注意**，可能存在多种有效的插入方式，只要树在插入后仍保持为二叉搜索树即可。 你可以返回 **任意有效的结果** 。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/insertbst.jpg)
+
+```
+输入：root = [4,2,7,1,3], val = 5
+输出：[4,2,7,1,3,5]
+解释：另一个满足题目要求可以通过的树是：
+```
+
+**示例 2：**
+
+```
+输入：root = [40,20,60,10,30,50,70], val = 25
+输出：[40,20,60,10,30,50,70,null,null,25]
+```
+
+**示例 3：**
+
+```
+输入：root = [4,2,7,1,3,null,null,null,null,null,null], val = 5
+输出：[4,2,7,1,3,5]
+```
+
+ 
+
+**提示：**
+
+- 树中的节点数将在 `[0, 104]`的范围内。
+- `-108 <= Node.val <= 108`
+- 所有值 `Node.val` 是 **独一无二** 的。
+- `-108 <= val <= 108`
+- **保证** `val` 在原始BST中不存在。
+
+#### [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)
+
+难度中等738
+
+给定一个二叉搜索树的根节点 **root** 和一个值 **key**，删除二叉搜索树中的 **key** 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。
+
+一般来说，删除节点可分为两个步骤：
+
+1. 首先找到需要删除的节点；
+2. 如果找到了，删除它。
+
+ 
+
+**示例 1:**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/del_node_1.jpg)
+
+```
+输入：root = [5,3,6,2,4,null,7], key = 3
+输出：[5,4,6,2,null,null,7]
+解释：给定需要删除的节点值是 3，所以我们首先找到 3 这个节点，然后删除它。
+一个正确的答案是 [5,4,6,2,null,null,7], 如下图所示。
+另一个正确答案是 [5,2,6,null,4,null,7]。
+```
+
+**示例 2:**
+
+```
+输入: root = [5,3,6,2,4,null,7], key = 0
+输出: [5,3,6,2,4,null,7]
+解释: 二叉树不包含值为 0 的节点
+```
+
+**示例 3:**
+
+```
+输入: root = [], key = 0
+输出: []
+```
+
+ 
+
+**提示:**
+
+- 节点数的范围 `[0, 104]`.
+- `-105 <= Node.val <= 105`
+- 节点值唯一
+- `root` 是合法的二叉搜索树
+- `-105 <= key <= 105`
+
+ 
+
+**进阶：** 要求算法时间复杂度为 O(h)，h 为树的高度。
+
+#### [776. 拆分二叉搜索树](https://leetcode-cn.com/problems/split-bst/)
+
+难度中等109
+
+给你一棵二叉搜索树（BST）的根结点 `root` 和一个整数 `target` 。请将该树按要求拆分为两个子树：其中一个子树结点的值都必须小于等于给定的目标值；另一个子树结点的值都必须大于目标值；树中并非一定要存在值为 `target` 的结点。
+
+除此之外，树中大部分结构都需要保留，也就是说原始树中父节点 `p` 的任意子节点 `c` ，假如拆分后它们仍在同一个子树中，那么结点 `p` 应仍为 `c` 的父结点。
+
+返回 *两个子树的根结点的数组* 。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/split-tree.jpg)
+
+```
+输入：root = [4,2,6,1,3,5,7], target = 2
+输出：[[2,1],[4,3,6,null,null,5,7]]
+```
+
+**示例 2:**
+
+```
+输入: root = [1], target = 1
+输出: [[1],[]]
+```
+
+ 
+
+**提示：**
+
+- 二叉搜索树节点个数在 `[1, 50]` 范围内
+- `0 <= Node.val, target <= 1000`
+
+#### [669. 修剪二叉搜索树](https://leetcode-cn.com/problems/trim-a-binary-search-tree/)
+
+难度中等530
+
+给你二叉搜索树的根节点 `root` ，同时给定最小边界`low` 和最大边界 `high`。通过修剪二叉搜索树，使得所有节点的值在`[low, high]`中。修剪树 **不应该** 改变保留在树中的元素的相对结构 (即，如果没有被移除，原有的父代子代关系都应当保留)。 可以证明，存在 **唯一的答案** 。
+
+所以结果应当返回修剪好的二叉搜索树的新的根节点。注意，根节点可能会根据给定的边界发生改变。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/trim1.jpg)
+
+```
+输入：root = [1,0,2], low = 1, high = 2
+输出：[1,null,2]
+```
+
+**示例 2：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/trim2.jpg)
+
+```
+输入：root = [3,0,4,null,2,null,null,1], low = 1, high = 3
+输出：[3,2,null,1]
+```
+
+ 
+
+**提示：**
+
+- 树中节点数在范围 `[1, 104]` 内
+- `0 <= Node.val <= 104`
+- 树中每个节点的值都是 **唯一** 的
+- 题目数据保证输入是一棵有效的二叉搜索树
+- `0 <= low <= high <= 104`
+
+#### [108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/)
+
+难度简单1030
+
+给你一个整数数组 `nums` ，其中元素已经按 **升序** 排列，请你将其转换为一棵 **高度平衡** 二叉搜索树。
+
+**高度平衡** 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。
+
+ 
+
+**示例 1：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/btree1.jpg)
+
+```
+输入：nums = [-10,-3,0,5,9]
+输出：[0,-3,9,-10,null,5]
+解释：[0,-10,5,null,-3,null,9] 也将被视为正确答案：
+```
+
+**示例 2：**
+
+![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/btree.jpg)
+
+```
+输入：nums = [1,3]
+输出：[3,1]
+解释：[1,null,3] 和 [3,1] 都是高度平衡二叉搜索树。
+```
+
+ 
+
+**提示：**
+
+- `1 <= nums.length <= 104`
+- `-104 <= nums[i] <= 104`
+- `nums` 按 **严格递增** 顺序排列
+
+
+
 #### [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 
 难度简单822
@@ -433,197 +1153,4 @@ Output: 1
 
 ![image-20220423210304405](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220423210304405.png)
 
-#### [2096. Step-By-Step Directions From a Binary Tree Node to Another](https://leetcode-cn.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/)
-
-难度中等34
-
-You are given the `root` of a **binary tree** with `n` nodes. Each node is uniquely assigned a value from `1` to `n`. You are also given an integer `startValue` representing the value of the start node `s`, and a different integer `destValue` representing the value of the destination node `t`.
-
-Find the **shortest path** starting from node `s` and ending at node `t`. Generate step-by-step directions of such path as a string consisting of only the **uppercase** letters `'L'`, `'R'`, and `'U'`. Each letter indicates a specific direction:
-
-- `'L'` means to go from a node to its **left child** node.
-- `'R'` means to go from a node to its **right child** node.
-- `'U'` means to go from a node to its **parent** node.
-
-Return *the step-by-step directions of the **shortest path** from node* `s` *to node* `t`.
-
- 
-
-**Example 1:**
-
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/eg1.png)
-
-```
-Input: root = [5,1,2,3,null,6,4], startValue = 3, destValue = 6
-Output: "UURL"
-Explanation: The shortest path is: 3 → 1 → 5 → 2 → 6.
-```
-
-**Example 2:**
-
-![img](https://assets.leetcode.com/uploads/2021/11/15/eg2.png)
-
-```
-Input: root = [2,1], startValue = 2, destValue = 1
-Output: "L"
-Explanation: The shortest path is: 2 → 1.
-```
-
- 
-
-**Constraints:**
-
-- The number of nodes in the tree is `n`.
-- `2 <= n <= 105`
-- `1 <= Node.val <= n`
-- All the values in the tree are **unique**.
-- `1 <= startValue, destValue <= n`
-- `startValue != destValue`
-
-#### [1740. 找到二叉树中的距离](https://leetcode-cn.com/problems/find-distance-in-a-binary-tree/)
-
-难度中等14
-
-给定一棵二叉树的根节点 `root` 以及两个整数 `p` 和 `q` ，返回该二叉树中值为 `p` 的结点与值为 `q` 的结点间的 **距离** 。
-
-两个结点间的 **距离** 就是从一个结点到另一个结点的路径上边的数目。
-
- 
-
-**示例 1：**
-
-![img](https://assets.leetcode.com/uploads/2018/12/14/binarytree.png)
-
-```
-输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 0
-输出：3
-解释：在 5 和 0 之间有 3 条边：5-3-1-0
-```
-
-**示例 2：**
-
-![img](https://assets.leetcode.com/uploads/2018/12/14/binarytree.png)
-
-```
-输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 7
-输出：2
-解释：在 5 和 7 之间有 2 条边：5-2-7
-```
-
-**示例 3：**
-
-![img](https://assets.leetcode.com/uploads/2018/12/14/binarytree.png)
-
-```
-输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 5
-输出：0
-解释：一个结点与它本身之间的距离为 0
-```
-
- 
-
-**提示：**
-
-- 树中结点个数的范围在 `[1, 104]`.
-- `0 <= Node.val <= 109`
-- 树中所有结点的值都是唯一的.
-- `p` 和`q` 是树中结点的值.
-
-#### [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst/)
-
-难度简单286
-
-给定二叉搜索树的根结点 `root`，返回值位于范围 *`[low, high]`* 之间的所有结点的值的和。
-
- 
-
-**示例 1：**
-
-![img](https://assets.leetcode.com/uploads/2020/11/05/bst1.jpg)
-
-```
-输入：root = [10,5,15,3,7,null,18], low = 7, high = 15
-输出：32
-```
-
-**示例 2：**
-
-![img](https://assets.leetcode.com/uploads/2020/11/05/bst2.jpg)
-
-```
-输入：root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
-输出：23
-```
-
- 
-
-**提示：**
-
-- 树中节点数目在范围 `[1, 2 * 104]` 内
-- `1 <= Node.val <= 105`
-- `1 <= low <= high <= 105`
-- 所有 `Node.val` **互不相同**
-
-#### [987. 二叉树的垂序遍历](https://leetcode-cn.com/problems/vertical-order-traversal-of-a-binary-tree/)
-
-难度困难189
-
-给你二叉树的根结点 `root` ，请你设计算法计算二叉树的 **垂序遍历** 序列。
-
-对位于 `(row, col)` 的每个结点而言，其左右子结点分别位于 `(row + 1, col - 1)` 和 `(row + 1, col + 1)` 。树的根结点位于 `(0, 0)` 。
-
-二叉树的 **垂序遍历** 从最左边的列开始直到最右边的列结束，按列索引每一列上的所有结点，形成一个按出现位置从上到下排序的有序列表。如果同行同列上有多个结点，则按结点的值从小到大进行排序。
-
-返回二叉树的 **垂序遍历** 序列。
-
- 
-
-**示例 1：**
-
-![img](https://assets.leetcode.com/uploads/2021/01/29/vtree1.jpg)
-
-```
-输入：root = [3,9,20,null,null,15,7]
-输出：[[9],[3,15],[20],[7]]
-解释：
-列 -1 ：只有结点 9 在此列中。
-列  0 ：只有结点 3 和 15 在此列中，按从上到下顺序。
-列  1 ：只有结点 20 在此列中。
-列  2 ：只有结点 7 在此列中。
-```
-
-**示例 2：**
-
-![img](https://assets.leetcode.com/uploads/2021/01/29/vtree2.jpg)
-
-```
-输入：root = [1,2,3,4,5,6,7]
-输出：[[4],[2],[1,5,6],[3],[7]]
-解释：
-列 -2 ：只有结点 4 在此列中。
-列 -1 ：只有结点 2 在此列中。
-列  0 ：结点 1 、5 和 6 都在此列中。
-          1 在上面，所以它出现在前面。
-          5 和 6 位置都是 (2, 0) ，所以按值从小到大排序，5 在 6 的前面。
-列  1 ：只有结点 3 在此列中。
-列  2 ：只有结点 7 在此列中。
-```
-
-**示例 3：**
-
-![img](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/vtree3.jpg)
-
-```
-输入：root = [1,2,3,4,6,5,7]
-输出：[[4],[2],[1,5,6],[3],[7]]
-解释：
-这个示例实际上与示例 2 完全相同，只是结点 5 和 6 在树中的位置发生了交换。
-因为 5 和 6 的位置仍然相同，所以答案保持不变，仍然按值从小到大排序。
-```
-
- 
-
-**提示：**
-
-- 树中结点数目总数在范围 `[1, 1000]` 内
-- `0 <= Node.val <= 1000`
+- 
