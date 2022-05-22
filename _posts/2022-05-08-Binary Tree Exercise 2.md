@@ -133,8 +133,13 @@ Inorder Binary Tree (Recursion)
 - 递归法（前序遍历）
   - 使用前序遍历，就是中左右
   - ![image-20220221113958199](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220221113958199.png)
+  - 所有的节点只会被访问一次，所以时间复杂度是O(n), 
+  - Because of recursion, O(h) function calls will be placed on the stack for the worst case, h is the height of the tree, so space complexity should also be O(n)
 - 迭代法
-- ![image-20220221114807652](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220221114807652.png)
+  - 使用迭代法就是BFS，深度优先搜索
+  - 想到BFS，和迭代，层序遍历，常用的数据结构就是deque，双向队列
+  - ![image-20220221114807652](C:\Users\Ethan\AppData\Roaming\Typora\typora-user-images\image-20220221114807652.png)
+
 
 #### [106. 从中序与后序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
 
@@ -162,7 +167,15 @@ Inorder Binary Tree (Recursion)
 
 思路：
 
+- 首先，后序遍历最后的一个一定是根节点，然后中序遍历找到根节点就是把它分为了左右两个部分
+- 左边部分即左子树，右边部分为右子树，针对每个部分可以用同样的方法继续递归下去构造。
+- ![image-20220522135005587](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220522135005587.png)
+- 记住，创建树是用的inorder，分割树是用postorder
+- ![image-20220522140632294](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220522140632294.png)
+
 代码：
+
+![image-20220522140551498](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220522140551498.png)
 
 #### [105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 

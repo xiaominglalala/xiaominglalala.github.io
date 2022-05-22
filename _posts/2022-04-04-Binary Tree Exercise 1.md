@@ -1232,7 +1232,7 @@ Now there are two questions:
 
 思路：
 
-使用递归是很自然的一个策略：
+使用深度优先搜索也就是Recursion递归是很自然的一个策略：
 
 ![image-20220518182408028](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220518182408028.png)
 
@@ -1279,5 +1279,7 @@ Now there are two questions:
 
 思路：
 
-代码：
+- 和上一题一样，比较适用DFS进行递归，更符合直觉
+- ![image-20220522123343751](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220522123343751.png)
 
+对于这个path.pop()之后需要更多的思考
