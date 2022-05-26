@@ -203,7 +203,11 @@ Inorder Binary Tree (Recursion)
 
 思路：
 
+注意，中序和前序都去掉了root，且通过中序可以找到左树和右树的大小，就可以分割出左右树的前序和中序
+
 代码：
+
+![image-20220522145145661](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220522145145661.png)
 
 #### [654. 最大二叉树](https://leetcode-cn.com/problems/maximum-binary-tree/)
 
@@ -249,6 +253,11 @@ Inorder Binary Tree (Recursion)
 
 思路：
 
+- 递归法：
+- ![image-20220522202634375](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220522202634375.png)
+- 这道题实际上是使用单调栈进行的解决
+- 现在带数字测试能理解它的正确性，但是还需要更多的练习
+
 代码：
 
 #### [617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)
@@ -283,7 +292,13 @@ Inorder Binary Tree (Recursion)
 
 思路：
 
-代码：
+- 使用递归的方法，把两棵树都合并到root1上，这样没有新建节点，节省空间
+- ![image-20220522204000513](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220522204000513.png)
+- 使用迭代，求二叉树对称的计算结果时候就是把两个树的节点同时加入队列进行操作，类似于101题
+
+![image-20220522205946398](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220522205946398.png)
+
+
 
 #### [536. 从字符串生成二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-string/)
 
@@ -328,7 +343,31 @@ Inorder Binary Tree (Recursion)
 - 输入字符串中只包含 `'('`, `')'`, `'-'` 和 `'0'` ~ `'9'` 
 - 空树由 `""` 而非`"()"`表示。
 
+
+
+思路：
+
+- 
+
+1. If `s[i]` is a digit or `"-"`, we update `num` by `num += s[i]`.
+2. If `s[i] == "("` and `nums` non-empty, we assign `stack[-1].left` to `nums` if it has not yet been assigned, else we assign `stack[-1].right` to `nums`. After this, we append `nums` to `stack`.
+3. If `s[i] == ")"`:
+   (i). If `nums` nonempty, we assign `stack[-1].left` to `nums` if it has not yet been assigned, else we assign `stack[-1].right` to `nums`. Contrary to the previous case, we do not append `nums` to stack.
+   (ii). If `nums` is empty, we do `stack.pop()` so that `stack[-1]` becomes the parent of the popped node.
+
+
+
+![image-20220524204249862](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220524204249862.png)
+
 ### 5.二叉搜索树的属性
+
+#### 二叉搜索树的定义
+
+二叉搜索树是一个有序树：
+
+- 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；
+- 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；
+- 它的左、右子树也分别为二叉搜索树
 
 #### [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/)
 
@@ -357,6 +396,18 @@ Inorder Binary Tree (Recursion)
 输入：root = [4,2,7,1,3], val = 5
 输出：[]
 ```
+
+思路：
+
+recursion：
+
+![image-20220524205130871](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220524205130871.png)
+
+Iteration：
+
+![image-20220524205943029](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220524205943029.png)
+
+
 
 #### [98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
@@ -391,6 +442,18 @@ Inorder Binary Tree (Recursion)
 解释：根节点的值是 5 ，但是右子节点的值是 4 。
 ```
 
+思路：
+
+使用math.inf来确定上下界，使用上下界来确定
+
+Recursion:
+
+![image-20220524211026432](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220524211026432.png)
+
+Iteration：
+
+![image-20220525122350067](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220525122350067.png)
+
 #### [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/)
 
 难度简单308
@@ -418,6 +481,20 @@ Inorder Binary Tree (Recursion)
 输入：root = [1,0,48,null,null,12,49]
 输出：1
 ```
+
+思路：
+
+这道题很容易产生一个误解，就是相邻的node之间的差
+
+但是实际上是所有的节点之间的差
+
+![530.二叉搜索树的最小绝对差](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210204153247458.png)
+
+这里7是可以比4大的，他只要遵循大于4，小于8
+
+![image-20220525125052116](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220525125052116.png)
+
+
 
 #### [501. 二叉搜索树中的众数](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/)
 
@@ -461,6 +538,20 @@ Inorder Binary Tree (Recursion)
  
 
 **进阶：**你可以不使用额外的空间吗？（假设由递归产生的隐式调用栈的开销不被计算在内）
+
+
+
+这道题的关键点在于Inorder traversal of a BST will find the nodes in ascending order.
+
+也就是BST的中序遍历将以递增的顺序返回Tree的节点值
+
+![501.二叉搜索树中的众数1](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/20210204152758889.png)
+
+- So just compare the current node to the previous, and if they match, increase the current count of duplicate values by 1. 
+- If they don't match, reset the current count to 1. Compare the current count to the max count found so far. 
+- If they match, append the current value to the result list. 
+- If the current count of duplicates exceeds the max count, create a new result list with just the current value.
+- ![image-20220525132603543](https://raw.githubusercontent.com/xiaominglalala/pic/main/img/image-20220525132603543.png)
 
 
 
